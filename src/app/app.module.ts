@@ -15,7 +15,7 @@ import { UserViewComponent } from './page/user-view/user-view.component';
     NotFoundComponent,
     HomeComponent,
     PlayGameComponent,
-    UserViewComponent
+    UserViewComponent,
   ],
   imports: [
     BrowserModule,
