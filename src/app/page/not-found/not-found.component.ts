@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class NotFoundComponent {
   imgUrl: string =
-    'https://github.com/frannquito97/tp-final/blob/404NotFound/src/app/page/imgs/404.png?raw=true';
+    'https://github.com/frannquito97/tp-final/blob/404NotFound/public/images/404.png?raw=true';
     
   
   

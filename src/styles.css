@@ -4,3 +4,23 @@
   max-width: 100%;
   height: auto !;
 }
+
+.background-F1-Games{
+  background-image: url("https://github.com/frannquito97/tp-final/blob/404NotFound/public/images/COLAPINTO-LOGIN.png?raw=true");
+  padding: 0%;
+  max-width: 100%;
+  height: auto !;
+}
+
+.formLogin{
+  border-width: 2px;
+  border-color: red;
+  height: 100vh;
+  width: 100vh;
+}
+
+.formContainer{
+  border-radius: 10px;
+
+}
+
