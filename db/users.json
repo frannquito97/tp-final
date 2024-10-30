@@ -1,0 +1,70 @@
+{
+  "user": [
+    {
+      "id": "0",
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "dateBorn": "24-12-1997",
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "createdAt": "2024-10-24",
+      "admin": "true"
+    },
+    {
+      "id": "1",
+      "firstName": "Franco",
+      "lastName": "Dominguez",
+      "dateBorn": "24-12-1997",
+      "username": "frann2310",
+      "email": "frann.dominguez0@gmail.com",
+      "password": "123456",
+      "createdAt": "2024-10-24",
+      "admin": false
+    },
+    {
+      "id": "2",
+      "firstName": "Giuliana",
+      "lastName": "Dominguez",
+      "dateBorn": "11-01-1994",
+      "username": "yuli1101",
+      "email": "yuli.dominguez0@gmail.com",
+      "password": "123456",
+      "createdAt": "2024-10-24",
+      "admin": "false"
+    },
+    {
+      "id": "3",
+      "firstName": "Juan",
+      "lastName": "Dominguez",
+      "dateBorn": "30-04-1990",
+      "username": "juan3004",
+      "email": "juan.dominguez0@gmail.com",
+      "password": "123456",
+      "createdAt": "2024-10-24",
+      "admin": "false"
+    },
+    {
+      "id": "0",
+      "firstName": "Franco",
+      "lastName": "Dominguez",
+      "dateBorn": "1997-12-24",
+      "username": "frann24",
+      "email": "frann.devv@gmail.com",
+      "password": "231022",
+      "createdAt": "2024-10-30T20:55:22.717Z",
+      "admin": false
+    },
+    {
+      "id": 4,
+      "firstName": "Franco",
+      "lastName": "Dominguez",
+      "dateBorn": "1997-12-24",
+      "username": "frann",
+      "email": "frann.devv@gmail.com",
+      "password": "2310",
+      "createdAt": "2024-10-30T20:57:21.196Z",
+      "admin": false
+    }
+  ]
+}
