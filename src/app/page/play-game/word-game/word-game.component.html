@@ -1,0 +1,25 @@
+<h3>¡Adivina el piloto!</h3>
+
+<p>Este piloto corrio en el año {{ anio }}</p>
+
+<p>En el circuito de {{ circuito }}</p>
+
+<p>Termino en la posicion numero: {{ posicion }}</p>
+
+<h4>Pista 1</h4>
+<button (click)="pistaUno()">Pista 1</button>
+@if(pista1==true){
+<p>Su comapeñero fue {{ companero }}</p>
+}
+
+<h4>Pista 2</h4>
+<button (click)="pistaDos()">Pista 2</button>
+@if(pista2==true){
+    <p>Pertenecia a la escuderia {{ escuderia }}</p>
+}
+
+
+<legend>
+  <label for="">El piloto es: </label>
+  <input type="text" name="piloto" id="piloto" />
+</legend>

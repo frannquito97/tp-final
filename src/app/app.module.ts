@@ -8,6 +8,7 @@ import { HomeComponent } from './page/home/home.component';
 import { PlayGameComponent } from './page/play-game/play-game.component';
 import { UserViewComponent } from './page/user-view/user-view.component';
 import { LoginComponent } from './page/login/login.component';
+import { WordGameComponent } from './page/play-game/word-game/word-game.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { LoginComponent } from './page/login/login.component';
     PlayGameComponent,
     UserViewComponent,
     LoginComponent,
+    WordGameComponent,
   ],
   imports: [
     BrowserModule,
