@@ -9,7 +9,7 @@ import { PlayGameComponent } from './page/play-game/play-game.component';
 import { UserViewComponent } from './page/user-view/user-view.component';
 import { LoginComponent } from './page/login/login.component';
 import { WordGameComponent } from './page/play-game/word-game/word-game.component';
-
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,11 +21,8 @@ import { WordGameComponent } from './page/play-game/word-game/word-game.componen
     LoginComponent,
     WordGameComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule],
+  providers: [provideHttpClient()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

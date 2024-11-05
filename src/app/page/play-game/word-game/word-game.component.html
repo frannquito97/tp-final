@@ -1,5 +1,5 @@
 <h3>¡Adivina el piloto!</h3>
-
+<h1>{{ piloto }}</h1>
 <p>Este piloto corrio en el año {{ anio }}</p>
 
 <p>En el circuito de {{ circuito }}</p>
@@ -15,11 +15,14 @@
 <h4>Pista 2</h4>
 <button (click)="pistaDos()">Pista 2</button>
 @if(pista2==true){
-    <p>Pertenecia a la escuderia {{ escuderia }}</p>
+<p>Pertenecia a la escuderia {{ escuderia }}</p>
 }
 
-
-<legend>
-  <label for="">El piloto es: </label>
-  <input type="text" name="piloto" id="piloto" />
-</legend>
+<div>
+  <form action="">
+    <legend></legend>
+    <label for="">El piloto es: </label>
+    <input type="text" name="piloto" id="piloto" />
+    <button type="submit">Enviar</button>
+  </form>
+</div>
