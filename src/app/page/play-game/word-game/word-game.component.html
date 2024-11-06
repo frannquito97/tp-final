@@ -29,13 +29,16 @@
     <legend>Piloto</legend>
     <form action="">
       <label for="">El piloto es: </label>
-      <input type="text" name="piloto" id="piloto" />
-      <button type="submit">Enviar</button>
+      <br />
+      @for (item of conjuntoPilotos; track $index) {
+      <button>{{ item }}</button>
+      <br />
+      }
     </form>
   </fieldset>
 </div>
 
-<h4>La respuesta correcta es PILOTO: {{piloto}}</h4>
+<h4>La respuesta correcta es PILOTO: {{ piloto }}</h4>
 
 @if (sigPiloto==true) {
 <p>Adivinaste! sigue asi</p>

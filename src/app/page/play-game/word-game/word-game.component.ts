@@ -11,21 +11,64 @@ export class WordGameComponent {
   constructor(private infoF1: ManagementInfoService) {}
   public datos: Array<Races> = [];
 
+  conjuntoPilotos: string[] = [];
+
   ngOnInit() {
     this.datos = this.infoF1.getRacesWins();
     console.log(this.datos);
+    this.conjuntoPilotos.sort();
   }
+
   inicio = 0;
   fin = 12;
 
   renderGame() {
+    this.conjuntoPilotos.splice(0, this.conjuntoPilotos.length);
+    let auxPiloto;
     let enteroAleatorio = this.inicio + Math.floor(Math.random() * this.fin);
+
+    auxPiloto =
+      this.datos[enteroAleatorio + 1].driverName +
+      ' ' +
+      this.datos[enteroAleatorio + 1].driverLastName;
+    this.conjuntoPilotos.push(auxPiloto);
+    auxPiloto =
+      this.datos[enteroAleatorio + 2].driverName +
+      ' ' +
+      this.datos[enteroAleatorio + 2].driverLastName;
+    this.conjuntoPilotos.push(auxPiloto);
+
+    auxPiloto =
+      this.datos[enteroAleatorio].driverName +
+      ' ' +
+      this.datos[enteroAleatorio].driverLastName;
+    this.conjuntoPilotos.push(auxPiloto);
+
+    auxPiloto =
+      this.datos[enteroAleatorio - 1].driverName +
+      ' ' +
+      this.datos[enteroAleatorio - 1].driverLastName;
+    this.conjuntoPilotos.push(auxPiloto);
+
+    auxPiloto =
+      this.datos[enteroAleatorio - 2].driverName +
+      ' ' +
+      this.datos[enteroAleatorio - 2].driverLastName;
+    this.conjuntoPilotos.push(auxPiloto);
+    auxPiloto =
+      this.datos[enteroAleatorio + 3].driverName +
+      ' ' +
+      this.datos[enteroAleatorio + 3].driverLastName;
+    this.conjuntoPilotos.push(auxPiloto);
+    let arraySinDuplicados = [...new Set(this.conjuntoPilotos)];
+    this.conjuntoPilotos = arraySinDuplicados;
     this.anio = this.datos[enteroAleatorio].season;
     this.circuito = this.datos[enteroAleatorio].location;
     this.season = this.datos[enteroAleatorio].season;
     this.escuderia = this.datos[enteroAleatorio].driverConstructor;
     this.piloto =
       this.datos[enteroAleatorio].driverName +
+      ' ' +
       this.datos[enteroAleatorio].driverLastName;
     this.nacionalidad = this.datos[enteroAleatorio].driverNationality;
     this.raceName = this.datos[enteroAleatorio].raceName;
