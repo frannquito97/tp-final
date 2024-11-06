@@ -24,7 +24,8 @@ export class ManagementInfoService {
             driverName: dt['Results']['0']['Driver']['givenName'],
             driverLastName: dt['Results']['0']['Driver']['familyName'],
             driverConstructor: dt['Results']['0']['Constructor']['name'],
-            driverNationality: dt['Results']['0']['Driver']['nationality']
+            driverNationality: dt['Results']['0']['Driver']['nationality'],
+            
           }
           this.season.push(race);
         });

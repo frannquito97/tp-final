@@ -1,15 +1,21 @@
 <h3>¡Adivina el piloto!</h3>
-<h1>{{ piloto }}</h1>
+
+@if(jugar==false){
+<button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
+} @if(jugar!=false){
+
 <p>Este piloto corrio en el año {{ anio }}</p>
 
-<p>En el circuito de {{ circuito }}</p>
+<p>En la locacion de {{ circuito }}</p>
 
-<p>Termino en la posicion numero: {{ posicion }}</p>
+<p></p>
+
+<p>Carrera: {{ raceName }}</p>
 
 <h4>Pista 1</h4>
 <button (click)="pistaUno()">Pista 1</button>
 @if(pista1==true){
-<p>Su comapeñero fue {{ companero }}</p>
+<p>Su nacionalidad es {{ nacionalidad }}</p>
 }
 
 <h4>Pista 2</h4>
@@ -19,10 +25,20 @@
 }
 
 <div>
-  <form action="">
-    <legend></legend>
-    <label for="">El piloto es: </label>
-    <input type="text" name="piloto" id="piloto" />
-    <button type="submit">Enviar</button>
-  </form>
+  <fieldset>
+    <legend>Piloto</legend>
+    <form action="">
+      <label for="">El piloto es: </label>
+      <input type="text" name="piloto" id="piloto" />
+      <button type="submit">Enviar</button>
+    </form>
+  </fieldset>
 </div>
+
+<h4>La respuesta correcta es PILOTO: {{piloto}}</h4>
+
+@if (sigPiloto==true) {
+<p>Adivinaste! sigue asi</p>
+<br />
+<button (click)="winner()">Siguiente piloto</button>
+} }
