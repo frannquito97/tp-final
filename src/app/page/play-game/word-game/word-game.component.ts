@@ -9,21 +9,6 @@ export class WordGameComponent {
   constructor(private carreras: ServicesWordService) {}
 
   ngOnInit() {
-    this.carreras
-      .getCarreras()
-      .then((response) => {
-        this.piloto =
-          response['MRData']['RaceTable']['Races'][0]['Results'][0][
-            'Driver'
-          ].driverId;
-        console.log(
-          response['MRData']['RaceTable']['Races'][0]['Results'][0]['Driver']
-            .driverId
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   }
 
   anio = '2022';
