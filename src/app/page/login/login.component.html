@@ -1,12 +1,18 @@
-<section class="background-F1-Games " id="not-found">
-    <!-- <img class="notFound" src="{{ loginImg }}"/> -->
-<nav class="formContainer">
-    <form class="formLogin" id="loginPage">
-    <label id="loginMail">Email</label>
-    <input id="loginMail">
-    <label id="loginPassword">Password</label>
-    <input id="loginPassword">
-    <button type="button">Login!</button>
-    </form>
-</nav>
+<section class="background-login">
+    <h1 class="titleLogin">Bienvenidos a F1 Games!</h1>
+    <nav class="formLogin">
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Correo Electronico</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="mb-3">
+                <label for="pass" class="form-label">Contrasena</label>
+                <input type="password" class="form-control" id="pass" aria-describedby="passHelp">
+                <div id="passHelp" class="form-text">La contrasena debe tener 8 caracteres, no simbolos</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+            <button type="button" class="btn btn-secondary">Registrarse!</button>
+        </form>
+    </nav>
 </section>
