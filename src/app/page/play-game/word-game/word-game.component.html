@@ -1,37 +1,37 @@
-<h3>¡Adivina el piloto!</h3>
-@if (renderWindows ==true) { @if(jugar==false){
-<button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
-} @if(jugar!=false){
+<section class="wordGame">
+  <h3>¡Adivina el piloto!</h3>
+  @if (renderWindows == true) { @if(jugar==false){
+  <button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
+  } @if(jugar!=false){
+  <h5>La respuesta correcta es PILOTO: {{ piloto }} harcodeado</h5>
+  <p>Este piloto corrio en el año {{ anio }}</p>
 
-<p>Este piloto corrio en el año {{ anio }}</p>
+  <p>En la locacion de {{ circuito }}</p>
 
-<p>En la locacion de {{ circuito }}</p>
+  <p>Carrera: {{ raceName }}</p>
 
-<p></p>
-
-<p>Carrera: {{ raceName }}</p>
-
-<h4>Pista 1</h4>
-<button (click)="pistaUno()">Pista 1</button>
-@if(pista1==true){
-<p>Su nacionalidad es {{ nacionalidad }}</p>
-}
-
-<h4>Pista 2</h4>
-<button (click)="pistaDos()">Pista 2</button>
-@if(pista2==true){
-<p>Pertenecia a la escuderia {{ escuderia }}</p>
-}
-
-<div>
-  <h4 for="">El piloto es:</h4>
+  <h4 for="">El piloto es: </h4>
   <br />
-  @for (item of conjuntoPilotos; track $index) {
-  <p for="">
-    {{ item }}
-  </p>
+  <ul>
+    @for (item of conjuntoPilotos; track $index) {
+    <li>{{ item }}</li>
+    }
+  </ul>
 
+
+  <h4>Pista 1</h4>
+  <button (click)="pistaUno()">Pista 1</button>
+  @if(pista1==true){
+  <p>Su nacionalidad es {{ nacionalidad }}</p>
   }
+
+  <h4>Pista 2</h4>
+  <button (click)="pistaDos()">Pista 2</button>
+  @if(pista2==true){
+  <p>Pertenecia a la escuderia {{ escuderia }}</p>
+  }
+
+  
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
     <div class="mb-3">
@@ -48,15 +48,17 @@
       form.controls['pilot'].touched) {
       <p class="invalid-field">*Campo requerido</p>
       }
+      <div class="contenedor">
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </div>
     </div>
-    <button class="btn btn-primary" type="submit">Enviar</button>
   </form>
-</div>
 
-<h5>La respuesta correcta es PILOTO: {{ piloto }}</h5>
+  
 
-@if (sigPiloto==true) {
-<p>Adivinaste! sigue asi</p>
-<br />
-<button (click)="winner()">Siguiente piloto</button>
-} }}
+  @if (sigPiloto==true) {
+  <p>Adivinaste! sigue asi</p>
+  <br />
+  <button (click)="winner()">Siguiente piloto</button>
+  } }}
+</section>

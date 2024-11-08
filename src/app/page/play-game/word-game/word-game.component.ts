@@ -20,10 +20,10 @@ export class WordGameComponent {
   public datos: Array<Races> = [];
 
   public conjuntoPilotos: string[] = [];
-
+  
+  
   ngOnInit() {
     this.datos = this.infoF1.getRacesWins();
-
   }
 
   inicio = 6;
@@ -39,9 +39,10 @@ export class WordGameComponent {
   renderGame() {
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
     this.conjuntoPilotos.splice(0, this.conjuntoPilotos.length);
+    
     let auxPiloto;
     this.renderNumber();
-    alert(this.enteroAleatorio);
+    
     auxPiloto =
       this.datos[this.enteroAleatorio + 1].driverName +
       ' ' +
@@ -49,6 +50,8 @@ export class WordGameComponent {
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
+      
+      
     auxPiloto =
       this.datos[this.enteroAleatorio + 2].driverName +
       ' ' +
@@ -88,9 +91,9 @@ export class WordGameComponent {
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
-
+    
     console.log('LOS PILOTOS SON: ', this.conjuntoPilotos);
-
+    
     this.anio = this.datos[this.enteroAleatorio].season;
     this.circuito = this.datos[this.enteroAleatorio].location;
     this.season = this.datos[this.enteroAleatorio].season;
@@ -99,8 +102,10 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio].driverName +
       ' ' +
       this.datos[this.enteroAleatorio].driverLastName;
+      alert(this.piloto)
     this.nacionalidad = this.datos[this.enteroAleatorio].driverNationality;
     this.raceName = this.datos[this.enteroAleatorio].raceName;
+    alert('Pilotos cargados ' + this.conjuntoPilotos);
   }
 
   raceName = '';
@@ -116,24 +121,24 @@ export class WordGameComponent {
   pista2 = false;
   respuestaPiloto = false;
   sigPiloto = false;
-  renderWindows:boolean = true;
+  renderWindows: boolean = true;
 
   pistaUno() {
     this.pista1 = true;
   }
   pistaDos() {
     this.pista2 = true;
-    console.log(this.conjuntoPilotos)
+    console.log(this.conjuntoPilotos);
   }
 
   winner() {
-    this.renderWindows= false;
+    this.renderGame();
+    this.renderWindows = false;
     this.pista1 = false;
     this.pista2 = false;
     this.respuestaPiloto = false;
-    this.renderGame();
     this.sigPiloto = false;
-    this.renderWindows= true;
+    this.renderWindows = true;
   }
 
   respuesta(e: Event) {
