@@ -1,30 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-image: url(app/imgs/img.webp);
+  padding: 0%;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+}
+
+.contenedor{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.btn:hover{
+  background-color: green;
+}
+
+
+form {
+  align-items: center;
+}
+
+.wordGame {
+display: flexbox;
+align-items: center;
+align-content: center;
+text-align: center;
+  margin-top: 150px;
+  color: aliceblue;
+  width: 400px;
+  background-color: black;
+  scroll-margin-top: initial;
+}
+
 .notFound {
   padding: 0%;
   max-width: 100%;
   height: auto !;
 }
 
-.background-F1-Games{
+.background-F1-Games {
   background-image: url("https://github.com/frannquito97/tp-final/blob/404NotFound/public/images/COLAPINTO-LOGIN.png?raw=true");
   padding: 0%;
   max-width: 100%;
   height: auto !;
 }
 
-.formLogin{
+.formLogin {
   border-width: 2px;
   border-color: red;
   height: 100vh;
   width: 100vh;
 }
 
-.formContainer{
+.formContainer {
   border-radius: 10px;
-
 }
 
-.invalid-field{
+.invalid-field {
   color: red;
 }
-
