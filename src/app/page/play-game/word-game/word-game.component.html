@@ -1,6 +1,5 @@
 <h3>¡Adivina el piloto!</h3>
-
-@if(jugar==false){
+@if (renderWindows ==true) { @if(jugar==false){
 <button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
 } @if(jugar!=false){
 
@@ -25,23 +24,39 @@
 }
 
 <div>
-  <fieldset>
-    <legend>Piloto</legend>
-    <form action="">
-      <label for="">El piloto es: </label>
-      <br />
-      @for (item of conjuntoPilotos; track $index) {
-      <button>{{ item }}</button>
-      <br />
+  <h4 for="">El piloto es:</h4>
+  <br />
+  @for (item of conjuntoPilotos; track $index) {
+  <p for="">
+    {{ item }}
+  </p>
+
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
+    <div class="mb-3">
+      <label for="" class="form-label"> El piloto es...</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="pilot"
+        name=""
+        id=""
+        placeholder="Escriba el nombre del piloto "
+      />
+      @if (form.controls['pilot'].getError('required') &&
+      form.controls['pilot'].touched) {
+      <p class="invalid-field">*Campo requerido</p>
       }
-    </form>
-  </fieldset>
+    </div>
+    <button class="btn btn-primary" type="submit">Enviar</button>
+  </form>
 </div>
 
-<h4>La respuesta correcta es PILOTO: {{ piloto }}</h4>
+<h5>La respuesta correcta es PILOTO: {{ piloto }}</h5>
 
 @if (sigPiloto==true) {
 <p>Adivinaste! sigue asi</p>
 <br />
 <button (click)="winner()">Siguiente piloto</button>
-} }
+} }}

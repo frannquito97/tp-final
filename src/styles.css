@@ -36,3 +36,7 @@
   position: absolute;
 }
 
+.invalid-field{
+  color: red;
+}
+
