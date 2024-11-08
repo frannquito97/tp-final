@@ -11,6 +11,7 @@ import { LoginComponent } from './page/login/login.component';
 import { WordGameComponent } from './page/play-game/word-game/word-game.component';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule, RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,13 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     WordGameComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule,FormsModule,ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })

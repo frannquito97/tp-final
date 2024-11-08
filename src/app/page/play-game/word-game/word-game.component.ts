@@ -10,13 +10,18 @@ import {
 } from '@angular/forms';
 import { compileNgModule } from '@angular/compiler';
 
+import { Router,RouterModule,RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-word-game',
   templateUrl: './word-game.component.html',
   styles: ``,
 })
 export class WordGameComponent {
+routerLink: any;
   constructor(private infoF1: ManagementInfoService) {}
+  
+  
   public datos: Array<Races> = [];
 
   public conjuntoPilotos: string[] = [];
@@ -138,6 +143,7 @@ export class WordGameComponent {
     this.respuestaPiloto = false;
     this.sigPiloto = false;
     this.renderWindows = true;
+    
   }
 
   respuesta(e: Event) {
