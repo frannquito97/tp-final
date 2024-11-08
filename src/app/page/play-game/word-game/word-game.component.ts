@@ -20,8 +20,7 @@ export class WordGameComponent {
   public datos: Array<Races> = [];
 
   public conjuntoPilotos: string[] = [];
-  
-  
+
   ngOnInit() {
     this.datos = this.infoF1.getRacesWins();
   }
@@ -32,17 +31,18 @@ export class WordGameComponent {
 
   renderNumber() {
     this.enteroAleatorio =
-      Math.floor(Math.random() * this.inicio) +
-      Math.floor(Math.random() * this.fin);
+    Math.floor(Math.random() * (16 - 6 + 1)) + 6;
+      alert(this.enteroAleatorio);
   }
+  
 
   renderGame() {
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
     this.conjuntoPilotos.splice(0, this.conjuntoPilotos.length);
-    
+
     let auxPiloto;
     this.renderNumber();
-    
+
     auxPiloto =
       this.datos[this.enteroAleatorio + 1].driverName +
       ' ' +
@@ -50,8 +50,7 @@ export class WordGameComponent {
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
-      
-      
+
     auxPiloto =
       this.datos[this.enteroAleatorio + 2].driverName +
       ' ' +
@@ -90,10 +89,10 @@ export class WordGameComponent {
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
-    this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
-    
+    // this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
+
     console.log('LOS PILOTOS SON: ', this.conjuntoPilotos);
-    
+
     this.anio = this.datos[this.enteroAleatorio].season;
     this.circuito = this.datos[this.enteroAleatorio].location;
     this.season = this.datos[this.enteroAleatorio].season;
@@ -102,7 +101,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio].driverName +
       ' ' +
       this.datos[this.enteroAleatorio].driverLastName;
-      alert(this.piloto)
+    alert(this.piloto);
     this.nacionalidad = this.datos[this.enteroAleatorio].driverNationality;
     this.raceName = this.datos[this.enteroAleatorio].raceName;
     alert('Pilotos cargados ' + this.conjuntoPilotos);
@@ -161,7 +160,7 @@ export class WordGameComponent {
 
   onSubmit() {
     if (this.form.invalid) return;
-    if (this.form.getRawValue().pilot == this.piloto) {
+    if (this.form.getRawValue().pilot.toUpperCase == this.piloto.toUpperCase) {
       this.sigPiloto = true;
     } else {
       alert(this.form.getRawValue().pilot + ': No era el piloto');
