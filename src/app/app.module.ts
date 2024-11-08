@@ -10,6 +10,7 @@ import { UserViewComponent } from './page/user-view/user-view.component';
 import { LoginComponent } from './page/login/login.component';
 import { WordGameComponent } from './page/play-game/word-game/word-game.component';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
     LoginComponent,
     WordGameComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule,FormsModule,ReactiveFormsModule],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
