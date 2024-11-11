@@ -1,47 +1,64 @@
-<h3>¡Adivina el piloto!</h3>
+<section class="wordGame">
+  <h3>¡Adivina el piloto!</h3>
+  @if (renderWindows == true) { @if(jugar==false){
+  <button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
+  } @if(jugar!=false){
+  <h5>La respuesta correcta es PILOTO: {{ piloto }} harcodeado</h5>
+  <p>Este piloto corrio en el año {{ anio }}</p>
 
-@if(jugar==false){
-<button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
-} @if(jugar!=false){
+  <p>En la locacion de {{ circuito }}</p>
 
-<p>Este piloto corrio en el año {{ anio }}</p>
+  <p>Carrera: {{ raceName }}</p>
 
-<p>En la locacion de {{ circuito }}</p>
+  <h4 for="">El piloto es: </h4>
+  <br />
+  <ul>
+    @for (item of conjuntoPilotos; track $index) {
+    <li>{{ item }}</li>
+    }
+  </ul>
 
-<p></p>
 
-<p>Carrera: {{ raceName }}</p>
+  <h4>Pista 1</h4>
+  <button (click)="pistaUno()">Pista 1</button>
+  @if(pista1==true){
+  <p>Su nacionalidad es {{ nacionalidad }}</p>
+  }
 
-<h4>Pista 1</h4>
-<button (click)="pistaUno()">Pista 1</button>
-@if(pista1==true){
-<p>Su nacionalidad es {{ nacionalidad }}</p>
-}
+  <h4>Pista 2</h4>
+  <button (click)="pistaDos()">Pista 2</button>
+  @if(pista2==true){
+  <p>Pertenecia a la escuderia {{ escuderia }}</p>
+  }
 
-<h4>Pista 2</h4>
-<button (click)="pistaDos()">Pista 2</button>
-@if(pista2==true){
-<p>Pertenecia a la escuderia {{ escuderia }}</p>
-}
+  
 
-<div>
-  <fieldset>
-    <legend>Piloto</legend>
-    <form action="">
-      <label for="">El piloto es: </label>
-      <br />
-      @for (item of conjuntoPilotos; track $index) {
-      <button>{{ item }}</button>
-      <br />
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
+    <div class="mb-3">
+      <label for="" class="form-label"> El piloto es...</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="pilot"
+        name=""
+        id=""
+        placeholder="Escriba el nombre del piloto "
+      />
+      @if (form.controls['pilot'].getError('required') &&
+      form.controls['pilot'].touched) {
+      <p class="invalid-field">*Campo requerido</p>
       }
-    </form>
-  </fieldset>
-</div>
+      <div class="contenedor">
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </div>
+    </div>
+  </form>
 
-<h4>La respuesta correcta es PILOTO: {{ piloto }}</h4>
+  
 
-@if (sigPiloto==true) {
-<p>Adivinaste! sigue asi</p>
-<br />
-<button (click)="winner()">Siguiente piloto</button>
-} }
+  @if (sigPiloto==true) {
+  <p>Adivinaste! sigue asi</p>
+  <br />
+  <button (click)="winner()"  >Siguiente piloto</button>
+  } }}
+</section>
