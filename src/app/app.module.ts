@@ -9,6 +9,7 @@ import { PlayGameComponent } from './page/play-game/play-game.component';
 import { UserViewComponent } from './page/user-view/user-view.component';
 import { LoginComponent } from './page/login/login.component';
 import { WordGameComponent } from './page/play-game/word-game/word-game.component';
+import { RegisterComponent } from './page/register/register.component';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule, RouterLink } from '@angular/router';
@@ -22,6 +23,7 @@ import { Router, RouterModule, RouterLink } from '@angular/router';
     UserViewComponent,
     LoginComponent,
     WordGameComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 export class User {
+    [x: string]: any;
     id: number = 0;
     username: string = '';
     email: string = '';
@@ -17,3 +18,4 @@ export class User {
 
     constructor(){ }
 }
+
