@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { F1InfoService } from './f1-info.service';
 import { Races } from '../interface/interfacesGames/races';
+import { UserService } from './user.service';
+import { User } from '../interface/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManagementInfoService {
   public season: Races[] = [];
-  constructor(private f1Info: F1InfoService) { }
+  public users: User[] = [];
+  constructor(private f1Info: F1InfoService, private userService: UserService) { }
 
   getRacesWins(/*PARAMETRO DEL AÑO ALEATORIO*/): Array<Races> {
     let data = [];
@@ -33,4 +36,19 @@ export class ManagementInfoService {
     })
     return this.season;
   }
+  getUserArray() : Array<User>{
+    let data = [];
+    this.userService.getUser().then( response => {
+      data = response;
+      if(data != null){
+        data.forEach( (dt: any) => {
+          let user: User = {
+            email: dt['email'],
+            password: dt['password']
+          }
+          this.users.push(user);
+        });
+      }})
+      return this.users;
+    }
 }

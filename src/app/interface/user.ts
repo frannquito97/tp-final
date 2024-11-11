@@ -1,6 +1,9 @@
 export interface User {
 // BASIC ATRIBUTES    
-    id:             number,
+
+email: string,
+password: string
+/*     id:             number,
     firstName:      string, 
     lastName:       string,
     dateBorn?:      Date,
@@ -9,7 +12,7 @@ export interface User {
     email:          string,
     password:       string,
     createdAtDate:  Date,
-    admin:          boolean,
+    admin:          boolean, */
 // GAME ATRIBUTES
 //  stats: stats
 

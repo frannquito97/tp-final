@@ -9,7 +9,9 @@ import { PlayGameComponent } from './page/play-game/play-game.component';
 import { UserViewComponent } from './page/user-view/user-view.component';
 import { LoginComponent } from './page/login/login.component';
 import { WordGameComponent } from './page/play-game/word-game/word-game.component';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './page/register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,9 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
     UserViewComponent,
     LoginComponent,
     WordGameComponent,
+    RegisterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
