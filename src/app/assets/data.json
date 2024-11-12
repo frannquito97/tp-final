@@ -1,19 +1,28 @@
 {
   "users": [
     {
-      "id": "59d1",
-      "email": "tincho@gmail.com",
-      "password": "12345"
+      "id": 1,
+      "email": "tinchomirandda@gmail.com",
+      "password": "12345",
+      "firstName": "Martin",
+      "lastName": "Miranda",
+      "userName": "Tincho"
     },
     {
-      "id": "83c2",
-      "email": "tincho@mail.com",
-      "password": "12345"
+      "id": 2,
+      "email": "frankito@gmail.com",
+      "password": "12345",
+      "firstName": "Franco",
+      "lastName": "Dominguez",
+      "userName": "Frankito"
     },
     {
-      "id": "c46c",
-      "email": "frann@gmail.com",
-      "password": "12345"
+      "id": 3,
+      "email": "sebas@gmail.com",
+      "password": "12345",
+      "firstName": "Sebastian",
+      "lastName": "Lopez",
+      "userName": "Sebas"
     }
   ]
 }

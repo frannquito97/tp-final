@@ -4,6 +4,8 @@ export class User {
     username: string = '';
     email: string = '';
     password?: string;
+    firstName: string = '';
+    lastName: string = '';
     createdAt: Date = new Date();
     lastLogin: Date = new Date();
     admin: boolean = false;

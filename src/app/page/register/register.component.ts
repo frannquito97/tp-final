@@ -23,20 +23,38 @@ export class RegisterComponent {
   }
 register(){
   if(this.registerForm.valid){
+    this.userService.getUser().then(users => {
+      let ultimoId = 0;
+
+      if(users.length > 0){
+        ultimoId = Math.max(...users.map((user: { id: any; }) => user.id));
+      }
 
     const newUser: User = {
+      id: ultimoId + 1,
       email: this.registerForm.get('email')?.value,
-      password: this.registerForm.get('password')?.value
-    }
+      password: this.registerForm.get('password')?.value,
+      firstName: this.registerForm.get('name')?.value,
+      lastName: this.registerForm.get('lastName')?.value,
+      userName: this.registerForm.get('userName')?.value
+    };
+
     this.userService.saveUser(newUser)
     .then( response => {
       this.message = "Sign Up Successfully";
-    }).catch( error => { this.message = 'An error has ocurred! OMG, Messi I love u'});
-  }
+    })
+    .catch( error => {
+      this.message = 'An error has ocurred! OMG, Messi I love u'
+    });
+    console.log(this.message);
+  })
+  .catch(error => {
+    this.message = 'Error al obtener los usuarios';
+  });
+}
   else{
-    console.log('form down');
+    console.log('form no es valido');
   }
-  console.log(this.message);
 }
 ngOnInit(){}
 

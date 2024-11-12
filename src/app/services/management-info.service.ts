@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, resolveForwardRef } from '@angular/core';
 import { F1InfoService } from './f1-info.service';
 import { Races } from '../interface/interfacesGames/races';
 import { UserService } from './user.service';
@@ -44,11 +44,30 @@ export class ManagementInfoService {
         data.forEach( (dt: any) => {
           let user: User = {
             email: dt['email'],
-            password: dt['password']
+            password: dt['password'],
+            id: dt[''],
+            firstName: dt['firstName'],
+            lastName: dt['lastName'],
+            userName: dt['userName']
           }
           this.users.push(user);
         });
       }})
       return this.users;
     }
-}
+    
+  getById(id: number): Promise<any>{
+    return new Promise((resolve,reject) =>{
+
+      const user = this.users.find(user => user.id ==id);
+      
+      if (user){
+        resolve(user);
+      }
+      else{
+        reject(new Error("User not found"));
+      }
+    });
+    }
+    
+  }

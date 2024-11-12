@@ -13,6 +13,7 @@ import { RegisterComponent } from './page/register/register.component';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule, RouterLink } from '@angular/router';
+import { ModifyUserComponent } from './page/modify-user/modify-user.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { Router, RouterModule, RouterLink } from '@angular/router';
     LoginComponent,
     WordGameComponent,
     RegisterComponent,
+    ModifyUserComponent,
   ],
   imports: [
     BrowserModule,
