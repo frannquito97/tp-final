@@ -10,17 +10,19 @@ import { LoginComponent } from './page/login/login.component';
 import { RegisterComponent } from './page/register/register.component';
 import { WordGameComponent } from './page/play-game/word-game/word-game.component';
 import { ModifyUserComponent } from './page/modify-user/modify-user.component';
+import { RankingComponent } from './page/ranking/ranking.component';
 
 const routes: Routes = [
   { path:'home', component: HomeComponent},
   { path:'', redirectTo:'f1Games', pathMatch: 'full' },
   { path:'play', component: PlayGameComponent },
-  {path:'word-Game' , component:WordGameComponent},
+  { path:'word-Game' , component:WordGameComponent},
   { path:'myProfile', component: UserViewComponent },
   { path:'f1Games', component: LoginComponent},
   { path:'register', component: RegisterComponent},
-  {path:'modifyUser', component: ModifyUserComponent},
-  /*{path:'user/id:', component}
+  { path:'modifyUser', component: ModifyUserComponent},
+  { path:'ranking', component: RankingComponent},
+  /*{path:'view/id:', component}
   {path:'user/id:', component}
   {path:'user/id:', component}*/
   { path:'**' , component: NotFoundComponent }

@@ -45,7 +45,7 @@ export class ManagementInfoService {
           let user: User = {
             email: dt['email'],
             password: dt['password'],
-            id: dt[''],
+            id: dt['id'],
             firstName: dt['firstName'],
             lastName: dt['lastName'],
             userName: dt['userName']

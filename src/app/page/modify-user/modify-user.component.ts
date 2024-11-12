@@ -26,4 +26,3 @@ ngOnInit() {
    })
 }
 }
-//seguir desde aca, tengo que cambiar los ID y ponerlos autoincremental asi pueden filtrarse y buscarse en el json de users, para mostrar y modificarlos
