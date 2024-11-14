@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ServicesWordService } from '../../../services/services-word.service';
-import { Races } from '../../../interface/interfacesGames/races';
+import { Race } from '../../../interface/interfacesGames/race';
 import { ManagementInfoService } from '../../../services/management-info.service';
 import {
   FormBuilder,
@@ -22,7 +21,7 @@ routerLink: any;
   constructor(private infoF1: ManagementInfoService) {}
   
   
-  public datos: Array<Races> = [];
+  public datos: Array<Race> = [];
 
   public conjuntoPilotos: string[] = [];
 
@@ -49,48 +48,48 @@ routerLink: any;
     this.renderNumber();
 
     auxPiloto =
-      this.datos[this.enteroAleatorio + 1].driverName +
+      this.datos[this.enteroAleatorio + 1].driver.name +
       ' ' +
-      this.datos[this.enteroAleatorio + 1].driverLastName;
+      this.datos[this.enteroAleatorio + 1].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
 
     auxPiloto =
-      this.datos[this.enteroAleatorio + 2].driverName +
+      this.datos[this.enteroAleatorio + 2].driver.name +
       ' ' +
-      this.datos[this.enteroAleatorio + 2].driverLastName;
+      this.datos[this.enteroAleatorio + 2].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
 
     auxPiloto =
-      this.datos[this.enteroAleatorio].driverName +
+      this.datos[this.enteroAleatorio].driver.name +
       ' ' +
-      this.datos[this.enteroAleatorio].driverLastName;
+      this.datos[this.enteroAleatorio].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
 
     auxPiloto =
-      this.datos[this.enteroAleatorio - 1].driverName +
+      this.datos[this.enteroAleatorio - 1].driver.name +
       ' ' +
-      this.datos[this.enteroAleatorio - 1].driverLastName;
+      this.datos[this.enteroAleatorio - 1].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
 
     auxPiloto =
-      this.datos[this.enteroAleatorio - 2].driverName +
+      this.datos[this.enteroAleatorio - 2].driver.name +
       ' ' +
-      this.datos[this.enteroAleatorio - 2].driverLastName;
+      this.datos[this.enteroAleatorio - 2].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
     auxPiloto =
-      this.datos[this.enteroAleatorio + 3].driverName +
+      this.datos[this.enteroAleatorio + 3].driver.name +
       ' ' +
-      this.datos[this.enteroAleatorio + 3].driverLastName;
+      this.datos[this.enteroAleatorio + 3].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
@@ -101,13 +100,13 @@ routerLink: any;
     this.anio = this.datos[this.enteroAleatorio].season;
     this.circuito = this.datos[this.enteroAleatorio].location;
     this.season = this.datos[this.enteroAleatorio].season;
-    this.escuderia = this.datos[this.enteroAleatorio].driverConstructor;
+    this.escuderia = this.datos[this.enteroAleatorio].driver.constructor;
     this.piloto =
-      this.datos[this.enteroAleatorio].driverName +
+      this.datos[this.enteroAleatorio].driver.name +
       ' ' +
-      this.datos[this.enteroAleatorio].driverLastName;
+      this.datos[this.enteroAleatorio].driver.lastName;
     alert(this.piloto);
-    this.nacionalidad = this.datos[this.enteroAleatorio].driverNationality;
+    this.nacionalidad = this.datos[this.enteroAleatorio].driver.nationality;
     this.raceName = this.datos[this.enteroAleatorio].raceName;
     alert('Pilotos cargados ' + this.conjuntoPilotos);
   }
