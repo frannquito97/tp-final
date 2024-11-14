@@ -15,6 +15,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 import { ModifyUserComponent } from './page/modify-user/modify-user.component';
 import { RankingComponent } from './page/ranking/ranking.component';
+import { NavComponent } from './page/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RankingComponent } from './page/ranking/ranking.component';
     RegisterComponent,
     ModifyUserComponent,
     RankingComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
