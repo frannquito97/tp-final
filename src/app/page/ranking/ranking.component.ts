@@ -14,6 +14,7 @@ export class RankingComponent implements OnInit {
   constructor(private management:ManagementInfoService){}
 ngOnInit() {
   this.userList = this.management.getUserArray();
-  //MANDAR CON EL BOTON DEL HTML A VER EL PERFIL DEL USUARIO SELECCIONADO.
+  //FALTA PONER LOS PUNTOS POR CADA JUEGO, 1 RESPUESTA CORRECTA SUMA UN PUNTO, EL QUE MAS RESPUESTAS CORRECTAS TENGA EN X TIEMPO VA A ESTAR PRIMERO EN EL RANKING.
+  
 }
 }

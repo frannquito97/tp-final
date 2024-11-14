@@ -1,29 +1,24 @@
-<h1>Ranking de jugadores</h1>
-<table class="table">
+<app-home></app-home>
+<div class="container text-center fondoH1">
+  <h1 class="mb-4">Players Ranking</h1>
+  <table class="table table-bordered mx-auto">
     <thead>
       <tr>
         <th scope="col">Position</th>
-        <th scope="col">ID</th>
-        <th scope="col">userName</th>
-        <th scope="col">FirstName</th>
-        <th scope="col">LastName</th>
+        <th scope="col">Username</th>
         <th scope="col">Points</th>
         <th scope="col">Errors</th>
         <th scope="col">Total</th>
-        <th scope="col">-</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of userList, let i = index">
         <th scope="row">{{ i + 1}}</th>
-        <td>{{user.id}}</td>
         <td>{{user.userName}}</td>
-        <td>{{user.firstName}}</td>
-        <td>{{user.lastName}}</td>
         <td>Puntos</td>
         <td>Errores</td>
         <td>Total</td>
-        <td><a class="btn btn-success btn-sm" routerLink="['/view/', user.id]">View Profile</a></td>
       </tr>
     </tbody>
   </table>
+</div>
