@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../interface/user';
-import { ManagementInfoService } from '../../services/management-info.service';
-import { RouterModule } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-ranking',
@@ -11,9 +10,13 @@ import { RouterModule } from '@angular/router';
 export class RankingComponent implements OnInit {
   userList: Array<User> = [];
 
-  constructor(private management:ManagementInfoService){}
+  constructor(private _userService:UserService){}
 ngOnInit() {
-  this.userList = this.management.getUserArray();
+  this._userService.getUsers().subscribe({
+    next: (data) =>{
+      this.userList = data;
+    }
+  });
   //FALTA PONER LOS PUNTOS POR CADA JUEGO, 1 RESPUESTA CORRECTA SUMA UN PUNTO, EL QUE MAS RESPUESTAS CORRECTAS TENGA EN X TIEMPO VA A ESTAR PRIMERO EN EL RANKING.
   
 }

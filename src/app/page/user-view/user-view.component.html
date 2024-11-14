@@ -1,8 +1,10 @@
 <app-home></app-home>
 <div class="container myProfile p-4 ">
-    <h1 *ngIf="editingMode" class="mb-3 title d-flex justify-content-between">Edit User - {{ user.id }}</h1>
-    <h1 *ngIf="!editingMode" class="mb-3 title d-flex justify-content-between">View User - {{ user.id }}</h1>
+    <h1 *ngIf="editingMode" class="mb-3 title d-flex justify-content-between">Edit User - {{ currentUser?.id }}</h1>
+    <h1 *ngIf="!editingMode" class="mb-3 title d-flex justify-content-between">View User - {{ currentUser?.id }}</h1>
+    <table class="table">
         
+    </table>        
         <div class="row mb-2">
             <button *ngIf="!editingMode" (click)="edit()" class="btn btn-sm btn-primary">Edit User</button>
             <button *ngIf="editingMode" (click)="editingMode = false" class="btn btn-sm btn-primary">Back to View User</button>
@@ -16,8 +18,8 @@
                     <label for="">First Name:</label>
                 </div>
                 <div class="col">
-                    <span *ngIf="!editingMode">{{ user.firstName }}</span>
-                    <input *ngIf="editingMode" type="text" [(ngModel)]="updateUser.firstName" class="form-control"/>
+                    <span *ngIf="!editingMode">{{ currentUser?.name }}</span>
+                    <input *ngIf="editingMode" type="text" class="form-control"/>
                 </div>
             </div>
 
@@ -26,8 +28,8 @@
                     <label for="">Last Name:</label>
                 </div>
                 <div class="col">
-                    <span *ngIf="!editingMode">{{ user.lastName }}</span>
-                    <input *ngIf="editingMode" type="text" [(ngModel)]="updateUser.lastName" class="form-control"/>
+                    <span *ngIf="!editingMode">{{ currentUser?.lastName }}</span>
+                    <input *ngIf="editingMode" type="text" class="form-control"/>
                 </div>                
             </div>                         
             
@@ -36,39 +38,28 @@
                     <label for="">User Name:</label>
                 </div>
                 <div class="col">
-                    <span *ngIf="!editingMode">{{ user.username }}</span>
-                    <input *ngIf="editingMode" type="text" [(ngModel)]="updateUser.userName" class="form-control"/>
+                    <span *ngIf="!editingMode">{{ currentUser?.username }}</span>
+                    <input *ngIf="editingMode" type="text" class="form-control"/>
                 </div> 
             </div>
 
             <div class="row mb-2">
                 <div class="col">
-                    <label for="">Email: {{ user.email }}</label>
+                    <label for="">Email: {{ currentUser?.email }}</label>
                 </div>
                 <div class="col">
-                    <span *ngIf="!editingMode">{{ user.email }}</span>
-                    <input *ngIf="editingMode" type="text" [(ngModel)]="updateUser.email" class="form-control"/>
+                    <span *ngIf="!editingMode">{{ currentUser?.email }}</span>
+                    <input *ngIf="editingMode" type="text" class="form-control"/>
                 </div> 
             </div>
-
-            <div class="row mb-2">
-                <div class="col">
-                    <label for="">Password:</label>
-                </div>
-                <div class="col">
-                    <span *ngIf="!editingMode">{{ user.password }}</span>
-                    <input *ngIf="editingMode" type="text" [(ngModel)]="updateUser.password" class="form-control"/>
-                </div> 
-            </div>
-
             <div class="row mb-2">
                 <div class="col">
 
                     <label for="">Points: </label>
-                    <!-- en PUNTOS DE JUEGO se pone las llaves y la llamada a los puntos que tenga el user -->
+                    en PUNTOS DE JUEGO se pone las llaves y la llamada a los puntos que tenga el user 
                 </div>
                     <div class="col">PUNTOS DE JUEGO
-                    <!-- {{user.points}} -->
+                    <!-- {{user.points}}  -->
                 </div>
                 <div class="col"></div>
             </div>
@@ -78,10 +69,10 @@
                 <div class="col">
 
                     <label for="">Errors: </label>
-                    <!-- en CANT ERRORES se pone las llaves y la llamada a los ERRORES que tenga el user -->
+                    en CANT ERRORES se pone las llaves y la llamada a los ERRORES que tenga el user 
                 </div>
                     <div class="col">CANT ERRORES
-                    <!-- {{user.errors}} -->
+                    <!-- {{user.errors}}  -->
                 </div>
                 <div class="col"></div>
             </div>
@@ -90,10 +81,10 @@
                 <div class="col">
 
                     <label for="">Total: </label>
-                    <!-- en PUNTOS TOTALES se pone las llaves y la llamada a los PUNTOS TOTALES que tenga el user -->
+                    en PUNTOS TOTALES se pone las llaves y la llamada a los PUNTOS TOTALES que tenga el user 
                 </div>
                     <div class="col">PUNTOS TOTALES
-                   <!-- {{user.totalPoints}} -->
+                    <!-- {{user.totalPoints}}  -->
                 </div>
                 <div class="col"></div>
             </div>            

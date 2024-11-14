@@ -1,12 +1,12 @@
 export interface User {
 // BASIC ATRIBUTES    
 
+id: number,
+username:       string,
+name:      string, 
+lastName:       string,       
 email: string,
 password: string,
-id: number
-firstName:      string, 
-lastName:       string,       
-userName:       string,
     /*createdAtDate:  Date,
     admin:          boolean, */
 // GAME ATRIBUTES

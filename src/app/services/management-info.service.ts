@@ -18,7 +18,7 @@ export class ManagementInfoService {
       data = response['MRData']['RaceTable']['Races'];
       console.log(data);
       if (data != null) {
-        data.forEach( (dt: any) => {
+        data.forEach((dt: any) => {
           let race: Races = {
             raceId: dt['Circuit']['circuitId'],
             season: dt['season'],
@@ -28,7 +28,7 @@ export class ManagementInfoService {
             driverLastName: dt['Results']['0']['Driver']['familyName'],
             driverConstructor: dt['Results']['0']['Constructor']['name'],
             driverNationality: dt['Results']['0']['Driver']['nationality'],
-            
+
           }
           this.season.push(race);
         });
@@ -36,38 +36,6 @@ export class ManagementInfoService {
     })
     return this.season;
   }
-  getUserArray() : Array<User>{
-    let data = [];
-    this.userService.getUser().then( response => {
-      data = response;
-      if(data != null){
-        data.forEach( (dt: any) => {
-          let user: User = {
-            email: dt['email'],
-            password: dt['password'],
-            id: dt['id'],
-            firstName: dt['firstName'],
-            lastName: dt['lastName'],
-            userName: dt['userName']
-          }
-          this.users.push(user);
-        });
-      }})
-      return this.users;
-    }
-    
-  getById(id: number): Promise<any>{
-    return new Promise((resolve,reject) =>{
 
-      const user = this.users.find(user => user.id ==id);
-      
-      if (user){
-        resolve(user);
-      }
-      else{
-        reject(new Error("User not found"));
-      }
-    });
-    }
-    
-  }
+}
+
