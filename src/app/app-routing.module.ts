@@ -11,17 +11,19 @@ import { ModifyUserComponent } from './page/modify-user/modify-user.component';
 import { RankingComponent } from './page/ranking/ranking.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { AddTokenInterceptor } from './utils/add-token.interceptor';
+import { authGuard } from './utils/auth.guard';
 
 const routes: Routes = [
   { path:'f1Games', component: LoginComponent},
-  { path:'home', component: HomeComponent},
-  { path:'play', component: PlayGameComponent },
-  { path:'modifyUser', component: ModifyUserComponent},
-  { path:'word-Game' , component:WordGameComponent},
-  { path:'myProfile/:id', component: UserViewComponent },
+  { path:'home', component: HomeComponent, canActivate: [authGuard]},
+  { path:'play', component: PlayGameComponent , canActivate:[authGuard]},
+  { path:'modifyUser', component: ModifyUserComponent, canActivate:[authGuard]},
+  { path:'word-Game' , component:WordGameComponent, canActivate:[authGuard]},
+  { path:'myProfile/:id', component: UserViewComponent, canActivate:[authGuard] },
   { path:'sign-in', component:SignInComponent},
   { path:'', redirectTo:'f1Games', pathMatch: 'full' },
-  { path:'ranking', component: RankingComponent},
+  { path:'ranking', component: RankingComponent, canActivate:[authGuard]},
   /*{path:'view/id:', component}
   {path:'user/id:', component}
   {path:'user/id:', component}*/

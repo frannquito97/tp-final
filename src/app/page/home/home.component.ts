@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   /*styleUrl: './home.component.css'*/
 })
 export class HomeComponent {
-  public currentUser?: User;
+  public tokenBoolean: boolean = localStorage.getItem('token')!=undefined ? true : false;
+  public currentUser?: User | undefined;
   constructor(private _userService: UserService, private router : Router){
     this._userService.getUserData(Number(localStorage.getItem('id'))).subscribe({
       next: (user) =>
@@ -24,6 +25,11 @@ export class HomeComponent {
     this.router.navigateByUrl(`myProfile/${this.currentUser?.id}`);
   }
 
-  name = this.currentUser?.username
+  logOut(){
+    this.currentUser = undefined;
+    localStorage.clear();
+    this.router.navigateByUrl('/f1Games');
+
+  }
 
   }

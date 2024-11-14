@@ -3,6 +3,7 @@ import { F1InfoService } from './f1-info.service';
 import { Race } from '../interface/interfacesGames/race';
 import { UserService } from './user.service';
 import { User } from '../interface/user';
+import { Driver } from '../interface/interfacesGames/driver';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ManagementInfoService {
   getRacesWins(/*PARAMETRO DEL AÑO ALEATORIO*/): Array<Race> {
     let data = [];
     this.f1Info.getWinnersBySeason("2024").then(response => {
-      data = response['MRData']['RaceTable']['Race'];
+      data = response['MRData']['RaceTable']['Races'];
       console.log(data);
       if (data != null) {
         data.forEach((dt: any) => {
@@ -24,13 +25,13 @@ export class ManagementInfoService {
             season: dt['season'],
             raceName: dt['raceName'],
             location: dt['Circuit']['Location']['country'],
-            driver : {
-              id: dt['Driver']['Results']['Driver']['driverId'],
-              numberCar: dt['Driver']['Results']['Driver']['permanentNumber'],
-              name: dt['Driver']['Results']['Driver']['givenName'],
-              lastName: dt['Driver']['Results']['Driver']['familyName'],
-              constructor: dt['Driver']['Results']['Constructor']['name'],
-              nationality: dt['Driver']['Results']['Driver']['nationality']
+            driver :  {
+              id: dt['Results'][0]['Driver']['driverId'],
+              numberCar: dt['Results'][0]['Driver']['permanentNumber'],
+              name: dt['Results'][0]['Driver']['givenName'],
+              lastName: dt['Results'][0]['Driver']['familyName'],
+              constructor: dt['Results'][0]['Constructor']['name'],
+              nationality: dt['Results'][0]['Driver']['nationality']
             }
 
           }

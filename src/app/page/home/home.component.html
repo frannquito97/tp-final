@@ -1,22 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/home">F1 GAMES</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <button *ngIf="tokenBoolean" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item ms-auto">
-            <a class="nav-link" href="/play">Jugar</a>
+            <a *ngIf="tokenBoolean" class="nav-link" href="/play">Jugar</a>
           </li>
-          <li class="nav-item ms-auto">
+          <li *ngIf="tokenBoolean" class="nav-item ms-auto">
             <a class="nav-link" href="/ranking">Ranking</a>
           </li>
-          <li class="nav-item ms-auto">
+          <li *ngIf="tokenBoolean" class="nav-item ms-auto">
             <a class="nav-link" (click)="userProfile()" >Mi Perfil</a>
           </li>
-          <li class="nav-item ms-auto">
-            <a class="nav-link" href="#">Cerrar Sesion</a>
+          <li *ngIf="tokenBoolean" class="nav-item ms-auto">
+            <a  class="nav-link" (click)="logOut()">Cerrar Sesion</a>
           </li>
         </ul>
       </div>

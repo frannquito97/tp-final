@@ -5,6 +5,4 @@ export interface Driver {
     nationality: string,
     constructor: string,
     numberCar: string
-
-
 }

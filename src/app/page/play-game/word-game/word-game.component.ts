@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Race } from '../../../interface/interfacesGames/race';
+import { Driver } from '../../../interface/interfacesGames/driver';
 import { ManagementInfoService } from '../../../services/management-info.service';
 import {
   FormBuilder,
@@ -7,9 +8,6 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
-import { compileNgModule } from '@angular/compiler';
-
-import { Router,RouterModule,RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-word-game',

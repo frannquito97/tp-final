@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ErrorService } from '../services/error.service';
@@ -19,7 +19,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if(error.status === 401){
           this._errorService.msjError(error)
-          this.router.navigate(['/login'])
+          this.router.navigate(['/f1Games'])
         }
         return throwError(() => new Error('Error'))
       })
