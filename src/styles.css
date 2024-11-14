@@ -121,4 +121,14 @@ text-align: center;
   display: flex;
   justify-content: space-between;
 }
+.contendor-formulario{
+
+    width: 500px;
+    background-color: #ccc;
+    border-radius: 10px;
+    padding: 50px
+  }
+.contendor-formulario input{
+  width: 100%;
+}
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
+import { User } from '../../interface/user';
 import { ManagementInfoService } from '../../services/management-info.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,19 +10,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModifyUserComponent implements OnInit {
 
-  user: User | null = new User;
+  
 
   constructor(private managementService: ManagementInfoService, private route: ActivatedRoute){
     
   }
 ngOnInit() {
-  let userId = Number(this.route.snapshot.paramMap.get('id'));
-   this.managementService.getById(userId)
-   .then(response => {
-    this.user = response;
-   })
-   .catch(error => {
-    console.log(error);
-   })
+  // let userId = Number(this.route.snapshot.paramMap.get('id'));
+  //  this.managementService.getById(userId)
+  //  .then(response => {
+  //   this.user = response;
+  //  })
+  //  .catch(error => {
+  //   console.log(error);
+  //  })
 }
 }

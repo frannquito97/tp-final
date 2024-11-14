@@ -1,0 +1,49 @@
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginRequest } from '../../interface/loginRequest';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../services/error.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styles: ``
+})
+export class LoginComponent {
+  constructor(private _userService: UserService, private router: Router, private _errorService: ErrorService) { }
+  loading: boolean = false;
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(16)])
+  })
+
+  get email() { return this.loginForm.get('email')?.value };
+  get password() { return this.loginForm.get('password')?.value };
+  login() {
+    let info: Array<string> = []
+    if (this.loginForm.valid) {
+      const user: LoginRequest = {
+        email: this.email || '',
+        password: this.password || ''
+      }
+      this._userService.login(user).subscribe({
+        next: (data) => {
+          console.log(data);
+          const arrayToken = data.split('.');
+          const tokenPayload = JSON.parse(atob(arrayToken[1]));
+          const id : number = tokenPayload.id;
+          this.router.navigateByUrl('/home');
+          localStorage.setItem('token', data);
+          localStorage.setItem('id', String(id));
+        },
+        error: (e: HttpErrorResponse) => {
+          this._errorService.msjError(e);
+          this.loading = false;
+        }
+      })
+    }
+  }
+}
+
