@@ -1,16 +1,16 @@
 <section class="wordGame">
-  <h3>¡Adivina el piloto!</h3>
+  <h2>¡Adivina el piloto!</h2>
   @if (renderWindows == true) { @if(jugar==false){
   <button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
   } @if(jugar!=false){
-  <h5>La respuesta correcta es PILOTO: {{ piloto }} harcodeado</h5>
-  <p>Este piloto corrio en el año {{ anio }}</p>
 
-  <p>En la locacion de {{ circuito }}</p>
+  <p>Este piloto corrio en el año: {{ anio }}</p>
+  <p>Salio Primero en la Pole</p>
+  <p>En la locacion de: {{ circuito }}</p>
 
   <p>Carrera: {{ raceName }}</p>
 
-  <h4 for="">El piloto es:</h4>
+  <h3 for="">El piloto es:</h3>
   <br />
   <section id="button-marked-section">
     @for (item of conjuntoPilotos; track $index) {
@@ -18,16 +18,16 @@
     }
   </section>
 
-  <h4>Pista 1</h4>
+  <h3>Pista 1</h3>
   <button (click)="pistaUno()">Pista 1</button>
   @if(pista1==true){
-  <p>Su nacionalidad es {{ nacionalidad }}</p>
+  <p class="pista">Su nacionalidad es: {{ nacionalidad }}</p>
   }
 
-  <h4>Pista 2</h4>
-  <button (click)="pistaDos()">Pista 2</button>
+  <h3>Pista 2</h3>
+  <button [disabled]="pista1==false" (click)="pistaDos()">Pista 2</button>
   @if(pista2==true){
-  <p>Pertenecia a la escuderia {{ escuderia }}</p>
+  <p class="pista"> Pertenecia a la escuderia: {{ escuderia }}</p>
   } @if (errorPiloto == true) {
   <p><strong>Seleccion un piloto incorrecto, Perdio puntos</strong></p>
   }
@@ -43,10 +43,10 @@
   </div>
 
   @if (sigPiloto==true) {
-  <p>Adivinaste! sigue asi</p>
+  <p class="ganador">Adivinaste! sigue asi</p>
   <br />
   <button (click)="winner()">Siguiente piloto</button>
   } }}
-  <hr>
+  <hr />
   <Button (click)="backHome()">Vovler al Home</Button>
 </section>

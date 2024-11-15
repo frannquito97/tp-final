@@ -160,6 +160,16 @@ font-weight: 700;
     scroll-margin-top: initial;
   }
 
-.button-marked-section{
- 
-}
+  button[disabled] {
+    background-color: gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .pista {
+    color: rgb(10, 2, 250);
+  }
+  
+  .ganador{
+    color: green;
+  }
