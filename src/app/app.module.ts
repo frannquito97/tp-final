@@ -24,6 +24,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
+import { DataDriverComponent } from './page/play-game/data-driver/data-driver.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
     SignInComponent,
     SpinnerComponent,
     FooterComponent,
+    DataDriverComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,9 +13,9 @@ export class ManagementInfoService {
   public users: User[] = [];
   constructor(private f1Info: F1InfoService, private userService: UserService) { }
 
-  getRacesWins(/*PARAMETRO DEL AÑO ALEATORIO*/): Array<Race> {
+  getRacesWins(year:string): Array<Race> {
     let data = [];
-    this.f1Info.getWinnersBySeason("2024").then(response => {
+    this.f1Info.getWinnersBySeason(year).then(response => {
       data = response['MRData']['RaceTable']['Races'];
       console.log(data);
       if (data != null) {

@@ -25,17 +25,32 @@ routerLink: any;
   public conjuntoPilotos: string[] = [];
 
   ngOnInit() {
-    this.datos = this.infoF1.getRacesWins();
+    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
   }
-
-  inicio = 6;
-  fin = 16;
+  inicioAnio = 1960;
+  finanio = 2024;
+  
   enteroAleatorio = 0;
-
-  renderNumber() {
+  
+  renderNumber(a:number,b:number ) {
     this.enteroAleatorio =
-    Math.floor(Math.random() * (16 - 6 + 1)) + 6;
-      
+    Math.floor(Math.random() * (b - a + 1)) + a;
+    
+    if(this.enteroAleatorio>=this.datos.length-3){
+      this.enteroAleatorio -= 3;
+    }
+    
+    if(this.enteroAleatorio<2){
+      this.enteroAleatorio += 4;
+    }
+    alert(this.enteroAleatorio)
+  }
+  
+  renderNumberAnio() {
+    const anio =
+    Math.floor(Math.random() * (this.finanio - this.inicioAnio + 1)) + this.inicioAnio;
+    alert(this.anio);
+    return anio.toString()
   }
   
 
@@ -44,8 +59,8 @@ routerLink: any;
     this.conjuntoPilotos.splice(0, this.conjuntoPilotos.length);
     
     let auxPiloto;
-    this.renderNumber();
-
+    this.renderNumber(0,this.datos.length);
+    
     auxPiloto =
       this.datos[this.enteroAleatorio + 1].driver.name +
       ' ' +
@@ -158,7 +173,10 @@ routerLink: any;
     this.pilotButton = '';
     this.errorPiloto = false;
     this.renderWindows = true;
+    this.datos.splice(0, this.datos.length);
     
+    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+    this.renderNumber(0,this.datos.length);
   }
 
   respuesta(e: Event) {
