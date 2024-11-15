@@ -10,14 +10,13 @@
 
   <p>Carrera: {{ raceName }}</p>
 
-  <h4 for="">El piloto es: </h4>
+  <h4 for="">El piloto es:</h4>
   <br />
-  <ul>
+  <section id="button-marked-section">
     @for (item of conjuntoPilotos; track $index) {
-    <li>{{ item }}</li>
+    <button (click)="mark(item)">{{ item }}</button>
     }
-  </ul>
-
+  </section>
 
   <h4>Pista 1</h4>
   <button (click)="pistaUno()">Pista 1</button>
@@ -29,36 +28,25 @@
   <button (click)="pistaDos()">Pista 2</button>
   @if(pista2==true){
   <p>Pertenecia a la escuderia {{ escuderia }}</p>
+  } @if (errorPiloto == true) {
+  <p><strong>Seleccion un piloto incorrecto, Perdio puntos</strong></p>
   }
 
-  
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
-    <div class="mb-3">
-      <label for="" class="form-label"> El piloto es...</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="pilot"
-        name=""
-        id=""
-        placeholder="Escriba el nombre del piloto "
-      />
-      @if (form.controls['pilot'].getError('required') &&
-      form.controls['pilot'].touched) {
-      <p class="invalid-field">*Campo requerido</p>
-      }
-      <div class="contenedor">
-        <button class="btn btn-primary" type="submit">Enviar</button>
-      </div>
+  <div class="mb-3">
+    <label for="" class="form-label"> Selecciono a: </label>
+    <p>{{ this.pilotButton }}</p>
+    <div class="contenedor">
+      <button (click)="onSubmit()" class="btn btn-primary" type="submit">
+        Enviar
+      </button>
     </div>
-  </form>
-
-  
+  </div>
 
   @if (sigPiloto==true) {
   <p>Adivinaste! sigue asi</p>
   <br />
-  <button (click)="winner()"  >Siguiente piloto</button>
+  <button (click)="winner()">Siguiente piloto</button>
   } }}
+  <hr>
+  <Button (click)="backHome()">Vovler al Home</Button>
 </section>

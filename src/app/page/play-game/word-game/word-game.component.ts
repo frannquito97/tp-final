@@ -8,6 +8,7 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-word-game',
@@ -34,14 +35,14 @@ routerLink: any;
   renderNumber() {
     this.enteroAleatorio =
     Math.floor(Math.random() * (16 - 6 + 1)) + 6;
-      alert(this.enteroAleatorio);
+      
   }
   
 
   renderGame() {
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
     this.conjuntoPilotos.splice(0, this.conjuntoPilotos.length);
-
+    
     let auxPiloto;
     this.renderNumber();
 
@@ -91,7 +92,7 @@ routerLink: any;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nullo');
-    // this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
+    this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
 
     console.log('LOS PILOTOS SON: ', this.conjuntoPilotos);
 
@@ -103,12 +104,12 @@ routerLink: any;
       this.datos[this.enteroAleatorio].driver.name +
       ' ' +
       this.datos[this.enteroAleatorio].driver.lastName;
-    alert(this.piloto);
+    
     this.nacionalidad = this.datos[this.enteroAleatorio].driver.nationality;
     this.raceName = this.datos[this.enteroAleatorio].raceName;
-    alert('Pilotos cargados ' + this.conjuntoPilotos);
+    
   }
-
+  //Info necesaria para la las preguntas
   raceName = '';
   nacionalidad = '';
   season: string = '';
@@ -118,12 +119,27 @@ routerLink: any;
   escuderia = '';
   companero = '';
   piloto: string = '';
+  //booleanos para habiliar HTML con pistas
   pista1 = false;
   pista2 = false;
+  //Booleano para detectar si el piloto es el ganador
   respuestaPiloto = false;
+  //Renderiza HTML en caso de ganar
   sigPiloto = false;
+  //Para volver a renderizar la pantalla evitando errores
   renderWindows: boolean = true;
-
+  //Variable para extraer la info de los botones de los posibles pilotos
+  pilotButton:string = '';
+  
+  //Boleano para ver si selecciono un boton del piloto
+  selected:boolean=false;
+  
+  //Si le erra el piloto se renderiza el HTML indicando que le erro
+  errorPiloto:boolean= false;
+  
+  //Un enrutador para redirijis la pagina
+  router = inject(Router);
+  
   pistaUno() {
     this.pista1 = true;
   }
@@ -139,12 +155,14 @@ routerLink: any;
     this.pista2 = false;
     this.respuestaPiloto = false;
     this.sigPiloto = false;
+    this.pilotButton = '';
+    this.errorPiloto = false;
     this.renderWindows = true;
     
   }
 
   respuesta(e: Event) {
-    if (String(e) == this.piloto) {
+    if (String(e) === this.piloto) {
       this.respuestaPiloto = true;
     }
   }
@@ -160,13 +178,35 @@ routerLink: any;
   form = this.fb.nonNullable.group({
     pilot: ['', [Validators.required, Validators.minLength(4)]],
   });
+  
+  mark(pilot:string){
+    this.pilotButton=pilot;
+  }
+  
+  //Funciones del boton
+  cambiado = false; // Variable para rastrear el estado
 
+  toggleColor(): void {
+    this.cambiado = !this.cambiado; // Alternar el valor entre true y false
+  }
+  //
+  
   onSubmit() {
-    if (this.form.invalid) return;
-    if (this.form.getRawValue().pilot.toUpperCase == this.piloto.toUpperCase) {
+    const data:string = this.pilotButton;
+    const dataWinner:string = this.piloto; 
+    if (data == dataWinner) {
       this.sigPiloto = true;
+      alert(this.piloto + 'ESTE ERA EL GANADOR')
+      alert(data + 'Este es el del form')
     } else {
-      alert(this.form.getRawValue().pilot + ': No era el piloto');
+      this.sigPiloto = false;
+      alert(data + ': No era el piloto');
+      this.errorPiloto = true;
     }
   }
+  //funcion para volver al home
+  backHome(){
+    this.router.navigateByUrl('home');
+  }
+  
 }
