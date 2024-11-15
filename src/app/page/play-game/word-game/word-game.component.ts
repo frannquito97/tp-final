@@ -16,10 +16,9 @@ import { Router } from '@angular/router';
   styles: ``,
 })
 export class WordGameComponent {
-routerLink: any;
+  routerLink: any;
   constructor(private infoF1: ManagementInfoService) {}
-  
-  
+
   public datos: Array<Race> = [];
 
   public conjuntoPilotos: string[] = [];
@@ -29,38 +28,37 @@ routerLink: any;
   }
   inicioAnio = 1960;
   finanio = 2024;
-  
+
   enteroAleatorio = 0;
-  
-  renderNumber(a:number,b:number ) {
-    this.enteroAleatorio =
-    Math.floor(Math.random() * (b - a + 1)) + a;
-    
-    if(this.enteroAleatorio>=this.datos.length-3){
+
+  renderNumber(a: number, b: number) {
+    this.enteroAleatorio = Math.floor(Math.random() * (b - a + 1)) + a;
+
+    if (this.enteroAleatorio >= this.datos.length - 3) {
       this.enteroAleatorio -= 3;
     }
-    
-    if(this.enteroAleatorio<2){
+
+    if (this.enteroAleatorio < 2) {
       this.enteroAleatorio += 4;
     }
-    alert(this.enteroAleatorio)
+    alert(this.enteroAleatorio);
   }
-  
+
   renderNumberAnio() {
     const anio =
-    Math.floor(Math.random() * (this.finanio - this.inicioAnio + 1)) + this.inicioAnio;
+      Math.floor(Math.random() * (this.finanio - this.inicioAnio + 1)) +
+      this.inicioAnio;
     alert(this.anio);
-    return anio.toString()
+    return anio.toString();
   }
-  
 
   renderGame() {
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
     this.conjuntoPilotos.splice(0, this.conjuntoPilotos.length);
-    
+
     let auxPiloto;
-    this.renderNumber(0,this.datos.length);
-    
+    this.renderNumber(0, this.datos.length);
+
     auxPiloto =
       this.datos[this.enteroAleatorio + 1].driver.name +
       ' ' +
@@ -119,10 +117,9 @@ routerLink: any;
       this.datos[this.enteroAleatorio].driver.name +
       ' ' +
       this.datos[this.enteroAleatorio].driver.lastName;
-    
+
     this.nacionalidad = this.datos[this.enteroAleatorio].driver.nationality;
     this.raceName = this.datos[this.enteroAleatorio].raceName;
-    
   }
   //Info necesaria para la las preguntas
   raceName = '';
@@ -144,17 +141,17 @@ routerLink: any;
   //Para volver a renderizar la pantalla evitando errores
   renderWindows: boolean = true;
   //Variable para extraer la info de los botones de los posibles pilotos
-  pilotButton:string = '';
-  
+  pilotButton: string = '';
+
   //Boleano para ver si selecciono un boton del piloto
-  selected:boolean=false;
-  
+  selected: boolean = false;
+
   //Si le erra el piloto se renderiza el HTML indicando que le erro
-  errorPiloto:boolean= false;
-  
+  errorPiloto: boolean = false;
+
   //Un enrutador para redirijis la pagina
   router = inject(Router);
-  
+
   pistaUno() {
     this.pista1 = true;
   }
@@ -174,9 +171,9 @@ routerLink: any;
     this.errorPiloto = false;
     this.renderWindows = true;
     this.datos.splice(0, this.datos.length);
-    
+
     this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
-    this.renderNumber(0,this.datos.length);
+    this.renderNumber(0, this.datos.length);
   }
 
   respuesta(e: Event) {
@@ -196,11 +193,11 @@ routerLink: any;
   form = this.fb.nonNullable.group({
     pilot: ['', [Validators.required, Validators.minLength(4)]],
   });
-  
-  mark(pilot:string){
-    this.pilotButton=pilot;
+
+  mark(pilot: string) {
+    this.pilotButton = pilot;
   }
-  
+
   //Funciones del boton
   cambiado = false; // Variable para rastrear el estado
 
@@ -208,14 +205,14 @@ routerLink: any;
     this.cambiado = !this.cambiado; // Alternar el valor entre true y false
   }
   //
-  
+
   onSubmit() {
-    const data:string = this.pilotButton;
-    const dataWinner:string = this.piloto; 
+    const data: string = this.pilotButton;
+    const dataWinner: string = this.piloto;
     if (data == dataWinner) {
       this.sigPiloto = true;
-      alert(this.piloto + 'ESTE ERA EL GANADOR')
-      alert(data + 'Este es el del form')
+      alert(this.piloto + 'ESTE ERA EL GANADOR');
+      alert(data + 'Este es el del form');
     } else {
       this.sigPiloto = false;
       alert(data + ': No era el piloto');
@@ -223,8 +220,7 @@ routerLink: any;
     }
   }
   //funcion para volver al home
-  backHome(){
+  backHome() {
     this.router.navigateByUrl('home');
   }
-  
 }
