@@ -4,6 +4,8 @@ import { Race } from '../interface/interfacesGames/race';
 import { UserService } from './user.service';
 import { User } from '../interface/user';
 import { Driver } from '../interface/interfacesGames/driver';
+import { Observable } from 'rxjs';
+import { NewPilosts } from '../interfaces/interfacesGames/new-pilosts';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class ManagementInfoService {
   public season: Race[] = [];
   public users: User[] = [];
   constructor(private f1Info: F1InfoService, private userService: UserService) { }
-
+  
   getRacesWins(year:string): Array<Race> {
     let data = [];
     this.f1Info.getWinnersBySeason(year).then(response => {
@@ -41,6 +43,10 @@ export class ManagementInfoService {
     })
     return this.season;
   }
+  
+  
+  
+  
 
 }
 

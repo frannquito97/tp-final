@@ -221,3 +221,6 @@ export class WordGameComponent {
     this.router.navigateByUrl('home');
   }
 }
+
+
+

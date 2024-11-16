@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { NewPilosts } from '../interfaces/interfacesGames/new-pilosts';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,9 @@ export class F1InfoService {
   return this.http.get(this.apiUrl + year + this.drivers + this.endUrl).toPromise()
   }
   
+  getDrivers(year : string): Observable<any> {
+    return this.http.get<any>(this.apiUrl + year + this.drivers, { responseType: 'json' });
+  }
   
   getWinnersBySeason( year : string ) : Promise<any> {
     console.log(this.apiUrl + year + this.results + '/1' + this.endUrl);
