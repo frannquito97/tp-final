@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Race } from '../../../interface/interfacesGames/race';
 import { Driver } from '../../../interface/interfacesGames/driver';
 import { ManagementInfoService } from '../../../services/management-info.service';
@@ -9,7 +9,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-word-game',
   templateUrl: './word-game.component.html',
