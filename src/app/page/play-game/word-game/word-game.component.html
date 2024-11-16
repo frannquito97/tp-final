@@ -29,12 +29,12 @@
   @if(pista2==true){
   <p class="pista"> Pertenecia a la escuderia: {{ escuderia }}</p>
   } @if (errorPiloto == true) {
-  <p><strong>Seleccion un piloto incorrecto, Perdio puntos</strong></p>
+  <p><strong>Seleccion a {{this.pilAux}}, el no fue ganador en esta carrera, Perdio puntos</strong></p>
   }
-
+  
   <div class="mb-3">
     <label for="" class="form-label"> Selecciono a: </label>
-    <p>{{ this.pilotButton }}</p>
+    <p class="bg">{{ this.pilotButton }}</p>
     <div class="contenedor">
       <button (click)="onSubmit()" class="btn btn-primary" type="submit">
         Enviar

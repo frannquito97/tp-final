@@ -177,6 +177,10 @@ button.active-button {
   scale: 1.1;
 }
 
+.bg{
+  background-color: black;
+}
+
 .pista {
   color: rgb(10, 2, 250);
 }

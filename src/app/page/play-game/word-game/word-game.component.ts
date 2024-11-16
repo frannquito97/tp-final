@@ -41,14 +41,12 @@ export class WordGameComponent {
     if (this.enteroAleatorio < 2) {
       this.enteroAleatorio += 4;
     }
-    alert(this.enteroAleatorio);
   }
 
   renderNumberAnio() {
     const anio =
       Math.floor(Math.random() * (this.finanio - this.inicioAnio + 1)) +
       this.inicioAnio;
-    alert(this.anio);
     return anio.toString();
   }
 
@@ -107,8 +105,6 @@ export class WordGameComponent {
       : console.log('Piloto nullo');
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
 
-    console.log('LOS PILOTOS SON: ', this.conjuntoPilotos);
-
     this.anio = this.datos[this.enteroAleatorio].season;
     this.circuito = this.datos[this.enteroAleatorio].location;
     this.season = this.datos[this.enteroAleatorio].season;
@@ -131,6 +127,7 @@ export class WordGameComponent {
   escuderia = '';
   companero = '';
   piloto: string = '';
+  pilAux: string = '';
   //booleanos para habiliar HTML con pistas
   pista1 = false;
   pista2 = false;
@@ -157,7 +154,6 @@ export class WordGameComponent {
   }
   pistaDos() {
     this.pista2 = true;
-    console.log(this.conjuntoPilotos);
   }
 
   winner() {
@@ -193,7 +189,7 @@ export class WordGameComponent {
   form = this.fb.nonNullable.group({
     pilot: ['', [Validators.required, Validators.minLength(4)]],
   });
-  
+
   //Con esta funcion hacemos que al seleccionar un piloto lo guarde y asi pintarlo luego
   mark(pilot: string) {
     this.pilotButton = pilot;
@@ -201,7 +197,7 @@ export class WordGameComponent {
 
   //Funciones del boton
   cambiado = false; // Variable para rastrear el estado
-  
+
   toggleColor(): void {
     this.cambiado = !this.cambiado; // Alternar el valor entre true y false
   }
@@ -211,12 +207,12 @@ export class WordGameComponent {
     const data: string = this.pilotButton;
     const dataWinner: string = this.piloto;
     if (data == dataWinner) {
+      this.errorPiloto = false;
       this.sigPiloto = true;
-      alert(this.piloto + 'ESTE ERA EL GANADOR');
-      alert(data + 'Este es el del form');
+      this.pilAux = '';
     } else {
       this.sigPiloto = false;
-      alert(data + ': No era el piloto');
+      this.pilAux = data;
       this.errorPiloto = true;
     }
   }
