@@ -14,7 +14,12 @@
   <br />
   <section id="button-marked-section">
     @for (item of conjuntoPilotos; track $index) {
-    <button  [ngClass]="{'active-button': pilotButton === item}"   (click)="mark(item)">{{ item }}</button>
+    <button
+      [ngClass]="{ 'active-button': pilotButton === item }"
+      (click)="mark(item)"
+    >
+      {{ item }}
+    </button>
     }
   </section>
 
@@ -25,9 +30,9 @@
   }
 
   <h3>Pista 2</h3>
-  <button [disabled]="pista1==false" (click)="pistaDos()">Pista 2</button>
+  <button [disabled]="pista1 == false" (click)="pistaDos()">Pista 2</button>
   @if(pista2==true){
-  <p class="pista"> Pertenecia a la escuderia: {{ escuderia }}</p>
+  <p class="pista">Pertenecia a la escuderia: {{ escuderia }}</p>
   } @if (errorPiloto == true) {
   <p><strong>Seleccion un piloto incorrecto, Perdio puntos</strong></p>
   }
