@@ -14,7 +14,7 @@
   <br />
   <section id="button-marked-section">
     @for (item of conjuntoPilotos; track $index) {
-    <button (click)="mark(item)">{{ item }}</button>
+    <button  [ngClass]="{'active-button': pilotButton === item}"   (click)="mark(item)">{{ item }}</button>
     }
   </section>
 

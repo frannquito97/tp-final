@@ -193,14 +193,15 @@ export class WordGameComponent {
   form = this.fb.nonNullable.group({
     pilot: ['', [Validators.required, Validators.minLength(4)]],
   });
-
+  
+  //Con esta funcion hacemos que al seleccionar un piloto lo guarde y asi pintarlo luego
   mark(pilot: string) {
     this.pilotButton = pilot;
   }
 
   //Funciones del boton
   cambiado = false; // Variable para rastrear el estado
-
+  
   toggleColor(): void {
     this.cambiado = !this.cambiado; // Alternar el valor entre true y false
   }
