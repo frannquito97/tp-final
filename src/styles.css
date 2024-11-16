@@ -13,23 +13,23 @@ body {
   align-items: flex-start;
   margin: 0;
 }
-.fondoH1 {
+.fondoH1{
   background-color: rgba(255, 255, 255, 0.8);
   margin-top: 20%;
   padding: 10px;
   display: inline-block;
   border-radius: 5px;
 }
-.myProfile {
-  background-color: rgba(255, 255, 255, 0.8);
-  max-width: 50%;
-  margin-top: 5%;
-  margin-left: 25%;
-  display: inline-block;
-  border-radius: 5px;
+.myProfile{
+    background-color: rgba(255, 255, 255, 0.8);
+    max-width: 50%;
+    margin-top: 5%;
+    margin-left: 25%;
+    display: inline-block;
+    border-radius: 5px;
 }
 
-.newPlayer {
+.newPlayer{
   background-color: rgba(255, 255, 255, 0.8);
   margin-top: 20%;
   padding: 10px;
@@ -37,18 +37,21 @@ body {
   max-width: 600px;
 }
 
-.contenedor {
+.contenedor{
   display: flex;
-  justify-content: center;
+  justify-content: center;  
 }
 
-.btn:hover {
+.btn:hover{
   background-color: green;
 }
+
 
 form {
   align-items: center;
 }
+
+
 
 .notFound {
   padding: 0%;
@@ -56,11 +59,12 @@ form {
   height: auto !;
 }
 
-.formLogin {
+.formLogin{
   border-width: 2px;
   flex-direction: column;
   align-items: center;
 }
+
 
 .ng-invalid:not(form).ng-touched {
   border: 3px solid red;
@@ -70,19 +74,20 @@ form {
   border: 3px solid green;
 }
 
-.formContainer {
+.formContainer{
   border-radius: 10px;
+
 }
 
 .invalid-field {
   color: red;
 }
 
-.btn {
+.btn{
   width: 100%;
   margin-bottom: 10px;
 }
-.text-center {
+.text-center{
   text-align: center;
 }
 .row {
@@ -90,15 +95,15 @@ form {
   align-items: center;
   margin-bottom: 15px;
 }
-.row .col-sm-2 {
+.row .col-sm-2{
   text-align: right;
   padding-right: 15px;
 }
-.row .col-sm-10 {
+.row .col-sm-10{
   display: flex;
 }
 
-.form-control {
+.form-control{
   width: 100%;
 }
 
@@ -106,19 +111,22 @@ form {
   display: flex;
   justify-content: space-between;
 }
-.contendor-formulario {
-  width: 500px;
-  background-color: #ccc;
-  border-radius: 10px;
-  padding: 50px;
-}
-.contendor-formulario input {
+.contendor-formulario{
+
+    width: 500px;
+    background-color: #ccc;
+    border-radius: 10px;
+    padding: 50px
+  }
+.contendor-formulario input{
   width: 100%;
 }
+
 
 /* Para Word Game */
 
 button {
+  
   background-color: #de0315;
   color: white;
   border: none;
@@ -134,59 +142,43 @@ button {
 button.cambiado {
   background-color: orange;
   color: black;
+  
 }
 
 .wordGame {
-  display: flexbox;
-  font-weight: 700;
+font-weight: 700;
   font-size: xx-large;
   border-radius: 10%;
-  border-style: solid;
-  border-width: 5px;
-
+  display: flexbox;
   align-items: center;
   align-content: center;
   text-align: center;
-  margin-top: 150px;
-  color: rgb(251, 6, 6);
-  width: 75vh;
-  background-color: rgba(245, 249, 249, 0.763);
-  scroll-margin-top: initial;
+    margin-top: 150px;
+    color: rgb(251, 6, 6);
+    width: 400px;
+    background-color: rgba(245, 249, 249, 0.763);
+    scroll-margin-top: initial;
+  }
+
+  button[disabled] {
+    background-color: gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
   
   
-  position: relative;
-  animation: slide-in 2s ease-out;
-}
-
-button[disabled] {
-  background-color: gray;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-button.active-button {
-  background-color: rgb(4, 253, 0);
-  color: rgb(6, 6, 6);
-  border: 1px solid blue;
-  scale: 1.1;
-}
-
-.pista {
-  color: rgb(10, 2, 250);
-}
-
-.ganador {
-  color: green;
-}
-
-
-@keyframes slide-in {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
+  button.active-button {
+    background-color: rgb(4, 253, 0);
+    color: rgb(6, 6, 6);
+    border: 1px solid blue;
+    scale: 1.1;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+  
+  
+  .pista {
+    color: rgb(10, 2, 250);
   }
-}
+  
+  .ganador{
+    color: green;
+  }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Race } from '../../../interface/interfacesGames/race';
 import { Driver } from '../../../interface/interfacesGames/driver';
 import { ManagementInfoService } from '../../../services/management-info.service';
@@ -9,26 +9,23 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-word-game',
   templateUrl: './word-game.component.html',
   styles: ``,
 })
 export class WordGameComponent {
-  ngOnInit() {
-    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
-    this.playSound();
-  }
-
   routerLink: any;
-
   constructor(private infoF1: ManagementInfoService) {}
 
   public datos: Array<Race> = [];
 
   public conjuntoPilotos: string[] = [];
 
+  ngOnInit() {
+    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+  }
   inicioAnio = 1960;
   finanio = 2024;
 
@@ -196,7 +193,7 @@ export class WordGameComponent {
   form = this.fb.nonNullable.group({
     pilot: ['', [Validators.required, Validators.minLength(4)]],
   });
-
+  
   //Con esta funcion hacemos que al seleccionar un piloto lo guarde y asi pintarlo luego
   mark(pilot: string) {
     this.pilotButton = pilot;
@@ -204,14 +201,13 @@ export class WordGameComponent {
 
   //Funciones del boton
   cambiado = false; // Variable para rastrear el estado
-
+  
   toggleColor(): void {
     this.cambiado = !this.cambiado; // Alternar el valor entre true y false
   }
   //
 
   onSubmit() {
-    this.playSound2();
     const data: string = this.pilotButton;
     const dataWinner: string = this.piloto;
     if (data == dataWinner) {
@@ -227,17 +223,5 @@ export class WordGameComponent {
   //funcion para volver al home
   backHome() {
     this.router.navigateByUrl('home');
-  }
-
-  //Sonidos
-
-  playSound() {
-    const audio = new Audio('../../../assets/sounds/WordGame.mp3'); // Ruta al archivo de sonido
-    audio.play();
-  }
-
-  playSound2() {
-    const audio = new Audio('../../../assets/sounds/PushWordGame.mp3'); // Ruta al archivo de sonido
-    audio.play();
   }
 }
