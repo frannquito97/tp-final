@@ -3,10 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.nuevoUsuario = exports.getUserData = exports.getUser = void 0;
+exports.login = exports.updateUser = exports.nuevoUsuario = exports.getUserData = exports.getUser = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const stats_1 = __importDefault(require("../models/stats"));
 const getUser = async (req, res) => {
     const listUsers = await user_1.default.findAll();
     res.json(listUsers);
@@ -35,9 +36,7 @@ const nuevoUsuario = async (req, res) => {
             msg: `Ya existe un usuario con el nombre de usuario: ${username}`
         });
     }
-    console.log('sigo');
     const hashPassword = await bcryptjs_1.default.hash(password, 10);
-    //
     try {
         user_1.default.create({
             name: name,
@@ -59,8 +58,30 @@ const nuevoUsuario = async (req, res) => {
     }
 };
 exports.nuevoUsuario = nuevoUsuario;
+const updateUser = async (req, res) => {
+    const { body } = req;
+    const { id, name, lastName, password } = body;
+    const regexBcrypt = '/^\$2[aby]\$/';
+    console.log(body);
+    const newPass = await bcryptjs_1.default.hash(password, 10);
+    const user = await user_1.default.findOne({ where: { id: id } });
+    if (user) {
+        const { dataValues } = user;
+        const passHash = dataValues['password'];
+        await bcryptjs_1.default.compare(password, passHash).then((result) => {
+            if (result) {
+                user_1.default.update({ name: name, lastName: lastName }, { where: { id: id } });
+                res.json({ msg: 'Usuario actualizado correctamente', status: res.status, statusCode: res.statusCode });
+            }
+            else {
+                user_1.default.update({ name: name, lastName: lastName, password: newPass }, { where: { id: id } });
+                res.json({ msg: 'Usuario actualizado correctamente, con pass nueva', status: res.status, statusCode: res.statusCode });
+            }
+        });
+    }
+};
+exports.updateUser = updateUser;
 const login = async (req, res) => {
-    console.log(req.body);
     const { body } = req;
     const { password, email } = body;
     const user = await user_1.default.findOne({ where: { email: email } });
@@ -73,12 +94,16 @@ const login = async (req, res) => {
         const { dataValues } = user;
         const passHash = dataValues['password'];
         const id = dataValues['id'];
+        const stat = await stats_1.default.findOne({ where: { id_user: id } });
+        const score = stat === null || stat === void 0 ? void 0 : stat.dataValues['score'];
+        const error = stat === null || stat === void 0 ? void 0 : stat.dataValues['error'];
         await bcryptjs_1.default.compare(password, passHash).then((result) => {
             if (result) {
                 //Login exitoso -- Generar 
                 const token = jsonwebtoken_1.default.sign({
                     id: id,
-                    email: email
+                    score: score,
+                    error: error
                 }, process.env.SECRET_KEY);
                 res.json(token);
             }

@@ -15,7 +15,10 @@ const Stats = sequelize.define('stats', {
             key: 'id'
         }
     },
-    totalScore:{
+    score:{
+        type: DataTypes.INTEGER
+    },
+    error:{
         type: DataTypes.INTEGER
     }
 });

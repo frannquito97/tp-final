@@ -8,7 +8,7 @@
         <div class="row mb-2">
             <button *ngIf="!editingMode" (click)="edit()" class="btn btn-sm btn-primary">Edit User</button>
             <button *ngIf="editingMode" (click)="editingMode = false" class="btn btn-sm btn-primary">Back to View User</button>
-            <button *ngIf="editingMode"(click)="saveChanges()" class="btn btn-sm btn-success">Save Changes</button>
+            <button *ngIf="editingMode" class="btn btn-sm btn-success">Save Changes</button>
         </div>
     <div class="bg-light p-4">
         <div class="row">

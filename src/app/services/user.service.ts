@@ -31,7 +31,7 @@ export class UserService {
    updateUser(id: number, userUpdate: User) : Observable<boolean>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    return this.http.post<boolean>(`${this.myAppURL}${this.myApiURL}${id}`, userUpdate, {headers : headers})
+    return this.http.put<boolean>(`${this.myAppURL}${this.myApiURL}${id}`, {id: userUpdate.id, name: userUpdate.name, lastName: userUpdate.lastName, password: userUpdate.password}, {headers : headers})
    }
    getUsers() : Observable<User[]>{
     const token = localStorage.getItem('token');

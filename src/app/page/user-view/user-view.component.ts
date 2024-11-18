@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../interface/user';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-user-view',
@@ -13,11 +14,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class UserViewComponent implements OnInit {
 
   editForm = new FormGroup({
-    name: new FormControl(`${this.currentUser?.name}`),
-    lastName: new FormControl(`${this.currentUser?.lastName}`),
-    password: new FormControl(`${this.currentUser?.password}`, [Validators.minLength(4), Validators.maxLength(8)]),
-    confirmPassword: new FormControl(`${this.currentUser?.password}`, [Validators.minLength(4), Validators.maxLength(8)])
+    name: new FormControl(''),
+    lastName: new FormControl(''),
+    password: new FormControl('', [Validators.minLength(4), Validators.maxLength(8)]),
+    confirmPassword: new FormControl('', [Validators.minLength(4), Validators.maxLength(8)])
   });
+
   get name() { return this.editForm.get('name')?.value };
   get lastName() { return this.editForm.get('lastName')?.value };
   get password() { return this.editForm.get('password')?.value };
@@ -43,8 +45,82 @@ export class UserViewComponent implements OnInit {
     })
   }
 
-  edit(): void {
-      Swal.fire({
+  async edit() {
+    const { value: formValues } = await Swal.fire({
+      title: "Multiple inputs",
+      html: `
+        <div class="form-floating mb-3 mt-3">
+          <input type="text" class="form-control form-control-sm" style="width: 85%" disabled value="${this.currentUser?.email}">
+          <label>Email</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+          <input type="text" class="form-control form-control-sm" style="width: 85%" disabled value="${this.currentUser?.username}">
+          <label>Usuario</label>
+        </div>
+                  <div class="form-floating mb-3 mt-3">
+            <input type="text" id="name" class="form-control form-control-sm" style="width: 85%">
+            <label>Nombre</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" id="lastName" class="form-control form-control-sm" style="width: 85%">
+            <label>Apellido</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <input type="password" id="password" class="form-control form-control-sm" style="width: 85%"  placeholder="Nueva Contraseña">
+            <label>Nueva Contraseña</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+             <input type="password" id="confirmPassword" class="form-control form-control-sm" style="width: 85%"  placeholder="Confirmar Contraseña">
+             <label>Confirmar Contraseña</label>
+          </div>
+        
+      `,
+      focusConfirm: false,
+      preConfirm: () => {
+        let name = (document.getElementById('name') as HTMLInputElement).value;
+        let lastName = (document.getElementById('lastName') as HTMLInputElement).value;  
+        let password = (document.getElementById('password') as HTMLInputElement).value;  
+        const confirmPassword = (document.getElementById('confirmPassword') as HTMLInputElement).value;  
+        if(password.length>0){
+          if (password != confirmPassword) {
+            Swal.showValidationMessage('Las Contraseñas deben ser iguales');
+            return null;
+          }
+          else if(password.length < 4 || password.length>16){
+            Swal.showValidationMessage('La contraseña debe tener entre 4 y 16 caracteres');
+            return null;
+          }
+        }
+        else{
+          password = this.currentUser?.password || '';
+        }
+        if(name.length == 0){
+          name = this.currentUser?.name || ''
+        }
+        if(lastName.length == 0){
+          lastName = this.currentUser?.lastName || ''
+        }
+        return {name, lastName, password}
+      }
+    });
+    if (formValues) {
+      console.log(formValues);
+      let user: User = {
+        id: Number(localStorage.getItem('id')),
+        email: '',
+        username: '',
+        name: formValues.name || this.currentUser?.name,
+        lastName: formValues.lastName || this.currentUser?.lastName,
+        password: formValues.password || this.currentUser?.password
+      }
+      this._userService.updateUser(Number(localStorage.getItem('id')),user).subscribe({
+        next: (data) => { 
+          console.log(data), 
+          window.location.reload();
+        }})
+      
+    }
+      /*Swal.fire({
       title: 'Editar Usuario',
       showCancelButton: true,
       confirmButtonText: 'Guardar',
@@ -52,47 +128,52 @@ export class UserViewComponent implements OnInit {
       html:
         `
         <div class="form-floating mb-3 mt-3">
-          <input type="text" id="email" class="form-control form-control-sm" style="width: 85%" disabled value="${this.currentUser?.email}">
+          <input type="text" class="form-control form-control-sm" style="width: 85%" disabled value="${this.currentUser?.email}">
           <label>Email</label>
         </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control form-control-sm" style="width: 85%" disabled value="${this.currentUser?.username}">
+            <label>Usuario</label>
+        </div>
+        <form [formGroup]="editForm">
           <div class="form-floating mb-3 mt-3">
-          <input type="text" id="username" class="form-control form-control-sm" style="width: 85%" disabled value="${this.currentUser?.username}">
-          <label>Usuario</label>
-        </div>
-        </div>
-        <div class="form-floating mb-3 mt-3">
-          <input type="text" id="name" class="form-control form-control-sm" style="width: 85%" value="${this.currentUser?.name}">
-          <label>Nombre</label>
-        </div>
-        <div class="form-floating mb-3 mt-3">
-          <input type="text" id="lastName" class="form-control form-control-sm" style="width: 85%" value="${this.currentUser?.lastName}">
-          <label>Apellido</label>
-        </div>
-        <div class="form-floating mb-3 mt-3">
-          <input type="password" id="password" class="form-control form-control-sm" style="width: 85%"  placeholder="Nueva Contraseña">
-          <label>Nueva Contraseña</label>
-        </div>
-        <div class="form-floating mb-3 mt-3">
-          <input type="password" id="confirmPassword" class="form-control form-control-sm" style="width: 85%"  placeholder="Confirmar Contraseña">
-          <label>Confirmar Contraseña</label>
-        </div>
+            <input type="text" formControlName="name" class="form-control form-control-sm" style="width: 85%">
+            <label>Nombre</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" formControlName="lastName" class="form-control form-control-sm" style="width: 85%">
+            <label>Apellido</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <input type="password" formControlName="password" class="form-control form-control-sm" style="width: 85%"  placeholder="Nueva Contraseña">
+            <label>Nueva Contraseña</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+             <input type="password" formControlName="confirmPassword" class="form-control form-control-sm" style="width: 85%"  placeholder="Confirmar Contraseña">
+             <label>Confirmar Contraseña</label>
+          </div>
+        </form>
         `,
         focusConfirm: false,
     }).then((result) => {
-  
+      console.log(this.editForm);
+      
       if (this.confirmPassword === this.password) {
         if (result.isConfirmed) {
+          console.log('hola');
           let userUpdate: User =
           {
             id: Number(localStorage.getItem('id')),
-            email: this.currentUser?.email || '',
-            username: this.currentUser?.username || '',
-            name: this.name || this.currentUser?.name || '',
-            lastName: this.lastName || this.currentUser?.lastName || '',
+            email: '',
+            username: '',
+            name: this.name || '',
+            lastName: this.lastName || '',
             password: this.password || ''
           }
           Swal.fire('Usuario Actualizado', '', 'success');
-          this._userService.updateUser(Number(localStorage.getItem('id')), userUpdate);
+          this._userService.updateUser(Number(localStorage.getItem('id')), userUpdate).subscribe({
+            next: (data) => { console.log('usuario actualizado');}
+          });
         }
         else if (result.isDenied) {
           this.router.navigateByUrl(`myProfile/${localStorage.getItem('id')}`)
@@ -102,8 +183,6 @@ export class UserViewComponent implements OnInit {
         Swal.fire('Error al guardar usuario', '', 'error');
       }
     })
-  }
-  saveChanges(): void {
-    //TODO modificacion de usuario
+  }*/
   }
 }

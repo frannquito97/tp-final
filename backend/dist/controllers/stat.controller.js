@@ -14,11 +14,55 @@ const getStatUser = async (req, res) => {
 };
 exports.getStatUser = getStatUser;
 const updateStats = async (req, res) => {
-    const { body } = req.body;
-    const { score, id_user } = body;
-    const statExist = await stats_1.default.findOne({ where: { id_user: id_user } });
+    const { score, text, id } = req.body;
+    const statExist = await stats_1.default.findOne({ where: { id_user: id } });
     if (statExist) {
-        await stats_1.default.update({ score: score }, { where: { id_user: id_user } });
+        try {
+            if (text == 'score') {
+                stats_1.default.update({
+                    score: score,
+                }, { where: { id_user: id } });
+            }
+            else {
+                stats_1.default.update({
+                    error: score,
+                }, { where: { id_user: id } });
+            }
+            res.json({ msg: 'Estadisticas actualizadas correctamente' });
+        }
+        catch (error) {
+            res.status(400).json({
+                msg: 'Ups ocurrio un error',
+                error
+            });
+        }
+    }
+    else {
+        try {
+            if (text == 'score') {
+                stats_1.default.create({
+                    id_user: id,
+                    score: score,
+                    error: 0
+                });
+            }
+            else {
+                stats_1.default.create({
+                    id_user: id,
+                    score: 0,
+                    error: score
+                });
+            }
+            res.json({
+                msg: `Estadisticas agregadas correctamente!`,
+            });
+        }
+        catch (error) {
+            res.status(400).json({
+                msg: 'Ups ocurrio un error',
+                error
+            });
+        }
     }
 };
 exports.updateStats = updateStats;

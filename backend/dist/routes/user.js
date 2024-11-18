@@ -10,4 +10,5 @@ const router = (0, express_1.Router)();
 router.get('/:id', validate_token_1.default, user_controller_1.getUserData);
 router.post('/', user_controller_1.nuevoUsuario);
 router.post('/login', user_controller_1.login);
+router.put('/:id', validate_token_1.default, user_controller_1.updateUser);
 exports.default = router;
