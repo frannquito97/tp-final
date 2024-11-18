@@ -14,6 +14,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Correr Back para obtener Usuarios y Puntos del usuario.
 
 - Abrir dos consolas y dirigirse a la carpeta ***backend***
+- En una de las consolas hacer un **NPM INSTALL** para que se instalen todas las dependencias de la parte del BACK
 - Una vez estando en la carpeta ***backend*** hay que escribir los siguientes **comandos** en cada consola
 - **npm run dev**
 - **npm run ts**
