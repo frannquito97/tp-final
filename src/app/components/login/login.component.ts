@@ -22,7 +22,6 @@ export class LoginComponent {
   get email() { return this.loginForm.get('email')?.value };
   get password() { return this.loginForm.get('password')?.value };
   login() {
-    let info: Array<string> = []
     if (this.loginForm.valid) {
       const user: LoginRequest = {
         email: this.email || '',
@@ -33,6 +32,7 @@ export class LoginComponent {
           console.log(data);
           const arrayToken = data.split('.');
           const tokenPayload = JSON.parse(atob(arrayToken[1]));
+          console.log(tokenPayload);
           const id : number = tokenPayload.id;
           this.router.navigateByUrl('/home');
           localStorage.setItem('token', data);
