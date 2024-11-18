@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { NewPilosts } from '../interfaces/interfacesGames/new-pilosts';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 @Injectable({

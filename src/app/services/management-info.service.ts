@@ -10,12 +10,13 @@ import { Driver } from '../interface/interfacesGames/driver';
 })
 export class ManagementInfoService {
   public season: Race[] = [];
-  public users: User[] = [];
-  constructor(private f1Info: F1InfoService, private userService: UserService) { }
+  public drivers: Driver[] = [];
+
+  constructor(private _f1Service: F1InfoService, private userService: UserService) { }
 
   getRacesWins(year:string): Array<Race> {
     let data = [];
-    this.f1Info.getWinnersBySeason(year).then(response => {
+    this._f1Service.getWinnersBySeason(year).then(response => {
       data = response['MRData']['RaceTable']['Races'];
       console.log(data);
       if (data != null) {
@@ -41,6 +42,36 @@ export class ManagementInfoService {
     })
     return this.season;
   }
+  getDrivers(): Driver[]{
 
+    this._f1Service.getDrivers(2024).subscribe({
+      next: (data) => { 
+        let info = [];
+        info = data['MRData']['DriverTable']['Drivers'];
+        if(info){
+          info.forEach( (aux : any) => {
+            let driver : Driver = {
+              id: aux.driverId,
+              name: aux.givenName,
+              lastName: aux.familyName,
+              constructor: data['MRData']['DriverTable']['season'],
+              nationality: aux.nationality,
+              numberCar: aux.permanentNumber
+            }
+            this.addConstructor(driver);
+            this.drivers.push(driver);
+          })
+        }
+      }
+    })
+    return this.drivers;
+  }
+  addConstructor(driver : Driver){
+    this._f1Service.getConstructorByDriver(driver.id, Number(driver.constructor)).subscribe({
+      next: (data) => { driver.constructor = data['MRData']['ConstructorTable']['Constructors'][0]['name'];
+      }
+    })     
+  }
+    
 }
 

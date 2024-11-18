@@ -11,8 +11,8 @@ import { ModifyUserComponent } from './page/modify-user/modify-user.component';
 import { RankingComponent } from './page/ranking/ranking.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { authGuard } from './utils/auth.guard';
+import { DataDriverComponent } from './page/play-game/data-driver/data-driver.component';
 
 const routes: Routes = [
   { path:'f1Games', component: LoginComponent},
@@ -22,6 +22,7 @@ const routes: Routes = [
   { path:'word-Game' , component:WordGameComponent, canActivate:[authGuard]},
   { path:'myProfile/:id', component: UserViewComponent, canActivate:[authGuard] },
   { path:'sign-in', component:SignInComponent},
+  { path:'drivers', component:DataDriverComponent},
   { path:'', redirectTo:'f1Games', pathMatch: 'full' },
   { path:'ranking', component: RankingComponent, canActivate:[authGuard]},
   /*{path:'view/id:', component}

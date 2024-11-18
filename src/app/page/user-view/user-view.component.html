@@ -1,3 +1,4 @@
+<app-home></app-home>
 <div class="container myProfile p-4 ">
     <h1 *ngIf="editingMode" class="mb-3 title d-flex justify-content-between">Edit User - {{ currentUser?.id }}</h1>
     <h1 *ngIf="!editingMode" class="mb-3 title d-flex justify-content-between">View User - {{ currentUser?.id }}</h1>
@@ -55,10 +56,8 @@
                 <div class="col">
 
                     <label for="">Points: </label>
-                    en PUNTOS DE JUEGO se pone las llaves y la llamada a los puntos que tenga el user 
                 </div>
-                    <div class="col">PUNTOS DE JUEGO
-                    <!-- {{user.points}}  -->
+                    <div class="col"> {{score}}
                 </div>
                 <div class="col"></div>
             </div>
@@ -68,10 +67,9 @@
                 <div class="col">
 
                     <label for="">Errors: </label>
-                    en CANT ERRORES se pone las llaves y la llamada a los ERRORES que tenga el user 
                 </div>
-                    <div class="col">CANT ERRORES
-                    <!-- {{user.errors}}  -->
+                    <div class="col">
+                        {{error}}
                 </div>
                 <div class="col"></div>
             </div>
@@ -80,10 +78,9 @@
                 <div class="col">
 
                     <label for="">Total: </label>
-                    en PUNTOS TOTALES se pone las llaves y la llamada a los PUNTOS TOTALES que tenga el user 
                 </div>
-                    <div class="col">PUNTOS TOTALES
-                    <!-- {{user.totalPoints}}  -->
+                    <div class="col">
+                    {{totalScore}}
                 </div>
                 <div class="col"></div>
             </div>            

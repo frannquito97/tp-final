@@ -32,11 +32,14 @@ export class LoginComponent {
           console.log(data);
           const arrayToken = data.split('.');
           const tokenPayload = JSON.parse(atob(arrayToken[1]));
-          console.log(tokenPayload);
           const id : number = tokenPayload.id;
+          const score : number = tokenPayload.score;
+          const error : number = tokenPayload.error;
           this.router.navigateByUrl('/home');
           localStorage.setItem('token', data);
           localStorage.setItem('id', String(id));
+          localStorage.setItem('score', String(score));
+          localStorage.setItem('error', String(error));
         },
         error: (e: HttpErrorResponse) => {
           this._errorService.msjError(e);
