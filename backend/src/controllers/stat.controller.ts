@@ -61,6 +61,4 @@ export const updateStats = async (req: Request, res: Response) => {
             })
         }
     }
-
-
 }

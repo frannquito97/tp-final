@@ -22,7 +22,7 @@ class Server {
 
     routes(){
         this.app.use('/api/users', routeUser);
-        this.app.use('/api/users/stats', routeStat);
+        this.app.use('/api/stats', routeStat);
     }
 
     midlewares(){

@@ -22,7 +22,7 @@ class Server {
     }
     routes() {
         this.app.use('/api/users', user_1.default);
-        this.app.use('/api/users/stats', stats_1.default);
+        this.app.use('/api/stats', stats_1.default);
     }
     midlewares() {
         this.app.use(express_1.default.json());
