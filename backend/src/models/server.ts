@@ -32,8 +32,8 @@ class Server {
     }
     async dbConnect(){
         try{
-            await Stats.sync();
             await User.sync();
+            await Stats.sync();
         }
         catch (error){
             console.error('No se ha podido conectar a la Base de Datos', error);

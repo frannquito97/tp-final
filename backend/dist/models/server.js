@@ -30,8 +30,8 @@ class Server {
     }
     async dbConnect() {
         try {
-            await stats_2.default.sync();
             await user_2.default.sync();
+            await stats_2.default.sync();
         }
         catch (error) {
             console.error('No se ha podido conectar a la Base de Datos', error);
