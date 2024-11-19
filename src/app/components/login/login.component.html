@@ -1,8 +1,7 @@
 
 <div class="wrapper">
     <div *ngIf="!loading" class="body"> 
-    <div class="body ">
-       <img class="logo" src="../../../assets/img/login.png" alt="img login"> 
+    <div class="body "> 
         <form [formGroup]="loginForm" class="contendor-formulario">
         <h3 class="mb-2">Login</h3>
             <div class="form-floating mb-3 mt-3">
@@ -31,7 +30,7 @@
                         La contraseña tiene que tener 8 caracteres como maximo.
                     </div>
                 </div>
-                <div *ngIf="this.loginForm.controls['password'].errors?.['required']" class="alert alert-danger">\
+                <div *ngIf="this.loginForm.controls['password'].errors?.['required']" class="alert alert-danger">
                     La contraseña es mandataria.</div>
             </div>
             <div class="d-grid gap-2">

@@ -61,7 +61,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio + 1].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio + 2].driver.name +
@@ -69,7 +69,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio + 2].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio].driver.name +
@@ -77,7 +77,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio - 1].driver.name +
@@ -85,7 +85,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio - 1].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio - 2].driver.name +
@@ -93,14 +93,14 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio - 2].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
     auxPiloto =
       this.datos[this.enteroAleatorio + 3].driver.name +
       ' ' +
       this.datos[this.enteroAleatorio + 3].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
 
     this.anio = this.datos[this.enteroAleatorio].season;
@@ -237,7 +237,7 @@ export class WordGameComponent {
         this.actualizarPuntos("pierde");
         
         Swal.fire({
-          title: 'Respuesta Inorrecta.',
+          title: 'Respuesta Incorrecta.',
           animation: true,
           icon: 'error',
           showCancelButton: true,
@@ -258,6 +258,10 @@ export class WordGameComponent {
   }
   actualizarPuntos(string : string){
     
+    if(localStorage.getItem('score') != undefined && localStorage.getItem('error')!=undefined){
+      localStorage.setItem('score', '0');
+      localStorage.setItem('error', '0');
+    }
     if(string == "pierde"){
       let error = Number(localStorage.getItem("error"));
       let totalError = error + 1;
