@@ -22,7 +22,7 @@ export class F1InfoService {
   
   getWinnersBySeason( year : string ) : Promise<any> {
     console.log(this.apiUrl + year + this.results + '/1' + this.endUrl);
-    return this.http.get(this.apiUrl + year + this.results + '/1' + this.endUrl).toPromise();
+    return this.http.get(`${this.apiUrl}/${year}${this.results}/1${this.endUrl}`).toPromise();
   }
 
   getDrivers( year : number): Observable<any>{

@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { getUser, getUserData, login, nuevoUsuario } from '../controllers/user.controller';
 import validateToken from '../routes/validate-token';
 import { getStatUser, updateStats } from '../controllers/stat.controller';
 

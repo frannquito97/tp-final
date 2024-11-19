@@ -257,6 +257,7 @@ export class WordGameComponent {
     this.router.navigateByUrl('home');
   }
   actualizarPuntos(string : string){
+
     
     if(localStorage.getItem('score') != undefined && localStorage.getItem('error')!=undefined){
       localStorage.setItem('score', '0');
