@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-html{
+html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -62,15 +62,19 @@ form {
   height: auto !;
 }
 
-.login{
+.login {
+  align-items: center;
+  align-self: center;
+  margin-top: 50%;
   background: linear-gradient(90deg, #ff0000, #000000);
   border: 3px solid #ffffff;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  color: white;
+  
 }
 
-.registrar{
+.registrar h3,
+p {
   color: white;
 }
 
@@ -78,8 +82,6 @@ form {
   border-width: 2px;
   flex-direction: column;
   align-items: center;
-  
-  
 }
 
 .ng-invalid:not(form).ng-touched {
@@ -306,10 +308,10 @@ button.active-button {
 .stat span {
   font-weight: bold;
   color: #f39c12;
-} 
+}
 .stat a {
   font-size: large;
-} 
+}
 
 a {
   color: #e10600; /* Color rojo característico de la Fórmula 1 */
@@ -329,12 +331,12 @@ a:hover {
 
 @media (max-width: 768px) {
   .card {
-      width: calc(50% - 20px); /* Dos tarjetas por fila en pantallas medianas */
+    width: calc(50% - 20px); /* Dos tarjetas por fila en pantallas medianas */
   }
 }
 
 @media (max-width: 580px) {
   .card {
-      width: 100%; /* Una tarjeta por fila en pantallas pequeñas */
+    width: 100%; /* Una tarjeta por fila en pantallas pequeñas */
   }
 }
