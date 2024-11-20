@@ -210,7 +210,8 @@ export class WordGameComponent {
     let interval;
     const data: string = this.pilotButton;
     const dataWinner: string = this.piloto;
-    if (data == dataWinner) {
+    if(this.pilotButton != ''){
+      if (data == dataWinner) {
         this.errorPiloto = false;
         this.sigPiloto = true;
         this.pilAux = '';
@@ -255,6 +256,13 @@ export class WordGameComponent {
           }
         });
     }
+  }else{
+    Swal.fire({
+      title: 'ERROR',
+      html: 'No selecciono ningun piloto, porfavor seleccione uno',
+      icon: 'error',
+    })
+  }
  }
   backHome() {
     this.router.navigateByUrl('home');

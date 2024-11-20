@@ -13,7 +13,7 @@ import { ManagementInfoService } from '../../services/management-info.service';
   styles: ``
 })
 export class LoginComponent {
-  constructor(private _userService: UserService, private router: Router, private _errorService: ErrorService, private _f1 :ManagementInfoService) { console.log(_f1.getRacesWins("2024"));
+  constructor(private _userService: UserService, private router: Router, private _errorService: ErrorService, private _f1 :ManagementInfoService) { ;
   }
   loading: boolean = false;
   loginForm = new FormGroup({
