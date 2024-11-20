@@ -7,7 +7,7 @@ import { Driver } from '../interface/interfacesGames/driver';
   providedIn: 'root'
 })
 export class F1InfoService {
-  private apiUrl: string  = 'http://ergast.com/api/f1/';
+  private apiUrl: string  = 'http://ergast.com/api/f1';
   private endUrl: string = '.json';
   private drivers : string = '/drivers';
   private results : string = '/results';
