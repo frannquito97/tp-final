@@ -60,7 +60,9 @@ export class ManagementInfoService {
               lastName: aux.familyName,
               constructor: data['MRData']['DriverTable']['season'],
               nationality: aux.nationality,
-              numberCar: aux.permanentNumber
+              numberCar: aux.permanentNumber,
+              
+              
             }
             this.addConstructor(driver);
             this.drivers.push(driver);

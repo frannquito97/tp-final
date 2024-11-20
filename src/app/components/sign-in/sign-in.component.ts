@@ -55,7 +55,7 @@ export class SignInComponent {
         next: (v) => {
           this.loading = false;
           this.toastr.success('Usuario registrado exitosamente', 'Usuario Registrado');
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('/f1Games');
         },
         error: (e: HttpErrorResponse) => {
           this._errorService.msjError(e);

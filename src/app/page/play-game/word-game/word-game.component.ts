@@ -61,7 +61,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio + 1].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio + 2].driver.name +
@@ -69,7 +69,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio + 2].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio].driver.name +
@@ -77,7 +77,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio - 1].driver.name +
@@ -85,7 +85,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio - 1].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio - 2].driver.name +
@@ -93,14 +93,14 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio - 2].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
     auxPiloto =
       this.datos[this.enteroAleatorio + 3].driver.name +
       ' ' +
       this.datos[this.enteroAleatorio + 3].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
 
     this.anio = this.datos[this.enteroAleatorio].season;
@@ -237,6 +237,7 @@ export class WordGameComponent {
         this.pilAux = data;
         this.errorPiloto = true;
         this.actualizarPuntos("pierde");
+
       await  Swal.fire({
           title: 'Respuesta Inorrecta.',
           html: `La Respuesta correcta es: ${this.piloto}. Se le sumo: 1 punto como errores en sus estadisticas`,

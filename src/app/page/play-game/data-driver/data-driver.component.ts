@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { F1InfoService } from '../../../services/f1-info.service';
 import { Driver } from '../../../interface/interfacesGames/driver';
 import { ManagementInfoService } from '../../../services/management-info.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-driver',
@@ -16,4 +17,7 @@ export class DataDriverComponent implements OnInit {
     console.log(this.drivers);
     
   }
+  route= inject(Router)
+
+  
 }

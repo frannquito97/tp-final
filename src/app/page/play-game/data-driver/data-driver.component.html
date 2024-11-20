@@ -1,1 +1,36 @@
-<p>data-driver works!</p>
+<div>
+  <h2 class="f1-title">ESTOS SON LOS PILOTOS ACTUALES EN LA F1 2024</h2>
+</div>
+
+<section class="card-section">
+  <div></div>
+  @for (item of drivers; track $index) {
+  <div class="card">
+    <div class="card-header">
+      <span class="position">F1</span>
+
+      <span class="rating">2024</span>
+    </div>
+    <div class="player-image">
+      <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/{{item.lastName}}" alt="Conductor" />
+    </div>
+
+    <div class="card-info">
+      <h3 class="player-name">{{ item.lastName }}, {{ item.name }}</h3>
+
+      <div class="stats">
+        <div class="stat">
+          Nacionalidad <span>{{ item.nationality }}</span>
+        </div>
+        <div class="stat">
+          Escuderia <span>{{ item.constructor }}</span>
+        </div>
+        <div class="stat">
+          Numero del monoplaza<span>{{ item.numberCar }}</span>
+        </div>
+        <a class="stat" target="_blank" href="https://soymotor.com/f1/pilotos/{{item.name}}-{{item.lastName}}">Mas info</a>
+      </div>
+    </div>
+  </div>
+  }
+</section>
