@@ -294,14 +294,21 @@ button.active-button {
   font-size: large;
 } 
 
-a{
-  font-size: 20px;
+a {
+  color: #e10600; /* Color rojo característico de la Fórmula 1 */
+  text-decoration: none; /* Elimina el subrayado predeterminado */
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
+/* Efecto hover */
 a:hover {
-  transform: scale(1.2);
-  
-} 
+  color: #ffffff; /* Cambia a blanco al pasar el cursor */
+  background-color: #e10600; /* Fondo rojo al pasar el cursor */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 5px 10px; /* Espaciado para mejorar la apariencia */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+}
 
 @media (max-width: 768px) {
   .card {
