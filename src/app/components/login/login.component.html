@@ -1,44 +1,86 @@
-
-<div class="wrapper">
-    <div *ngIf="!loading" class="body"> 
-    <div class="body "> 
-        <form [formGroup]="loginForm" class="contendor-formulario">
+<div class="wrapper login">
+  <div *ngIf="!loading" class="body">
+    <div class="body">
+      <form [formGroup]="loginForm" class="contendor-formulario">
         <h3 class="mb-2">Login</h3>
-            <div class="form-floating mb-3 mt-3">
-                <input type="text" formControlName="email" autocomplete="false" class="form-control"
-                    placeholder="Ingrese usuario o email">
-                <label>Email</label>
-                <div *ngIf="this.loginForm.controls['email'].invalid && (this.loginForm.controls['email'].dirty || this.loginForm.controls['email'].touched)"
-                    class="alert alert-danger">
-                    <div *ngIf="this.loginForm.controls['email'].errors?.['required']">El email es mandatario.</div>
-                    <div *ngIf="this.loginForm.controls['email'].errors?.['email']">Debe tener un formato Email.</div>
-                    
-                </div>
+        <div class="form-floating mb-3 mt-3">
+          <input
+            type="text"
+            formControlName="email"
+            autocomplete="false"
+            class="form-control"
+            placeholder="Ingrese usuario o email"
+          />
+          <label>Email</label>
+          <div
+            *ngIf="
+              this.loginForm.controls['email'].invalid &&
+              (this.loginForm.controls['email'].dirty ||
+                this.loginForm.controls['email'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="this.loginForm.controls['email'].errors?.['required']">
+              El email es mandatario.
             </div>
-            <div class="form-floating mb-3">
-                <input type="password" formControlName="password" autocomplete="false" class="form-control"
-                    placeholder="Ingrese password">
-                <label>Password</label>
+            <div *ngIf="this.loginForm.controls['email'].errors?.['email']">
+              Debe tener un formato Email.
+            </div>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            formControlName="password"
+            autocomplete="false"
+            class="form-control"
+            placeholder="Ingrese password"
+          />
+          <label>Password</label>
+        </div>
+        <div
+          *ngIf="
+            this.loginForm.controls['password'].invalid &&
+            (this.loginForm.controls['password'].dirty ||
+              this.loginForm.controls['password'].touched)
+          "
+        >
+          <div *ngIf="loginForm.controls['password'].errors">
+            <div
+              *ngIf="loginForm.controls['password'].errors['minlength']"
+              class="alert alert-danger"
+            >
+              La contraseña tiene que tener 4 caracteres como minimo
             </div>
             <div
-                *ngIf="this.loginForm.controls['password'].invalid && (this.loginForm.controls['password'].dirty || this.loginForm.controls['password'].touched)">
-                <div *ngIf="loginForm.controls['password'].errors">
-                    <div *ngIf="loginForm.controls['password'].errors['minlength']" class="alert alert-danger">
-                        La contraseña tiene que tener 4 caracteres como minimo
-                    </div>
-                    <div *ngIf="loginForm.controls['password'].errors['maxlength']" class="alert alert-danger">
-                        La contraseña tiene que tener 8 caracteres como maximo.
-                    </div>
-                </div>
-                <div *ngIf="this.loginForm.controls['password'].errors?.['required']" class="alert alert-danger">
-                    La contraseña es mandataria.</div>
+              *ngIf="loginForm.controls['password'].errors['maxlength']"
+              class="alert alert-danger"
+            >
+              La contraseña tiene que tener 8 caracteres como maximo.
             </div>
-            <div class="d-grid gap-2">
-                <button type="button" class="btn btn-primary btn-lg" (click)="login()">Aceptar</button>
-            </div>
-            <p class="mt-3">No tienes cuenta? <a routerLink="/sign-in">Registrar</a></p>
-        </form>
+          </div>
+          <div
+            *ngIf="this.loginForm.controls['password'].errors?.['required']"
+            class="alert alert-danger"
+          >
+            La contraseña es mandataria.
+          </div>
+        </div>
+        <div class="d-grid gap-2">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            (click)="login()"
+          >
+            Aceptar
+          </button>
+        </div>
+        <p class="mt-3 registrar">
+          No tienes cuenta? <a routerLink="/sign-in">Registrar</a>
+        </p>
+      </form>
     </div>
     <app-spinner *ngIf="loading"></app-spinner>
+  </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>
