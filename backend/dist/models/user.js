@@ -10,6 +10,16 @@ const User = conection_1.default.define('user', {
         primaryKey: true,
         autoIncrement: true
     },
+    username: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    email: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
     name: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
@@ -18,17 +28,8 @@ const User = conection_1.default.define('user', {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    username: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
     password: {
         type: sequelize_1.DataTypes.STRING
-    },
-    email: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        unique: true
     },
     active: {
         type: sequelize_1.DataTypes.BOOLEAN,

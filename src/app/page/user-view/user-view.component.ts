@@ -91,15 +91,6 @@ export class UserViewComponent implements OnInit {
             return null;
           }
         }
-        else{
-          password = this.currentUser?.password || '';
-        }
-        if(name.length == 0){
-          name = this.currentUser?.name || ''
-        }
-        if(lastName.length == 0){
-          lastName = this.currentUser?.lastName || ''
-        }
         return {name, lastName, password}
       }
     });
@@ -109,9 +100,9 @@ export class UserViewComponent implements OnInit {
         id: Number(localStorage.getItem('id')),
         email: '',
         username: '',
-        name: formValues.name || this.currentUser?.name,
-        lastName: formValues.lastName || this.currentUser?.lastName,
-        password: formValues.password || this.currentUser?.password
+        name: formValues.name || '',
+        lastName: formValues.lastName || '',
+        password: formValues.password || ''
       }
       this._userService.updateUser(Number(localStorage.getItem('id')),user).subscribe({
         next: (data) => { 

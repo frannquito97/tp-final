@@ -12,22 +12,26 @@ export const getStatUser = async (req: Request, res: Response) => {
 }
 
 export const updateStats = async (req: Request, res: Response) => {
-    const { score, text, id } = req.body;  
+    const { points, text, id } = req.body; 
     const statExist = await Stats.findOne({ where: { id_user: id } });
+    const { error, score } = statExist?.dataValues
     if (statExist) {
         try {
             if (text == 'score') {
                 Stats.update({
-                    score: score,
+                    score: points,
+                    total: points - error
+                    
                 },
                     { where: { id_user: id } })
             }else{
                 Stats.update({
-                    error: score,
+                    error: points,
+                    total: score - points
                 },
                     { where: { id_user: id } })
             }
-            res.json({ msg: 'Estadisticas actualizadas correctamente' })
+            res.status(200).json({ msg: 'Estadisticas actualizadas correctamente' })
 
         } catch (error) {
             res.status(400).json({
@@ -41,17 +45,19 @@ export const updateStats = async (req: Request, res: Response) => {
             if(text == 'score'){
                 Stats.create({
                     id_user: id,
-                    score: score,
-                    error: 0
+                    score: points,
+                    error: 0,
+                    total: points
                 })
             }else{
                 Stats.create({
                     id_user: id,
                     score: 0,
-                    error: score
+                    error: points,
+                    total: points
                 })
             }         
-            res.json({
+            res.status(201).json({
                 msg: `Estadisticas agregadas correctamente!`,
             })
         } catch (error) {

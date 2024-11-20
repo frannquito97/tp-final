@@ -22,7 +22,7 @@ export class WordGameComponent {
   public conjuntoPilotos: string[] = [];
 
   ngOnInit() {
-    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+  this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
   }
   inicioAnio = 1960;
   finanio = 2024;
@@ -206,7 +206,7 @@ export class WordGameComponent {
   }
   //
 
-  onSubmit() {
+ async onSubmit() {
     let interval;
     const data: string = this.pilotButton;
     const dataWinner: string = this.piloto;
@@ -215,8 +215,9 @@ export class WordGameComponent {
         this.sigPiloto = true;
         this.pilAux = '';
         this.actualizarPuntos("gana");
-        Swal.fire({
+        await Swal.fire({
           title: 'Respuesta Correcta.',
+          html: `La respuesta es correcta! Felicidades se le sumaron: ${this.puntosAGanar} a sus estadisticas`,
           animation: true,
           icon: 'success',
           showCancelButton: true,
@@ -236,8 +237,9 @@ export class WordGameComponent {
         this.errorPiloto = true;
         this.actualizarPuntos("pierde");
         
-        Swal.fire({
+      await  Swal.fire({
           title: 'Respuesta Inorrecta.',
+          html: `La Respuesta correcta es: ${this.piloto}. Se le sumaron: ${this.puntosAGanar} como errores en sus estadisticas`,
           animation: true,
           icon: 'error',
           showCancelButton: true,
@@ -245,7 +247,7 @@ export class WordGameComponent {
           cancelButtonText: 'Volver al Inicio',
         }).then((result) => {
           if(result.value){
-            this.winner();
+            window.location.reload();
           }else if( result.dismiss === Swal.DismissReason.cancel) {
             this.router.navigateByUrl('/home');
           }

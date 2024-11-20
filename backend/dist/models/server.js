@@ -12,7 +12,7 @@ const stats_2 = __importDefault(require("./stats"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
-        this.port = process.env.PORT || '3001';
+        this.port = process.env.PORT || '3000';
         this.midlewares();
         this.routes();
         this.dbConnect();

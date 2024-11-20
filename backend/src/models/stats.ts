@@ -20,6 +20,9 @@ const Stats = sequelize.define('stats', {
     },
     error:{
         type: DataTypes.INTEGER
+    },
+    total:{
+        type: DataTypes.INTEGER
     }
 });
 
