@@ -32,18 +32,9 @@ export class LoginComponent {
       this._userService.login(user).subscribe({
         next: (data) => {
           console.log(data);
-          const arrayToken = data.split('.');
-          const tokenPayload = JSON.parse(atob(arrayToken[1]));
-          const id : number = tokenPayload.id;
-          const score : number = tokenPayload.score;
-          const error : number = tokenPayload.error;
-          const total : number = tokenPayload.total;
-          this.router.navigateByUrl('/home');
-          localStorage.setItem('token', data);
-          localStorage.setItem('id', String(id));
-          localStorage.setItem('score', String(score));
-          localStorage.setItem('error', String(error));
-          localStorage.setItem('total', String(total))
+          this.dataToLS(data);
+          console.log(localStorage);
+          
         },
         error: (e: HttpErrorResponse) => {
           this._errorService.msjError(e);
@@ -51,6 +42,20 @@ export class LoginComponent {
         }
       })
     }
+  }
+  dataToLS(data : string){
+    const arrayToken = data.split('.');
+    const tokenPayload = JSON.parse(atob(arrayToken[1]));
+    const id : number = tokenPayload.id;
+    const score : number = tokenPayload.score;
+    const error : number = tokenPayload.error;
+    const total : number = tokenPayload.total;
+    this.router.navigateByUrl('/home');
+    localStorage.setItem('token', data);
+    localStorage.setItem('id', String(id));
+    localStorage.setItem('score', String(score));
+    localStorage.setItem('error', String(error));
+    localStorage.setItem('total', String(total))
   }
 }
 

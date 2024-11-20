@@ -105,15 +105,27 @@ const login = async (req, res) => {
         const passHash = dataValues['password'];
         const id = dataValues['id'];
         const stat = await stats_1.default.findOne({ where: { id_user: id } });
-        const score = stat === null || stat === void 0 ? void 0 : stat.dataValues['score'];
-        const error = stat === null || stat === void 0 ? void 0 : stat.dataValues['error'];
+        let error;
+        let score;
+        let total;
+        if (stat) {
+            score = stat === null || stat === void 0 ? void 0 : stat.dataValues['score'];
+            error = stat === null || stat === void 0 ? void 0 : stat.dataValues['error'];
+            total = stat === null || stat === void 0 ? void 0 : stat.dataValues['total'];
+        }
+        else {
+            score = 0;
+            error = 0;
+            total = 0;
+        }
         await bcryptjs_1.default.compare(password, passHash).then((result) => {
             if (result) {
                 //Login exitoso -- Generar 
                 const token = jsonwebtoken_1.default.sign({
                     id: id,
                     score: score,
-                    error: error
+                    error: error,
+                    total: total,
                 }, process.env.SECRET_KEY);
                 res.status(200).json(token);
             }

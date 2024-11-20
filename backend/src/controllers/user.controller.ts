@@ -97,15 +97,27 @@ export const login = async (req: Request, res: Response) => {
         const passHash = dataValues['password'];
         const id = dataValues['id'];
         const stat = await Stats.findOne({ where: { id_user: id } })
-        const score = stat?.dataValues['score'];
-        const error = stat?.dataValues['error'];
+        let error : number;
+        let score : number;
+        let total : number;
+        if(stat){
+            score = stat?.dataValues['score'];
+            error = stat?.dataValues['error'];
+            total = stat?.dataValues['total'];
+        }else{
+            score = 0;
+            error = 0;
+            total = 0;
+        }
+
         await bycrypt.compare(password, passHash).then((result) => {
             if (result) {
                 //Login exitoso -- Generar 
                 const token = jwt.sign({
                     id: id,
                     score: score,
-                    error: error
+                    error: error,
+                    total: total,
                 },
                     process.env.SECRET_KEY!)
                 res.status(200).json(token);

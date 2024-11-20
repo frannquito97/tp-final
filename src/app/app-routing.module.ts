@@ -24,7 +24,7 @@ const routes: Routes = [
   { path:'sign-in', component:SignInComponent},
   { path:'drivers', component:DataDriverComponent},
   { path:'', redirectTo:'f1Games', pathMatch: 'full' },
-  { path:'ranking', component: RankingComponent, canActivate:[authGuard]},
+  { path:'ranking', component: RankingComponent, /* canActivate:[authGuard] */},
   /*{path:'view/id:', component}
   {path:'user/id:', component}
   {path:'user/id:', component}*/

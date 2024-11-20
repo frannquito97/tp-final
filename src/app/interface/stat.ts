@@ -1,5 +1,6 @@
 export interface Stat {
-    id_user?: string,
+    id_user: number,
     score: number,
     error: number,
+    total: number,
 }

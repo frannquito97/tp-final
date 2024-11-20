@@ -10,14 +10,17 @@ import { environment } from '../../environments/environment';
 export class StatService {
   constructor(private http : HttpClient) { }
 
-  updateStat(score : Number, text: string, id : number) : Observable<boolean>{
+  updateStat(points : Number, text: string, id : number) : Observable<boolean>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    return this.http.post<boolean>(`${environment.API}/stats`, {score, text, id}, { headers: headers});
+    return this.http.post<boolean>(`${environment.API}/stats`, {points, text, id}, { headers: headers});
   }
   getCurrentStats(id: number) : Observable<Stat>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
     return this.http.get<Stat>(`${environment.API}/stats/${id}`, {headers: headers});
+  }
+  getRanking() : Observable<Stat[]>{
+    return this.http.get<Stat[]>(`${environment.API}/stats`);
   }
 }
