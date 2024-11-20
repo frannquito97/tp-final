@@ -1,3 +1,5 @@
+const PORT = '3000'
 export const environment = {
-  urlPilots: 'http://ergast.com/api/f1/2024/drivers',
+    F1API: 'http://ergast.com/api/f1',
+    API: `http://localhost:${PORT}/api`, 
 };

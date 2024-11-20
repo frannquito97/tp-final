@@ -1,4 +1,4 @@
-<div class="container text-center fondoH1">
+<div class="container bg-center fondoH1">
   <h1 class="mb-4">Players Ranking</h1>
   <table class="table table-bordered mx-auto">
     <thead>
@@ -11,12 +11,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of userList, let i = index">
-        <th scope="row">{{ i + 1}}</th>
-        <td>{{user.username}}</td>
-        <td>Puntos</td>
-        <td>Errores</td>
-        <td>Total</td>
+      <tr *ngFor="let position of ranking, let i = index">
+        <th *ngIf="i == 0" ngClass="bg-success" scope="row">{{ i + 1}}</th>
+        <td *ngIf="i == 0" ngClass="bg-success">{{usersRanking[i].name}} {{usersRanking[i].lastName}}</td>
+        <td *ngIf="i == 0" ngClass="bg-success">{{position.score}}</td>
+        <td *ngIf="i == 0" ngClass="bg-success">{{position.error}}</td>
+        <td *ngIf="i == 0" ngClass="bg-success">{{position.total}}</td>
+        <th *ngIf="i == 1" ngClass="bg-primary" scope="row">{{ i + 1}}</th>
+        <td *ngIf="i == 1" ngClass="bg-primary">{{usersRanking[i].name}} {{usersRanking[i].lastName}}</td>
+        <td *ngIf="i == 1" ngClass="bg-primary">{{position.score}}</td>
+        <td *ngIf="i == 1" ngClass="bg-primary">{{position.error}}</td>
+        <td *ngIf="i == 1" ngClass="bg-primary">{{position.total}}</td>
+        <th *ngIf="i == 2" ngClass="bg-info" scope="row">{{ i + 1}}</th>
+        <td *ngIf="i == 2" ngClass="bg-info">{{usersRanking[i].name}} {{usersRanking[i].lastName}}</td>
+        <td *ngIf="i == 2" ngClass="bg-info">{{position.score}}</td>
+        <td *ngIf="i == 2" ngClass="bg-info">{{position.error}}</td>
+        <td *ngIf="i == 2" ngClass="bg-info">{{position.total}}</td>
+        <th *ngIf="i > 2 && position.total > 0" ngClass="bg-secondary" scope="row">{{ i + 1}}</th>
+        <td *ngIf="i > 2 && position.total > 0" ngClass="bg-secondary">{{usersRanking[i].name}} {{usersRanking[i].lastName}}</td>
+        <td *ngIf="i > 2 && position.total > 0" ngClass="bg-secondary">{{position.score}}</td>
+        <td *ngIf="i > 2 && position.total > 0" ngClass="bg-secondary">{{position.error}}</td>
+        <td *ngIf="i > 2 && position.total > 0" ngClass="bg-secondary">{{position.total}}</td>
+
+        <th *ngIf="i > 2 && position.total < 0" ngClass="bg-danger" scope="row">{{ i + 1}}</th>
+        <td *ngIf="i > 2 && position.total < 0" ngClass="bg-danger">{{usersRanking[i].name}} {{usersRanking[i].lastName}}</td>
+        <td *ngIf="i > 2 && position.total < 0" ngClass="bg-danger">{{position.score}}</td>
+        <td *ngIf="i > 2 && position.total < 0" ngClass="bg-danger">{{position.error}}</td>
+        <td *ngIf="i > 2 && position.total < 0" ngClass="bg-danger">{{position.total}}</td>
+        
       </tr>
     </tbody>
   </table>

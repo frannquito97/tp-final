@@ -4,6 +4,8 @@ import { Race } from '../interface/interfacesGames/race';
 import { UserService } from './user.service';
 import { User } from '../interface/user';
 import { Driver } from '../interface/interfacesGames/driver';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,45 +14,47 @@ export class ManagementInfoService {
   public season: Race[] = [];
   public drivers: Driver[] = [];
 
-  constructor(private _f1Service: F1InfoService, private userService: UserService) { }
+  constructor(private _f1Service: F1InfoService, private _errorService: ErrorService) { }
 
-  getRacesWins(year:string): Array<Race> {
-    let data = [];
-    this._f1Service.getWinnersBySeason(year).then(response => {
-      data = response['MRData']['RaceTable']['Races'];
-      console.log(data);
-      if (data != null) {
-        data.forEach((dt: any) => {
-          let race: Race = {
-            raceId: dt['Circuit']['circuitId'],
-            season: dt['season'],
-            raceName: dt['raceName'],
-            location: dt['Circuit']['Location']['country'],
-            driver :  {
-              id: dt['Results'][0]['Driver']['driverId'],
-              numberCar: dt['Results'][0]['Driver']['permanentNumber'],
-              name: dt['Results'][0]['Driver']['givenName'],
-              lastName: dt['Results'][0]['Driver']['familyName'],
-              constructor: dt['Results'][0]['Constructor']['name'],
-              nationality: dt['Results'][0]['Driver']['nationality']
+  getRacesWins(year: string): Race[] {
+    let data: Race[] = [];
+    this._f1Service.getWinnersBySeason(year).subscribe({
+      next: (info) => {
+        data = info['MRData']['RaceTable']['Races'];
+        console.log(data);
+        data.forEach((race: any) => {
+          let newRace: Race = {
+            raceId: race['Circuit']['circuitId'],
+            season: race['season'],
+            raceName: race['raceName'],
+            location: race['Circuit']['Location']['country'],
+            driver: {
+              id: race['Results'][0]['Driver']['driverId'],
+              numberCar: race['Results'][0]['Driver']['permanentNumber'],
+              name: race['Results'][0]['Driver']['givenName'],
+              lastName: race['Results'][0]['Driver']['familyName'],
+              constructor: race['Results'][0]['Constructor']['name'],
+              nationality: race['Results'][0]['Driver']['nationality']
             }
-
           }
-          this.season.push(race);
-        });
+          this.season.push(newRace);
+        })
+      },
+      error: (e: HttpErrorResponse) => {
+        console.log('No se ha podido cargar los datos de la API, recargue la pagina para volver a intentar');
+        this._errorService.msjError(e);
       }
     })
     return this.season;
   }
-  getDrivers(): Driver[]{
-
-    this._f1Service.getDrivers(2024).subscribe({
-      next: (data) => { 
+  getDrivers(year: number): Driver[] {
+    this._f1Service.getDrivers(year).subscribe({
+      next: (data) => {
         let info = [];
         info = data['MRData']['DriverTable']['Drivers'];
-        if(info){
-          info.forEach( (aux : any) => {
-            let driver : Driver = {
+        if (info) {
+          info.forEach((aux: any) => {
+            let driver: Driver = {
               id: aux.driverId,
               name: aux.givenName,
               lastName: aux.familyName,
@@ -68,12 +72,13 @@ export class ManagementInfoService {
     })
     return this.drivers;
   }
-  addConstructor(driver : Driver){
+  addConstructor(driver: Driver) {
     this._f1Service.getConstructorByDriver(driver.id, Number(driver.constructor)).subscribe({
-      next: (data) => { driver.constructor = data['MRData']['ConstructorTable']['Constructors'][0]['name'];
+      next: (data) => {
+        driver.constructor = data['MRData']['ConstructorTable']['Constructors'][0]['name'];
       }
-    })     
+    })
   }
-    
+
 }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../interface/user';
 import { UserService } from '../../services/user.service';
+import { Stat } from '../../interface/stat';
+import { StatService } from '../../services/stat.service';
+import { userRanking } from '../../interface/userRanking';
 
 @Component({
   selector: 'app-ranking',
@@ -8,16 +10,32 @@ import { UserService } from '../../services/user.service';
   styles: ``
 })
 export class RankingComponent implements OnInit {
-  userList: Array<User> = [];
+  ranking: Stat[] = [];
+  usersRanking: userRanking[] = [];
 
-  constructor(private _userService:UserService){}
-ngOnInit() {
-  this._userService.getUsers().subscribe({
-    next: (data) =>{
-      this.userList = data;
-    }
-  });
-  //FALTA PONER LOS PUNTOS POR CADA JUEGO, 1 RESPUESTA CORRECTA SUMA UN PUNTO, EL QUE MAS RESPUESTAS CORRECTAS TENGA EN X TIEMPO VA A ESTAR PRIMERO EN EL RANKING.
-  
-}
+  constructor(private _statService: StatService, private _userService: UserService) { }
+  ngOnInit() {
+    this._statService.getRanking().subscribe({
+      next: (data) => {
+        this.ranking = data
+        this.ranking.forEach(id => {
+          this._userService.getUserData(id.id_user).subscribe({
+            next: (info) => {
+              let aux: userRanking = {
+                name: info['name'],
+                lastName: info['lastName'],
+                username: info['username']
+              }
+              this.usersRanking.push(aux);
+            }
+          })
+
+        })
+
+      }
+
+
+    });
+
+  }
 }

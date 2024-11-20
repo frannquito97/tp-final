@@ -22,7 +22,7 @@ export class WordGameComponent {
   public conjuntoPilotos: string[] = [];
 
   ngOnInit() {
-    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+  this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
   }
   inicioAnio = 1960;
   finanio = 2024;
@@ -206,7 +206,7 @@ export class WordGameComponent {
   }
   //
 
-  onSubmit() {
+ async onSubmit() {
     let interval;
     const data: string = this.pilotButton;
     const dataWinner: string = this.piloto;
@@ -215,10 +215,12 @@ export class WordGameComponent {
         this.sigPiloto = true;
         this.pilAux = '';
         this.actualizarPuntos("gana");
-        Swal.fire({
+        await Swal.fire({
           title: 'Respuesta Correcta.',
+          html: `La respuesta es correcta! Felicidades se le sumaron: ${this.puntosAGanar} a sus estadisticas`,
           animation: true,
           icon: 'success',
+          allowOutsideClick: false,
           showCancelButton: true,
           confirmButtonText: 'Siguiente Piloto',
           cancelButtonText: 'Volver al Inicio',
@@ -235,11 +237,13 @@ export class WordGameComponent {
         this.pilAux = data;
         this.errorPiloto = true;
         this.actualizarPuntos("pierde");
-        
-        Swal.fire({
-          title: 'Respuesta Incorrecta.',
+
+      await  Swal.fire({
+          title: 'Respuesta Inorrecta.',
+          html: `La Respuesta correcta es: ${this.piloto}. Se le sumo: 1 punto como errores en sus estadisticas`,
           animation: true,
           icon: 'error',
+          allowOutsideClick: false,
           showCancelButton: true,
           confirmButtonText: 'Siguiente Piloto',
           cancelButtonText: 'Volver al Inicio',
@@ -251,24 +255,28 @@ export class WordGameComponent {
           }
         });
     }
-  }
-  //funcion para volver al home
+ }
   backHome() {
     this.router.navigateByUrl('home');
   }
   actualizarPuntos(string : string){
-
-    
-    if(localStorage.getItem('score') != undefined && localStorage.getItem('error')!=undefined){
-      localStorage.setItem('score', '0');
-      localStorage.setItem('error', '0');
-    }
     if(string == "pierde"){
       let error = Number(localStorage.getItem("error"));
-      let totalError = error + 1;
-      console.log(totalError);
+      console.log('error',localStorage.getItem("error"));
+      let totalError:number = 0;
+      if(this.puntosAGanar == 3){
+        totalError = error + 1;
+        console.log('errores totales', totalError);
+      }else if( this.puntosAGanar == 2){
+        totalError = error + 2;
+        console.log('errores totales', totalError);
+      }else if ( this.puntosAGanar == 1){
+        totalError = error + 3
+        console.log('errores totales', totalError);
+      }
+      
       this._statService.updateStat(totalError, 'error', Number(localStorage.getItem('id'))).subscribe({
-        next: (data) => { console.log('Actualizar errores');
+        next: (data) => { console.log('Actualizar errores', data);
           localStorage.setItem('error', String(totalError));
         }
       });
@@ -276,10 +284,9 @@ export class WordGameComponent {
       let score = Number(localStorage.getItem("score"));
       console.log(score);
       
-      let total = score + this.puntosAGanar;
-      console.log(total);      
+      let total = score + this.puntosAGanar;  
       this._statService.updateStat(total, 'score', Number(localStorage.getItem('id'))).subscribe({
-        next: (data) => { console.log('Actualizar Score'),
+        next: (data) => { console.log('Actualizar Score', data),
                         localStorage.setItem('score', String(total));
 
         }
