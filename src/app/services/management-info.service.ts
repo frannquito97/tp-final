@@ -6,6 +6,7 @@ import { User } from '../interface/user';
 import { Driver } from '../interface/interfacesGames/driver';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from './error.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -40,9 +41,20 @@ export class ManagementInfoService {
           this.season.push(newRace);
         })
       },
-      error: (e: HttpErrorResponse) => {
-        console.log('No se ha podido cargar los datos de la API, recargue la pagina para volver a intentar');
-        this._errorService.msjError(e);
+      error: async (e : HttpErrorResponse) => {this._errorService.msjError(e)
+      await  Swal.fire({
+          title: 'ERROR',
+          html: 'OCURRIO UN ERROR AL CARGAR EL JUEGO, POR FAVOR RECARGA LA PAGINA',
+          icon: 'error',
+          allowOutsideClick: false,
+          confirmButtonText: 'Recargar Pagina'
+        }).then((result) =>{
+          if(result){
+            window.location.reload()
+          }else{
+            window.location.reload();
+          }
+        })
       }
     })
     return this.season;
@@ -61,14 +73,12 @@ export class ManagementInfoService {
               constructor: data['MRData']['DriverTable']['season'],
               nationality: aux.nationality,
               numberCar: aux.permanentNumber,
-              
-              
             }
             this.addConstructor(driver);
             this.drivers.push(driver);
           })
         }
-      }
+      },
     })
     return this.drivers;
   }
