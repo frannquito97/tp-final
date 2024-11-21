@@ -24,6 +24,9 @@ const Stats = conection_1.default.define('stats', {
     },
     error: {
         type: sequelize_1.DataTypes.INTEGER
+    },
+    total: {
+        type: sequelize_1.DataTypes.INTEGER
     }
 });
 exports.default = Stats;

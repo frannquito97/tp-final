@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from '../../services/error.service';
+import { ManagementInfoService } from '../../services/management-info.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import { ErrorService } from '../../services/error.service';
   styles: ``
 })
 export class LoginComponent {
-  constructor(private _userService: UserService, private router: Router, private _errorService: ErrorService) { }
+  constructor(private _userService: UserService, private router: Router, private _errorService: ErrorService, private _f1 :ManagementInfoService) { ;
+  }
   loading: boolean = false;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -30,16 +32,9 @@ export class LoginComponent {
       this._userService.login(user).subscribe({
         next: (data) => {
           console.log(data);
-          const arrayToken = data.split('.');
-          const tokenPayload = JSON.parse(atob(arrayToken[1]));
-          const id : number = tokenPayload.id;
-          const score : number = tokenPayload.score;
-          const error : number = tokenPayload.error;
-          this.router.navigateByUrl('/home');
-          localStorage.setItem('token', data);
-          localStorage.setItem('id', String(id));
-          localStorage.setItem('score', String(score));
-          localStorage.setItem('error', String(error));
+          this.dataToLS(data);
+          console.log(localStorage);
+          
         },
         error: (e: HttpErrorResponse) => {
           this._errorService.msjError(e);
@@ -47,6 +42,20 @@ export class LoginComponent {
         }
       })
     }
+  }
+  dataToLS(data : string){
+    const arrayToken = data.split('.');
+    const tokenPayload = JSON.parse(atob(arrayToken[1]));
+    const id : number = tokenPayload.id;
+    const score : number = tokenPayload.score;
+    const error : number = tokenPayload.error;
+    const total : number = tokenPayload.total;
+    this.router.navigateByUrl('/home');
+    localStorage.setItem('token', data);
+    localStorage.setItem('id', String(id));
+    localStorage.setItem('score', String(score));
+    localStorage.setItem('error', String(error));
+    localStorage.setItem('total', String(total))
   }
 }
 
