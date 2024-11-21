@@ -25,6 +25,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 import { DataDriverComponent } from './page/play-game/data-driver/data-driver.component';
+import { TimerComponent } from './components/timer/timer.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { DataDriverComponent } from './page/play-game/data-driver/data-driver.co
     SpinnerComponent,
     FooterComponent,
     DataDriverComponent,
+    TimerComponent,
   ],
   imports: [
     BrowserModule,

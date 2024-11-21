@@ -1,8 +1,10 @@
 <section class="wordGame">
   <h2>¡Adivina el piloto!</h2>
   @if (renderWindows == true) { @if(jugar==false){
-  <button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
+  <button (click)="renderGame()" (click)="startGame()" (click)="iniciarJuego()" *ngIf ="!jugar">EMPEZAR JUEGO</button>
   } @if(jugar!=false){
+
+  <app-timer *ngIf="jugar" [duration]="30" (timerFinished)="salirDelJuego()"></app-timer>
 
   <p>Este piloto corrio en el año: {{ anio }}</p>
   <p>Salio Primero en la Pole</p>
