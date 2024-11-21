@@ -75,8 +75,8 @@ form {
 }
 
 .registrar h3,
-p {
-  color: #ff0000;
+p,a {
+  color: #ffffff;
 }
 
 .formLogin {
