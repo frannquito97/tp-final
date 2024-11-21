@@ -261,7 +261,7 @@ export class WordGameComponent {
         this.actualizarPuntos("pierde");
 
       await  Swal.fire({
-          title: 'Respuesta Inorrecta.',
+          title: 'Respuesta Incorrecta.',
           html: `La Respuesta correcta es: ${this.piloto}. Se le sumo: 1 punto como errores en sus estadisticas`,
           animation: true,
           icon: 'error',

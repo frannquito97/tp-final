@@ -157,6 +157,7 @@ p,a {
 
 .preguntas p{
   color: #de0315;
+  font-size: large;
 }
 
 button {
@@ -164,7 +165,7 @@ button {
   color: white;
   border: none;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: medium;
   cursor: pointer;
   border-radius: 15px;
   transition: background-color 0.3s, color 0.3s;
@@ -223,7 +224,8 @@ button.active-button {
 }
 
 .pista {
-  color: rgb(10, 2, 250);
+  color:#e10600;
+  font-size: large;
 }
 
 .ganador {
@@ -238,14 +240,41 @@ button.active-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-
-.time {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+  border: 5px solid gray;
+  color: #ffffff;
   font-size: 48px;
   font-weight: bold;
-  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  animation: pulse 1s infinite;
+  background: linear-gradient(90deg,#000000,#ff0000);
+  margin-right: 10px;
+}
+
+.circle:hover {
+  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.7);
+}
+
+.timerPosition{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 20px;
+}
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+}
+
+.contenedorGameTimer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 /* Para la info del driver */
 
