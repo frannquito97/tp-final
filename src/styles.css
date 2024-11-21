@@ -3,6 +3,7 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 body {
@@ -70,7 +71,7 @@ form {
   border: 3px solid #ffffff;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  
+  color:#ffffff";
 }
 
 .registrar h3,
@@ -136,7 +137,18 @@ p {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   padding: 50px;
+  
 }
+
+.contendor-formulario p{
+  color:#ffffff
+}
+
+.contendor-formulario h3{
+  color:#ffffff
+  
+}
+
 .contendor-formulario input {
   width: 100%;
 }
