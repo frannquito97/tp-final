@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
 body {
   background-image: url(app/imgs/img.webp);
   padding: 0%;
@@ -56,6 +63,22 @@ form {
   height: auto !;
 }
 
+.login {
+  align-items: center;
+  align-self: center;
+  margin-top: 50%;
+  background: linear-gradient(90deg, #ff0000, #000000);
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  color:#ffffff";
+}
+
+.registrar h3,
+p,a {
+  color: #ffffff;
+}
+
 .formLogin {
   border-width: 2px;
   flex-direction: column;
@@ -108,10 +131,24 @@ form {
 }
 .contendor-formulario {
   width: 500px;
-  background-color: #ccc;
+  background: linear-gradient(90deg, #ff0000, #000000);
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   padding: 50px;
+  
 }
+
+.contendor-formulario p{
+  color:#ffffff
+}
+
+.contendor-formulario h3{
+  color:#ffffff
+  
+}
+
 .contendor-formulario input {
   width: 100%;
 }
@@ -177,7 +214,7 @@ button.active-button {
   scale: 1.1;
 }
 
-.bg{
+.bg {
   background-color: black;
 }
 
@@ -187,4 +224,149 @@ button.active-button {
 
 .ganador {
   color: green;
+}
+
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.time {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+}
+/* Para la info del driver */
+
+.f1-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  position: relative;
+  text-align: center;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #ff0000, #000000); /* Colores F1 */
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.card-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 30px;
+  width: 100%;
+  max-width: 1200px;
+  background: linear-gradient(90deg, #ff0000, #000000);
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.card {
+  width: 375px;
+  background: linear-gradient(135deg, #2c3e50, #bdc3c7);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #e74c3c, #e67e22);
+  font-weight: bold;
+}
+
+.position {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.rating {
+  font-size: 24px;
+}
+
+.player-image img {
+  width: 100%;
+  border-bottom: 4px solid #e67e22;
+}
+
+.card-info {
+  padding: 15px;
+}
+
+.player-name {
+  font-size: 20px;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  font-size: 14px;
+}
+
+.stat {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat span {
+  font-weight: bold;
+  color: #f39c12;
+}
+.stat a {
+  font-size: large;
+}
+
+a {
+  color: #e10600; /* Color rojo característico de la Fórmula 1 */
+  text-decoration: none; /* Elimina el subrayado predeterminado */
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efecto hover */
+a:hover {
+  color: #ffffff; /* Cambia a blanco al pasar el cursor */
+  background-color: #e10600; /* Fondo rojo al pasar el cursor */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 5px 10px; /* Espaciado para mejorar la apariencia */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: calc(50% - 20px); /* Dos tarjetas por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 580px) {
+  .card {
+    width: 100%; /* Una tarjeta por fila en pantallas pequeñas */
+  }
+
 }

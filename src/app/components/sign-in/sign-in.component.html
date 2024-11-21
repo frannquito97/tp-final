@@ -1,9 +1,8 @@
-<div class="wrapper">
+<div class="wrapper registrar login">
     <!-- <div ngIf="!loading"*/ class="body"> -->
     <div class="body">
-        <!-- <img class="logo" src="../../../assets/img/login.png" alt="img login"> -->
-        <h3 class="mb-2">Sign In</h3>
-        <form [formGroup]="signInForm">
+        <form [formGroup]="signInForm" class="contendor-formulario">
+        <h3 class="mb-2">Register</h3>
         <div class="form-floating mb-3 mt-3">
             <input type="text" formControlName="email"  class="form-control" placeholder="Ingrese Email">
             <label>Email</label>
@@ -31,8 +30,8 @@
         <div class="d-grid gap-2">
             <button type="button" class="btn btn-primary btn-lg" (click)="addUser()">Aceptar</button>
         </div>
-    </form>
         <p class="mt-3">Ya tenes cuenta? <a routerLink="/f1Games"> Volver </a></p>
+    </form>
     </div>
     <app-spinner *ngIf="loading"></app-spinner>
 </div>
