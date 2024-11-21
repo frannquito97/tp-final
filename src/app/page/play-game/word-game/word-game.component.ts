@@ -2,10 +2,7 @@ import { Component, inject, ViewChild, viewChild } from '@angular/core';
 import { Race } from '../../../interface/interfacesGames/race';
 import { ManagementInfoService } from '../../../services/management-info.service';
 import Swal from 'sweetalert2';
-import {
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StatService } from '../../../services/stat.service';
 import { TimerComponent } from '../../../components/timer/timer.component';
@@ -16,23 +13,24 @@ import { TimerComponent } from '../../../components/timer/timer.component';
   styles: ``,
 })
 export class WordGameComponent {
-
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
 
-  constructor(private infoF1: ManagementInfoService, private _statService : StatService) {}
+  constructor(
+    private infoF1: ManagementInfoService,
+    private _statService: StatService
+  ) {}
 
+  ngAfterViewInit(): void {}
 
-  ngAfterViewInit(): void{ }
-  
-  iniciarJuego(): void{
-    setTimeout(() => { 
-      if(this.timerComponent){
-      this.timerComponent.iniciarTimer();
-   }
-  }, 0);
+  iniciarJuego(): void {
+    setTimeout(() => {
+      if (this.timerComponent) {
+        this.timerComponent.iniciarTimer();
+      }
+    }, 0);
   }
 
-  salirDelJuego(): void{
+  salirDelJuego(): void {
     this.jugar = false;
   }
 
@@ -41,7 +39,8 @@ export class WordGameComponent {
   public conjuntoPilotos: string[] = [];
 
   ngOnInit() {
-  this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+    console.log(this.datos);
   }
   inicioAnio = 1960;
   finanio = 2024;
@@ -71,25 +70,11 @@ export class WordGameComponent {
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
     this.conjuntoPilotos.splice(0, this.conjuntoPilotos.length);
 
-    let auxPiloto;
     this.renderNumber(0, this.datos.length);
 
-    auxPiloto =
-      this.datos[this.enteroAleatorio + 1].driver.name +
-      ' ' +
-      this.datos[this.enteroAleatorio + 1].driver.lastName;
-    auxPiloto
-      ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nulo');
+    //GUARDAMOS LOS DATOS DEL GANADOR
 
-    auxPiloto =
-      this.datos[this.enteroAleatorio + 2].driver.name +
-      ' ' +
-      this.datos[this.enteroAleatorio + 2].driver.lastName;
-    auxPiloto
-      ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nulo');
-
+    let auxPiloto;
     auxPiloto =
       this.datos[this.enteroAleatorio].driver.name +
       ' ' +
@@ -97,30 +82,6 @@ export class WordGameComponent {
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
       : console.log('Piloto nulo');
-
-    auxPiloto =
-      this.datos[this.enteroAleatorio - 1].driver.name +
-      ' ' +
-      this.datos[this.enteroAleatorio - 1].driver.lastName;
-    auxPiloto
-      ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nulo');
-
-    auxPiloto =
-      this.datos[this.enteroAleatorio - 2].driver.name +
-      ' ' +
-      this.datos[this.enteroAleatorio - 2].driver.lastName;
-    auxPiloto
-      ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nulo');
-    auxPiloto =
-      this.datos[this.enteroAleatorio + 3].driver.name +
-      ' ' +
-      this.datos[this.enteroAleatorio + 3].driver.lastName;
-    auxPiloto
-      ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nulo');
-    this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
 
     this.anio = this.datos[this.enteroAleatorio].season;
     this.circuito = this.datos[this.enteroAleatorio].location;
@@ -130,9 +91,18 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio].driver.name +
       ' ' +
       this.datos[this.enteroAleatorio].driver.lastName;
-
     this.nacionalidad = this.datos[this.enteroAleatorio].driver.nationality;
     this.raceName = this.datos[this.enteroAleatorio].raceName;
+    let i = 1;
+    /// GUARDAMOS 3 OPCIONES DE POSIBLES GANADORES
+    this.cargaPositiva(i);
+    /// ENCASO QUE SE GUARDARON MENOS DE 4 PILOTOS REALIZAMOS LA CARGA DE MANERA INVERSA
+    i = -1;
+    alert(this.conjuntoPilotos.length);
+    alert(this.enteroAleatorio)
+    if (this.conjuntoPilotos.length != 4) {
+      this.cargaImpositiva(i);
+    }
   }
   //Info necesaria para la las preguntas
   raceName = '';
@@ -169,7 +139,7 @@ export class WordGameComponent {
   pistaUno() {
     this.puntosAGanar = this.puntosAGanar - 1;
     console.log(this.puntosAGanar);
-    
+
     this.pista1 = true;
   }
   pistaDos() {
@@ -227,16 +197,16 @@ export class WordGameComponent {
   }
   //
 
- async onSubmit() {
+  async onSubmit() {
     let interval;
     const data: string = this.pilotButton;
     const dataWinner: string = this.piloto;
-    if(this.pilotButton != ''){
+    if (this.pilotButton != '') {
       if (data == dataWinner) {
         this.errorPiloto = false;
         this.sigPiloto = true;
         this.pilAux = '';
-        this.actualizarPuntos("gana");
+        this.actualizarPuntos('gana');
         await Swal.fire({
           title: 'Respuesta Correcta.',
           html: `La respuesta es correcta! Felicidades se le sumaron: ${this.puntosAGanar} a sus estadisticas`,
@@ -247,20 +217,19 @@ export class WordGameComponent {
           confirmButtonText: 'Siguiente Piloto',
           cancelButtonText: 'Volver al Inicio',
         }).then((result) => {
-          if(result.value){
+          if (result.value) {
             this.winner();
-          }else if( result.dismiss === Swal.DismissReason.cancel) {
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
             this.router.navigateByUrl('/home');
           }
         });
-      
-    } else {
+      } else {
         this.sigPiloto = false;
         this.pilAux = data;
         this.errorPiloto = true;
-        this.actualizarPuntos("pierde");
+        this.actualizarPuntos('pierde');
 
-      await  Swal.fire({
+        await Swal.fire({
           title: 'Respuesta Inorrecta.',
           html: `La Respuesta correcta es: ${this.piloto}. Se le sumo: 1 punto como errores en sus estadisticas`,
           animation: true,
@@ -270,56 +239,99 @@ export class WordGameComponent {
           confirmButtonText: 'Siguiente Piloto',
           cancelButtonText: 'Volver al Inicio',
         }).then((result) => {
-          if(result.value){
+          if (result.value) {
             this.winner();
-          }else if( result.dismiss === Swal.DismissReason.cancel) {
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
             this.router.navigateByUrl('/home');
           }
         });
+      }
+    } else {
+      Swal.fire({
+        title: 'ERROR',
+        html: 'No selecciono ningun piloto, porfavor seleccione uno',
+        icon: 'error',
+      });
     }
-  }else{
-    Swal.fire({
-      title: 'ERROR',
-      html: 'No selecciono ningun piloto, porfavor seleccione uno',
-      icon: 'error',
-    })
   }
- }
   backHome() {
     this.router.navigateByUrl('home');
   }
-  actualizarPuntos(string : string){
-    if(string == "pierde"){
-      let error = Number(localStorage.getItem("error"));
-      console.log('error',localStorage.getItem("error"));
-      let totalError:number = 0;
-      if(this.puntosAGanar == 3){
+  actualizarPuntos(string: string) {
+    if (string == 'pierde') {
+      let error = Number(localStorage.getItem('error'));
+      console.log('error', localStorage.getItem('error'));
+      let totalError: number = 0;
+      if (this.puntosAGanar == 3) {
         totalError = error + 1;
         console.log('errores totales', totalError);
-      }else if( this.puntosAGanar == 2){
+      } else if (this.puntosAGanar == 2) {
         totalError = error + 2;
         console.log('errores totales', totalError);
-      }else if ( this.puntosAGanar == 1){
-        totalError = error + 3
+      } else if (this.puntosAGanar == 1) {
+        totalError = error + 3;
         console.log('errores totales', totalError);
       }
-      
-      this._statService.updateStat(totalError, 'error', Number(localStorage.getItem('id'))).subscribe({
-        next: (data) => { console.log('Actualizar errores', data);
-          localStorage.setItem('error', String(totalError));
-        }
-      });
-    }else{
-      let score = Number(localStorage.getItem("score"));
-      console.log(score);
-      
-      let total = score + this.puntosAGanar;  
-      this._statService.updateStat(total, 'score', Number(localStorage.getItem('id'))).subscribe({
-        next: (data) => { console.log('Actualizar Score', data),
-                        localStorage.setItem('score', String(total));
 
+      this._statService
+        .updateStat(totalError, 'error', Number(localStorage.getItem('id')))
+        .subscribe({
+          next: (data) => {
+            console.log('Actualizar errores', data);
+            localStorage.setItem('error', String(totalError));
+          },
+        });
+    } else {
+      let score = Number(localStorage.getItem('score'));
+      console.log(score);
+
+      let total = score + this.puntosAGanar;
+      this._statService
+        .updateStat(total, 'score', Number(localStorage.getItem('id')))
+        .subscribe({
+          next: (data) => {
+            console.log('Actualizar Score', data),
+              localStorage.setItem('score', String(total));
+          },
+        });
+    }
+  }
+
+  cargaPositiva(i: number) {
+    while (this.conjuntoPilotos.length <= 3) {
+      this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
+      if (this.datos.length > this.conjuntoPilotos.length) {
+        let auxPiloto;
+        auxPiloto =
+          this.datos[this.enteroAleatorio + i].driver.name +
+          ' ' +
+          this.datos[this.enteroAleatorio + i].driver.lastName;
+        auxPiloto;
+        if (!this.conjuntoPilotos.includes(auxPiloto)) {
+          this.conjuntoPilotos.push(auxPiloto);
         }
-      });
+        i++;
+      }
+    }
+  }
+
+  cargaImpositiva(i: number) {
+    alert(this.conjuntoPilotos.length);
+    alert('SE ACTIVO LA CARGA IMPOSITIVA');
+    while (this.conjuntoPilotos.length <= 3) {
+      this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
+      if (this.datos.length > this.conjuntoPilotos.length) {
+        let auxPiloto;
+        auxPiloto =
+          this.datos[this.enteroAleatorio + i].driver.name +
+          ' ' +
+          this.datos[this.enteroAleatorio + i].driver.lastName;
+        auxPiloto;
+        if (!this.conjuntoPilotos.includes(auxPiloto)) {
+          this.conjuntoPilotos.push(auxPiloto);
+        }
+        i--;
+      }
     }
   }
 }
