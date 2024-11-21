@@ -214,6 +214,23 @@ button.active-button {
   color: green;
 }
 
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.time {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+
 /* Para la info del driver */
 
 .f1-title {
@@ -339,4 +356,5 @@ a:hover {
   .card {
     width: 100%; /* Una tarjeta por fila en pantallas pequeñas */
   }
+
 }

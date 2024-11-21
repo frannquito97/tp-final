@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, viewChild } from '@angular/core';
 import { Race } from '../../../interface/interfacesGames/race';
 import { ManagementInfoService } from '../../../services/management-info.service';
 import Swal from 'sweetalert2';
@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StatService } from '../../../services/stat.service';
+import { TimerComponent } from '../../../components/timer/timer.component';
 
 @Component({
   selector: 'app-word-game',
@@ -15,7 +16,25 @@ import { StatService } from '../../../services/stat.service';
   styles: ``,
 })
 export class WordGameComponent {
+
+  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
+
   constructor(private infoF1: ManagementInfoService, private _statService : StatService) {}
+
+
+  ngAfterViewInit(): void{ }
+  
+  iniciarJuego(): void{
+    setTimeout(() => { 
+      if(this.timerComponent){
+      this.timerComponent.iniciarTimer();
+   }
+  }, 0);
+  }
+
+  salirDelJuego(): void{
+    this.jugar = false;
+  }
 
   private puntosAGanar: number = 3;
   public datos: Array<Race> = [];
@@ -183,6 +202,8 @@ export class WordGameComponent {
 
   startGame() {
     this.jugar = true;
+    console.log('entre');
+    this.iniciarJuego();
   }
 
   /// Para el formulario
