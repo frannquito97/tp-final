@@ -186,13 +186,17 @@ button.cambiado {
   align-items: center;
   align-content: center;
   text-align: center;
-  margin-top: 150px;
+  margin-top: 75px;
   color: rgb(251, 6, 6);
-  width: 75vh;
+  width: 130vh;
   background-color: rgba(245, 249, 249, 0.763);
   scroll-margin-top: initial;
   position: relative;
   animation: slide-in 2s ease-out;
+}
+
+.loginBox{
+  margin-top: 30px;
 }
 
 @keyframes slide-in {
