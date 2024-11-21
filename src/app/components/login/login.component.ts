@@ -38,7 +38,6 @@ export class LoginComponent {
         },
         error: (e: HttpErrorResponse) => {
           this._errorService.msjError(e);
-          this.loading = false;
         }
       })
     }

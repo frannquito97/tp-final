@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, input, OnDestroy, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { interval, Subscription, take } from 'rxjs';
+import Swal from 'sweetalert2';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-timer',
@@ -8,13 +10,13 @@ import { interval, Subscription, take } from 'rxjs';
   styles: ``
 })
 export class TimerComponent implements OnDestroy {
-  @Input() duration: number = 30;
+  @Input() duration: number = environment.duration;
   @Output() timerFinished: EventEmitter<void> = new EventEmitter<void>();
   timer: number =0;
 
   private suscripcion: Subscription | undefined;
   
-  constructor(private route:Router){}
+  constructor(private router:Router){}
   
   iniciarTimer(): void{
     this.timer = this.duration;
@@ -24,9 +26,25 @@ export class TimerComponent implements OnDestroy {
       next: (value) => {
         this.timer = this.duration - value;
       },
-      complete: () => {
+      complete: async () => {
         console.log('finish timer');
-        this.timerFinished.emit();
+        Swal.fire({
+          title: 'Tiempo finalizado!',
+          icon: 'info',
+          confirmButtonColor: 'blue',
+          confirmButtonText: 'Volver al Inicio',
+          showCancelButton: true,
+          cancelButtonText: 'Volver a Jugar',
+          cancelButtonColor: 'green',
+          html: 'Termino el juego, Volver a jugar?'
+        }).then( (result) => {
+          if(result.value){
+            this.timerFinished.emit();
+            this.router.navigateByUrl('/home');
+          }else if(result.dismiss === Swal.DismissReason.cancel){
+            window.location.reload();
+          }
+        })
       }
     });
   }

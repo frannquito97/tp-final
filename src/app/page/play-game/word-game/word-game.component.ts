@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { StatService } from '../../../services/stat.service';
 import { TimerComponent } from '../../../components/timer/timer.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-word-game',
@@ -20,7 +21,7 @@ export class WordGameComponent {
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
 
   constructor(private infoF1: ManagementInfoService, private _statService : StatService) {}
-
+  duration = environment.duration;
 
   ngAfterViewInit(): void{ }
   

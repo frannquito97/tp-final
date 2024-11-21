@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr'
 import { User } from '../../interface/user';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from '../../services/error.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +13,7 @@ import { ErrorService } from '../../services/error.service';
   styles: ``
 })
 export class SignInComponent {
-  constructor(private toastr: ToastrService, private _userService: UserService, private router: Router,private _errorService : ErrorService) { }
+  constructor(private _userService: UserService, private router: Router,private _errorService : ErrorService) { }
   loading: boolean = false;
   signInForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -38,7 +38,15 @@ export class SignInComponent {
 
     if (this.signInForm.valid) {
       if (this.confirmPassword != this.password) {
-        this.toastr.error('Las contraseñas son distintas', 'Error');
+        Swal.fire({
+          title: 'Contraseñas incorrectas!',
+          icon: 'error',
+          html: 'Las contraseñas no son identicas, por favor vuelve a ingresarlas.',
+          confirmButtonColor: 'red',
+          confirmButtonText: 'Volver a ingresar datos',
+          allowOutsideClick: false,
+          animation: true
+        })
         return;
       }
 
@@ -52,16 +60,35 @@ export class SignInComponent {
       }
       this.loading = true;
       this._userService.signIn(user).subscribe({
-        next: (v) => {
-          this.loading = false;
-          this.toastr.success('Usuario registrado exitosamente', 'Usuario Registrado');
-          this.router.navigateByUrl('/f1Games');
+        next: async (v) => {
+          await Swal.fire({
+            title: 'Usuario Registrado!',
+            icon: 'success',
+            confirmButtonText: 'Iniciar Sesion',
+            confirmButtonColor: 'green',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            html: `${this.email} registrado exitosamente!`,
+            animation: true
+          }).then( (result) => {
+            if(result){
+              this.router.navigateByUrl('/f1Games');
+            }
+          });        
         },
         error: (e: HttpErrorResponse) => {
-          this._errorService.msjError(e);
-          this.loading = false;
-          
+          this._errorService.msjError(e);          
         }
+      })
+    }else{
+      Swal.fire({
+        title: 'Registro incompleto',
+        html: 'Complete todos los campos antes de enviar el registro',
+        icon: 'warning',
+        animation: true,
+        confirmButtonText: 'Volver al registro',
+        confirmButtonColor: 'red',
+        allowOutsideClick: false
       })
     }
   }
