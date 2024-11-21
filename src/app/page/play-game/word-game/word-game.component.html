@@ -31,8 +31,6 @@
   <button [disabled]="pista1==false" (click)="pistaDos()">Pista 2</button>
   @if(pista2==true){
   <p class="pista"> Pertenecia a la escuderia: {{ escuderia }}</p>
-  } @if (errorPiloto == true) {
-  <p><strong>Seleccion a {{this.pilAux}}, el no fue ganador en esta carrera, Perdio puntos</strong></p>
   }
   
   <div class="mb-3">
@@ -44,12 +42,7 @@
       </button>
     </div>
   </div>
-
-  @if (sigPiloto==true) {
-  <!-- <p class="ganador">Adivinaste! sigue asi</p> -->
-  <br />
-  <!-- <button (click)="winner()">Siguiente piloto</button> -->
-  } }}
+ }}
   <hr />
   <Button (click)="backHome()">Volver al Home</Button>
 </section>
