@@ -292,34 +292,22 @@ export class WordGameComponent {
   actualizarPuntos(string : string){
     if(string == "pierde"){
       let error = Number(localStorage.getItem("error"));
-      console.log('error',localStorage.getItem("error"));
       let totalError:number = 0;
       if(this.puntosAGanar == 3){
         totalError = error + 1;
-        console.log('errores totales', totalError);
       }else if( this.puntosAGanar == 2){
         totalError = error + 2;
-        console.log('errores totales', totalError);
       }else if ( this.puntosAGanar == 1){
         totalError = error + 3
-        console.log('errores totales', totalError);
       }
-      
       this._statService.updateStat(totalError, 'error', Number(localStorage.getItem('id'))).subscribe({
-        next: (data) => { console.log('Actualizar errores', data);
-          localStorage.setItem('error', String(totalError));
-        }
+        next: (data) => {localStorage.setItem('error', String(totalError));}
       });
     }else{
-      let score = Number(localStorage.getItem("score"));
-      console.log(score);
-      
+      let score = Number(localStorage.getItem("score"));      
       let total = score + this.puntosAGanar;  
       this._statService.updateStat(total, 'score', Number(localStorage.getItem('id'))).subscribe({
-        next: (data) => { console.log('Actualizar Score', data),
-                        localStorage.setItem('score', String(total));
-
-        }
+        next: (data) => {localStorage.setItem('score', String(total))}
       });
     }
   }

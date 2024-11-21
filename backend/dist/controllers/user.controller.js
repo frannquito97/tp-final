@@ -132,7 +132,7 @@ const login = async (req, res) => {
             else {
                 // Password incorrecto
                 res.status(400).json({
-                    msg: 'Password Incorrecto',
+                    msg: 'Contraseña Incorrecta, vuelve a ingresarla',
                 });
             }
         });

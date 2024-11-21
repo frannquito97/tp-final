@@ -124,7 +124,7 @@ export const login = async (req: Request, res: Response) => {
             } else {
                 // Password incorrecto
                 res.status(400).json({
-                    msg: 'Password Incorrecto',
+                    msg: 'Contraseña Incorrecta, vuelve a ingresarla',
                 })
             }
         })

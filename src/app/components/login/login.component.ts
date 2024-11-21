@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from '../../services/error.service';
 import { ManagementInfoService } from '../../services/management-info.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -41,6 +42,17 @@ export class LoginComponent {
         }
       })
     }
+   else{
+    Swal.fire({
+      title: 'Campos incompletos',
+      html: 'Complete todos los campos antes de enviar el registro',
+      icon: 'warning',
+      animation: true,
+      confirmButtonText: 'Volver a Iniciar Sesion',
+      confirmButtonColor: 'red',
+      allowOutsideClick: false
+    })
+   } 
   }
   dataToLS(data : string){
     const arrayToken = data.split('.');
