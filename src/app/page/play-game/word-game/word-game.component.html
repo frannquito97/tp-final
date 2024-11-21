@@ -4,7 +4,7 @@
   <nav class="timerPosition">
     <app-timer
     *ngIf="jugar"
-    [duration]="30"
+    [duration]="duration"
     (timerFinished)="salirDelJuego()"
     ></app-timer>  
   </nav>
