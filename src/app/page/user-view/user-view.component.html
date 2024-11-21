@@ -1,3 +1,4 @@
+<app-nav></app-nav>
 <div class="container myProfile p-4 ">
     <h1 *ngIf="editingMode" class="mb-3 title d-flex justify-content-between">Edit User - {{ currentUser?.id }}</h1>
     <h1 *ngIf="!editingMode" class="mb-3 title d-flex justify-content-between">View User - {{ currentUser?.id }}</h1>
@@ -7,7 +8,7 @@
         <div class="row mb-2">
             <button *ngIf="!editingMode" (click)="edit()" class="btn btn-sm btn-primary">Edit User</button>
             <button *ngIf="editingMode" (click)="editingMode = false" class="btn btn-sm btn-primary">Back to View User</button>
-            <button *ngIf="editingMode"(click)="saveChanges()" class="btn btn-sm btn-success">Save Changes</button>
+            <button *ngIf="editingMode" class="btn btn-sm btn-success">Save Changes</button>
         </div>
     <div class="bg-light p-4">
         <div class="row">
@@ -55,10 +56,8 @@
                 <div class="col">
 
                     <label for="">Points: </label>
-                    en PUNTOS DE JUEGO se pone las llaves y la llamada a los puntos que tenga el user 
                 </div>
-                    <div class="col">PUNTOS DE JUEGO
-                    <!-- {{user.points}}  -->
+                    <div class="col"> {{score}}
                 </div>
                 <div class="col"></div>
             </div>
@@ -68,10 +67,9 @@
                 <div class="col">
 
                     <label for="">Errors: </label>
-                    en CANT ERRORES se pone las llaves y la llamada a los ERRORES que tenga el user 
                 </div>
-                    <div class="col">CANT ERRORES
-                    <!-- {{user.errors}}  -->
+                    <div class="col">
+                        {{error}}
                 </div>
                 <div class="col"></div>
             </div>
@@ -80,10 +78,9 @@
                 <div class="col">
 
                     <label for="">Total: </label>
-                    en PUNTOS TOTALES se pone las llaves y la llamada a los PUNTOS TOTALES que tenga el user 
                 </div>
-                    <div class="col">PUNTOS TOTALES
-                    <!-- {{user.totalPoints}}  -->
+                    <div class="col">
+                    {{totalScore}}
                 </div>
                 <div class="col"></div>
             </div>            

@@ -12,7 +12,7 @@ const stats_2 = __importDefault(require("./stats"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
-        this.port = process.env.PORT || '3001';
+        this.port = process.env.PORT || '3000';
         this.midlewares();
         this.routes();
         this.dbConnect();
@@ -22,7 +22,7 @@ class Server {
     }
     routes() {
         this.app.use('/api/users', user_1.default);
-        this.app.use('/api/users/stats', stats_1.default);
+        this.app.use('/api/stats', stats_1.default);
     }
     midlewares() {
         this.app.use(express_1.default.json());
@@ -30,8 +30,8 @@ class Server {
     }
     async dbConnect() {
         try {
-            await stats_2.default.sync();
             await user_2.default.sync();
+            await stats_2.default.sync();
         }
         catch (error) {
             console.error('No se ha podido conectar a la Base de Datos', error);

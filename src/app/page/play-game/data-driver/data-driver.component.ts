@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { PilotsService } from '../../../services/pilots.service';
-import { NewPilosts } from '../../../interfaces/interfacesGames/new-pilosts';
+import { F1InfoService } from '../../../services/f1-info.service';
+import { Driver } from '../../../interface/interfacesGames/driver';
+import { ManagementInfoService } from '../../../services/management-info.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-driver',
@@ -8,23 +10,14 @@ import { NewPilosts } from '../../../interfaces/interfacesGames/new-pilosts';
   styles: ``,
 })
 export class DataDriverComponent implements OnInit {
+  drivers: Driver[] = [];
+  constructor(private _infoService : ManagementInfoService){}
   ngOnInit(): void {
-    this.services.getDrivers().subscribe({
-      next: (drivers) => {
-        this.driversLista = drivers;
-        console.log(drivers);
-        for (let index = 0; index < drivers.length; index++) {
-          const element = drivers[index];
-          console.log(element);
-          alert('Entro');
-        }
-      },
-      error: (e: Error) => {
-        console.log(e.message);
-        alert('No entro')
-      },
-    });
+    this.drivers = this._infoService.getDrivers(2024);
+    console.log(this.drivers);
+    
   }
-  driversLista: NewPilosts[] = [];
-  services = inject(PilotsService);
+  route= inject(Router)
+
+  
 }

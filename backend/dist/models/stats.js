@@ -19,7 +19,13 @@ const Stats = conection_1.default.define('stats', {
             key: 'id'
         }
     },
-    totalScore: {
+    score: {
+        type: sequelize_1.DataTypes.INTEGER
+    },
+    error: {
+        type: sequelize_1.DataTypes.INTEGER
+    },
+    total: {
         type: sequelize_1.DataTypes.INTEGER
     }
 });

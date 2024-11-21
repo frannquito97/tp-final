@@ -10,7 +10,7 @@ class Server {
     private port : string;
     constructor(){
         this.app = express();
-        this.port = process.env.PORT || '3001';
+        this.port = process.env.PORT || '3000';
         this.midlewares();
         this.routes();
         this.dbConnect();
@@ -22,7 +22,7 @@ class Server {
 
     routes(){
         this.app.use('/api/users', routeUser);
-        this.app.use('/api/users/stats', routeStat);
+        this.app.use('/api/stats', routeStat);
     }
 
     midlewares(){
@@ -32,8 +32,8 @@ class Server {
     }
     async dbConnect(){
         try{
-            await Stats.sync();
             await User.sync();
+            await Stats.sync();
         }
         catch (error){
             console.error('No se ha podido conectar a la Base de Datos', error);

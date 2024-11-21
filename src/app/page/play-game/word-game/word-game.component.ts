@@ -1,14 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, viewChild } from '@angular/core';
 import { Race } from '../../../interface/interfacesGames/race';
-import { Driver } from '../../../interface/interfacesGames/driver';
 import { ManagementInfoService } from '../../../services/management-info.service';
+import Swal from 'sweetalert2';
 import {
   FormBuilder,
-  ReactiveFormsModule,
-  FormsModule,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StatService } from '../../../services/stat.service';
+import { TimerComponent } from '../../../components/timer/timer.component';
 
 @Component({
   selector: 'app-word-game',
@@ -16,15 +16,32 @@ import { Router } from '@angular/router';
   styles: ``,
 })
 export class WordGameComponent {
-  routerLink: any;
-  constructor(private infoF1: ManagementInfoService) {}
 
+  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
+
+  constructor(private infoF1: ManagementInfoService, private _statService : StatService) {}
+
+
+  ngAfterViewInit(): void{ }
+  
+  iniciarJuego(): void{
+    setTimeout(() => { 
+      if(this.timerComponent){
+      this.timerComponent.iniciarTimer();
+   }
+  }, 0);
+  }
+
+  salirDelJuego(): void{
+    this.jugar = false;
+  }
+
+  private puntosAGanar: number = 3;
   public datos: Array<Race> = [];
-
   public conjuntoPilotos: string[] = [];
 
   ngOnInit() {
-    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+  this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
   }
   inicioAnio = 1960;
   finanio = 2024;
@@ -63,7 +80,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio + 1].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio + 2].driver.name +
@@ -71,7 +88,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio + 2].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio].driver.name +
@@ -79,7 +96,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio - 1].driver.name +
@@ -87,7 +104,7 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio - 1].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
 
     auxPiloto =
       this.datos[this.enteroAleatorio - 2].driver.name +
@@ -95,14 +112,14 @@ export class WordGameComponent {
       this.datos[this.enteroAleatorio - 2].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
     auxPiloto =
       this.datos[this.enteroAleatorio + 3].driver.name +
       ' ' +
       this.datos[this.enteroAleatorio + 3].driver.lastName;
     auxPiloto
       ? this.conjuntoPilotos.push(auxPiloto)
-      : console.log('Piloto nullo');
+      : console.log('Piloto nulo');
     this.conjuntoPilotos = [...new Set(this.conjuntoPilotos)];
 
     this.anio = this.datos[this.enteroAleatorio].season;
@@ -150,9 +167,13 @@ export class WordGameComponent {
   router = inject(Router);
 
   pistaUno() {
+    this.puntosAGanar = this.puntosAGanar - 1;
+    console.log(this.puntosAGanar);
+    
     this.pista1 = true;
   }
   pistaDos() {
+    this.puntosAGanar = this.puntosAGanar - 1;
     this.pista2 = true;
   }
 
@@ -169,6 +190,7 @@ export class WordGameComponent {
     this.datos.splice(0, this.datos.length);
 
     this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+    this.puntosAGanar = 3;
     this.renderNumber(0, this.datos.length);
   }
 
@@ -180,6 +202,8 @@ export class WordGameComponent {
 
   startGame() {
     this.jugar = true;
+    console.log('entre');
+    this.iniciarJuego();
   }
 
   /// Para el formulario
@@ -203,22 +227,100 @@ export class WordGameComponent {
   }
   //
 
-  onSubmit() {
+ async onSubmit() {
+    let interval;
     const data: string = this.pilotButton;
     const dataWinner: string = this.piloto;
-    if (data == dataWinner) {
-      this.errorPiloto = false;
-      this.sigPiloto = true;
-      this.pilAux = '';
+    if(this.pilotButton != ''){
+      if (data == dataWinner) {
+        this.errorPiloto = false;
+        this.sigPiloto = true;
+        this.pilAux = '';
+        this.actualizarPuntos("gana");
+        await Swal.fire({
+          title: 'Respuesta Correcta.',
+          html: `La respuesta es correcta! Felicidades se le sumaron: ${this.puntosAGanar} a sus estadisticas`,
+          animation: true,
+          icon: 'success',
+          allowOutsideClick: false,
+          showCancelButton: true,
+          confirmButtonText: 'Siguiente Piloto',
+          cancelButtonText: 'Volver al Inicio',
+        }).then((result) => {
+          if(result.value){
+            this.winner();
+          }else if( result.dismiss === Swal.DismissReason.cancel) {
+            this.router.navigateByUrl('/home');
+          }
+        });
+      
     } else {
-      this.sigPiloto = false;
-      this.pilAux = data;
-      this.errorPiloto = true;
+        this.sigPiloto = false;
+        this.pilAux = data;
+        this.errorPiloto = true;
+        this.actualizarPuntos("pierde");
+
+      await  Swal.fire({
+          title: 'Respuesta Inorrecta.',
+          html: `La Respuesta correcta es: ${this.piloto}. Se le sumo: 1 punto como errores en sus estadisticas`,
+          animation: true,
+          icon: 'error',
+          allowOutsideClick: false,
+          showCancelButton: true,
+          confirmButtonText: 'Siguiente Piloto',
+          cancelButtonText: 'Volver al Inicio',
+        }).then((result) => {
+          if(result.value){
+            this.winner();
+          }else if( result.dismiss === Swal.DismissReason.cancel) {
+            this.router.navigateByUrl('/home');
+          }
+        });
     }
+  }else{
+    Swal.fire({
+      title: 'ERROR',
+      html: 'No selecciono ningun piloto, porfavor seleccione uno',
+      icon: 'error',
+    })
   }
-  //funcion para volver al home
+ }
   backHome() {
     this.router.navigateByUrl('home');
+  }
+  actualizarPuntos(string : string){
+    if(string == "pierde"){
+      let error = Number(localStorage.getItem("error"));
+      console.log('error',localStorage.getItem("error"));
+      let totalError:number = 0;
+      if(this.puntosAGanar == 3){
+        totalError = error + 1;
+        console.log('errores totales', totalError);
+      }else if( this.puntosAGanar == 2){
+        totalError = error + 2;
+        console.log('errores totales', totalError);
+      }else if ( this.puntosAGanar == 1){
+        totalError = error + 3
+        console.log('errores totales', totalError);
+      }
+      
+      this._statService.updateStat(totalError, 'error', Number(localStorage.getItem('id'))).subscribe({
+        next: (data) => { console.log('Actualizar errores', data);
+          localStorage.setItem('error', String(totalError));
+        }
+      });
+    }else{
+      let score = Number(localStorage.getItem("score"));
+      console.log(score);
+      
+      let total = score + this.puntosAGanar;  
+      this._statService.updateStat(total, 'score', Number(localStorage.getItem('id'))).subscribe({
+        next: (data) => { console.log('Actualizar Score', data),
+                        localStorage.setItem('score', String(total));
+
+        }
+      });
+    }
   }
 }
 

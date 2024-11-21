@@ -4,49 +4,91 @@ import { Race } from '../interface/interfacesGames/race';
 import { UserService } from './user.service';
 import { User } from '../interface/user';
 import { Driver } from '../interface/interfacesGames/driver';
-import { Observable } from 'rxjs';
-import { NewPilosts } from '../interfaces/interfacesGames/new-pilosts';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from './error.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManagementInfoService {
   public season: Race[] = [];
-  public users: User[] = [];
-  constructor(private f1Info: F1InfoService, private userService: UserService) { }
-  
-  getRacesWins(year:string): Array<Race> {
-    let data = [];
-    this.f1Info.getWinnersBySeason(year).then(response => {
-      data = response['MRData']['RaceTable']['Races'];
-      console.log(data);
-      if (data != null) {
-        data.forEach((dt: any) => {
-          let race: Race = {
-            raceId: dt['Circuit']['circuitId'],
-            season: dt['season'],
-            raceName: dt['raceName'],
-            location: dt['Circuit']['Location']['country'],
-            driver :  {
-              id: dt['Results'][0]['Driver']['driverId'],
-              numberCar: dt['Results'][0]['Driver']['permanentNumber'],
-              name: dt['Results'][0]['Driver']['givenName'],
-              lastName: dt['Results'][0]['Driver']['familyName'],
-              constructor: dt['Results'][0]['Constructor']['name'],
-              nationality: dt['Results'][0]['Driver']['nationality']
-            }
+  public drivers: Driver[] = [];
 
+  constructor(private _f1Service: F1InfoService, private _errorService: ErrorService) { }
+
+  getRacesWins(year: string): Race[] {
+    let data: Race[] = [];
+    this._f1Service.getWinnersBySeason(year).subscribe({
+      next: (info) => {
+        data = info['MRData']['RaceTable']['Races'];
+        console.log(data);
+        data.forEach((race: any) => {
+          let newRace: Race = {
+            raceId: race['Circuit']['circuitId'],
+            season: race['season'],
+            raceName: race['raceName'],
+            location: race['Circuit']['Location']['country'],
+            driver: {
+              id: race['Results'][0]['Driver']['driverId'],
+              numberCar: race['Results'][0]['Driver']['permanentNumber'],
+              name: race['Results'][0]['Driver']['givenName'],
+              lastName: race['Results'][0]['Driver']['familyName'],
+              constructor: race['Results'][0]['Constructor']['name'],
+              nationality: race['Results'][0]['Driver']['nationality']
+            }
           }
-          this.season.push(race);
-        });
+          this.season.push(newRace);
+        })
+      },
+      error: async (e : HttpErrorResponse) => {this._errorService.msjError(e)
+      await  Swal.fire({
+          title: 'ERROR',
+          html: 'OCURRIO UN ERROR AL CARGAR EL JUEGO, POR FAVOR RECARGA LA PAGINA',
+          icon: 'error',
+          allowOutsideClick: false,
+          confirmButtonText: 'Recargar Pagina'
+        }).then((result) =>{
+          if(result){
+            window.location.reload()
+          }else{
+            window.location.reload();
+          }
+        })
       }
     })
     return this.season;
   }
-  
-  
-  
-  
+  getDrivers(year: number): Driver[] {
+    this._f1Service.getDrivers(year).subscribe({
+      next: (data) => {
+        let info = [];
+        info = data['MRData']['DriverTable']['Drivers'];
+        if (info) {
+          info.forEach((aux: any) => {
+            let driver: Driver = {
+              id: aux.driverId,
+              name: aux.givenName,
+              lastName: aux.familyName,
+              constructor: data['MRData']['DriverTable']['season'],
+              nationality: aux.nationality,
+              numberCar: aux.permanentNumber,
+            }
+            this.addConstructor(driver);
+            this.drivers.push(driver);
+          })
+        }
+      },
+    })
+    return this.drivers;
+  }
+  addConstructor(driver: Driver) {
+    this._f1Service.getConstructorByDriver(driver.id, Number(driver.constructor)).subscribe({
+      next: (data) => {
+        driver.constructor = data['MRData']['ConstructorTable']['Constructors'][0]['name'];
+      }
+    })
+  }
 
 }
 

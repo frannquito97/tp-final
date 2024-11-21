@@ -1,20 +1,39 @@
+<app-nav></app-nav>
 <section class="wordGame">
   <h2>¡Adivina el piloto!</h2>
   @if (renderWindows == true) { @if(jugar==false){
-  <button (click)="renderGame()" (click)="startGame()">EMPEZAR JUEGO</button>
+  <button
+    (click)="renderGame()"
+    (click)="startGame()"
+    (click)="iniciarJuego()"
+    *ngIf="!jugar"
+  >
+    EMPEZAR JUEGO
+  </button>
   } @if(jugar!=false){
 
-  <p>Este piloto corrio en el año: {{ anio }}</p>
-  <p>Salio Primero en la Pole</p>
-  <p>En la locacion de: {{ circuito }}</p>
+  <app-timer
+    *ngIf="jugar"
+    [duration]="30"
+    (timerFinished)="salirDelJuego()"
+  ></app-timer>
+  <div class="preguntas">
+    <p>Este piloto corrio en el año: {{ anio }}</p>
+    <p>Salio Primero en la Pole</p>
+    <p>En la locacion de: {{ circuito }}</p>
 
-  <p>Carrera: {{ raceName }}</p>
-
+    <p>Carrera: {{ raceName }}</p>
+  </div>
   <h3 for="">El piloto es:</h3>
   <br />
   <section id="button-marked-section">
     @for (item of conjuntoPilotos; track $index) {
-    <button  [ngClass]="{'active-button': pilotButton === item}"   (click)="mark(item)">{{ item }}</button>
+    <button
+      [ngClass]="{ 'active-button': pilotButton === item }"
+      (click)="mark(item)"
+    >
+      {{ item }}
+    </button>
     }
   </section>
 
@@ -25,13 +44,11 @@
   }
 
   <h3>Pista 2</h3>
-  <button [disabled]="pista1==false" (click)="pistaDos()">Pista 2</button>
+  <button [disabled]="pista1 == false" (click)="pistaDos()">Pista 2</button>
   @if(pista2==true){
-  <p class="pista"> Pertenecia a la escuderia: {{ escuderia }}</p>
-  } @if (errorPiloto == true) {
-  <p><strong>Seleccion a {{this.pilAux}}, el no fue ganador en esta carrera, Perdio puntos</strong></p>
+  <p class="pista">Pertenecia a la escuderia: {{ escuderia }}</p>
   }
-  
+
   <div class="mb-3">
     <label for="" class="form-label"> Selecciono a: </label>
     <p class="bg">{{ this.pilotButton }}</p>
@@ -41,12 +58,7 @@
       </button>
     </div>
   </div>
-
-  @if (sigPiloto==true) {
-  <p class="ganador">Adivinaste! sigue asi</p>
-  <br />
-  <button (click)="winner()">Siguiente piloto</button>
-  } }}
+  }}
   <hr />
-  <Button (click)="backHome()">Vovler al Home</Button>
+  <Button (click)="backHome()">Volver al Home</Button>
 </section>
