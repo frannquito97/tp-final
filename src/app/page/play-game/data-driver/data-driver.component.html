@@ -1,6 +1,6 @@
 
 <div style="margin-top: 75px;">
-  <h2 class="f1-title">PILOTOS ACTUALES</h2>
+  <h2 class="f1-title">2025 LINEUP</h2>
 </div>
 <section class="card-section" style="margin-bottom: 75px;">
   @for (item of drivers; track $index) {
@@ -8,10 +8,10 @@
     <div class="card-header">
       <span class="position">F1</span>
 
-      <span class="rating">2024</span>
+      <span class="rating">2025</span>
     </div>
     <div class="player-image">
-      <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/{{item.lastName}}" alt="Conductor" />
+      <img src="https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2025Drivers/{{item.lastName}}" alt="Conductor" />
     </div>
 
     <div class="card-info">
@@ -19,15 +19,15 @@
 
       <div class="stats">
         <div class="stat">
-          Nacionalidad <span>{{ item.nationality }}</span>
+          Nationality <span>{{ item.nationality }}</span>
         </div>
         <div class="stat">
-          Escuderia <span>{{ item.constructor }}</span>
+          Constructor <span>{{ item.constructor }}</span>
         </div>
         <div class="stat">
-          Numero del monoplaza<span>{{ item.numberCar }}</span>
+          Number <span>{{ item.numberCar }}</span>
         </div>
-        <a class="stat" target="_blank" href="https://soymotor.com/f1/pilotos/{{item.name}}-{{item.lastName}}">Mas info</a>
+        <a class="stat" target="_blank" href="{{item.url}}">More</a>
       </div>
     </div>
   </div>

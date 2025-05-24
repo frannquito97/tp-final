@@ -7,16 +7,16 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item ms-auto">
-          <a *ngIf="tokenBoolean" class="nav-link" href="/play">Jugar</a>
+          <a *ngIf="tokenBoolean" class="nav-link" href="/play">Play</a>
         </li>
         <li *ngIf="tokenBoolean" class="nav-item ms-auto">
           <a class="nav-link" href="/ranking">Ranking</a>
         </li>
         <li *ngIf="tokenBoolean" class="nav-item ms-auto">
-          <a class="nav-link" (click)="userProfile()" >Mi Perfil</a>
+          <a class="nav-link" (click)="userProfile()" >My Profile</a>
         </li>
         <li *ngIf="tokenBoolean" class="nav-item ms-auto">
-          <a  class="nav-link" (click)="logOut()">Cerrar Sesion</a>
+          <a  class="nav-link" (click)="logOut()">Logout</a>
         </li>
       </ul>
     </div>

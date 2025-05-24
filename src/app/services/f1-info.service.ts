@@ -9,7 +9,6 @@ import { environment } from '../../environments/environment';
 export class F1InfoService {
 constructor(private http : HttpClient){ }
 getWinnersBySeason( year : string ) : Observable<any> {
-    console.log(`${environment.F1API}/${year}/results/1.json`);
     return this.http.get<any>(`${environment.F1API}/${year}/results/1.json`);
   }
   getDrivers( year : number): Observable<any>{

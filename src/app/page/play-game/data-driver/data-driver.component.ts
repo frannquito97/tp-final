@@ -13,9 +13,7 @@ export class DataDriverComponent implements OnInit {
   drivers: Driver[] = [];
   constructor(private _infoService : ManagementInfoService){}
   ngOnInit(): void {
-    this.drivers = this._infoService.getDrivers(2024);
-    console.log(this.drivers);
-    
+    this.drivers = this._infoService.getDrivers(2025);  
   }
   route= inject(Router)
 

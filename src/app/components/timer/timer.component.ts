@@ -29,14 +29,14 @@ export class TimerComponent implements OnDestroy {
       complete: async () => {
         console.log('finish timer');
         Swal.fire({
-          title: 'Tiempo finalizado!',
+          title: 'Time Over!',
           icon: 'info',
           confirmButtonColor: 'blue',
-          confirmButtonText: 'Volver al Inicio',
+          confirmButtonText: 'Back to Home',
           showCancelButton: true,
-          cancelButtonText: 'Volver a Jugar',
+          cancelButtonText: 'Play Again',
           cancelButtonColor: 'green',
-          html: 'Termino el juego, Volver a jugar?'
+          html: 'Game over, Play Again?'
         }).then( (result) => {
           if(result.value){
             this.timerFinished.emit();

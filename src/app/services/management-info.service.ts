@@ -1,8 +1,6 @@
 import { Injectable, resolveForwardRef } from '@angular/core';
 import { F1InfoService } from './f1-info.service';
 import { Race } from '../interface/interfacesGames/race';
-import { UserService } from './user.service';
-import { User } from '../interface/user';
 import { Driver } from '../interface/interfacesGames/driver';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from './error.service';
@@ -35,7 +33,8 @@ export class ManagementInfoService {
               name: race['Results'][0]['Driver']['givenName'],
               lastName: race['Results'][0]['Driver']['familyName'],
               constructor: race['Results'][0]['Constructor']['name'],
-              nationality: race['Results'][0]['Driver']['nationality']
+              nationality: race['Results'][0]['Driver']['nationality'],
+              url: ''
             }
           }
           this.season.push(newRace);
@@ -73,6 +72,7 @@ export class ManagementInfoService {
               constructor: data['MRData']['DriverTable']['season'],
               nationality: aux.nationality,
               numberCar: aux.permanentNumber,
+              url: aux.url
             }
             this.addConstructor(driver);
             this.drivers.push(driver);
