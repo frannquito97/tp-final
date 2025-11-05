@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { interval, Subscription, take } from 'rxjs';
 import Swal from 'sweetalert2';

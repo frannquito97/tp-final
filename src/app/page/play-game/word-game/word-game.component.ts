@@ -38,39 +38,35 @@ export class WordGameComponent {
   public datos: Array<Race> = [];
   public conjuntoPilotos: string[] = [];
 
-  ngOnInit() {
-  this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
-  }
+  ngOnInit() {///CAMBIAR EL 5 POR UN BUSCADOR DE 1 A CANTIDADRACES.LENGHT PARA QUE SELECCIONE ENTRE 1 Y N CANTIDAD DE CARRERAS TOTALES DE ESE A;O
+  let year = this.getRandomNumber(this.inicioAnio,this.finanio);
+
+  this.datos = this.infoF1.getRaceData(year,8);
+}
+
+
+
   /// VER PARA PEDIR POR PARAMETRO PARA TENER UN RANGO DE A;OS PARA JUGAR
   inicioAnio = 1950;
   finanio = 2025;
 
   enteroAleatorio = 0;
-
-  ///REVISAR ESTO
-  renderNumber(a: number, b: number) {
+  
+/// FALTA FUNCION PARA BUSCAR UN NUMERO RANDOM DE CARRERAS, SE PUEDE USAR EL GETRANDOMNUMBER PERO HAY QUE FILTRAR LA CANTIDAD DE CARRERAS QUE TENGA DICHO YEAR.
+  getRandomNumber(a: number, b: number) {
     this.enteroAleatorio = Math.floor(Math.random() * (b - a + 1)) + a;
-
-    if (this.enteroAleatorio >= this.datos.length - 3) {
-      this.enteroAleatorio -= 3;
-    }
-
-    if (this.enteroAleatorio < 2) {
-      this.enteroAleatorio += 4;
-    }
+    return this.enteroAleatorio;
   }
-  ///HASTA ACA
-
-  ///Funcion para agarrar un random entre la primer temporada y la ultima inclusive.
-  renderNumberAnio() {
-    const anio = Math.floor(Math.random() * (this.finanio - this.inicioAnio + 1)) + this.inicioAnio;
-    return anio.toString();
-  }
+  
   /// Juego propiamente dicho
   renderGame() {
   this.conjuntoPilotos = [];
+console.log('PRUEBA');
+console.log(this.datos.length);
+console.log('FINPRUEBA');
 
-  this.renderNumber(0, this.datos.length);
+  this.getRandomNumber(0, this.datos.length);
+  
   const indicesRelativos = [1, 2, 0, -1, -2, 3];
   const pilotosSet = new Set<string>();
 
@@ -86,7 +82,7 @@ export class WordGameComponent {
     }
   }
 
-  this.conjuntoPilotos = Array.from(pilotosSet).slice(0, 4);
+  this.conjuntoPilotos = Array.from(pilotosSet).slice(0, 4);///aca esta el problema de que se filtra mal ME PARECE, en algun CONJUNTOPILOTOS ESTA LA JODA
 
   this.anio = this.datos[this.enteroAleatorio].season;
   this.circuito = this.datos[this.enteroAleatorio].location;
@@ -152,9 +148,9 @@ export class WordGameComponent {
     this.renderWindows = true;
     this.datos.splice(0, this.datos.length);
 
-    this.datos = this.infoF1.getRacesWins(this.renderNumberAnio());
+    this.datos = this.infoF1.getRaceData(this.getRandomNumber(this.inicioAnio,this.finanio),8);
     this.puntosAGanar = 3;
-    this.renderNumber(0, this.datos.length);
+    this.getRandomNumber(0, this.datos.length);
   }
 
   respuesta(e: Event) {
@@ -213,6 +209,7 @@ export class WordGameComponent {
             this.winner();
           }else if( result.dismiss === Swal.DismissReason.cancel) {
             this.router.navigateByUrl('/home');
+            ///this.timerComponent.detenerTimer(); REVISAR PORQUE NO CORTA
           }
         });
       
@@ -236,21 +233,24 @@ export class WordGameComponent {
             this.winner();
           }else if( result.dismiss === Swal.DismissReason.cancel) {
             this.router.navigateByUrl('/home');
+            ///this.timerComponent.detenerTimer(); REVISAR POR QUE NO CORTA
           }
         });
+      }
+    }else{
+      Swal.fire({
+        title: 'ERROR',
+        html: 'Error. Please select one driver.',
+        icon: 'error',
+      })
     }
-  }else{
-    Swal.fire({
-      title: 'ERROR',
-      html: 'Error. Please select one driver.',
-      icon: 'error',
-    })
   }
- }
+  
   backHome() {
     this.router.navigateByUrl('home');
-    /// agregar el kill timer
+    ///this.timerComponent.detenerTimer(); REVISAR POR QUE NO CORTA
   }
+
   actualizarPuntos(string : string){
     if(string == "pierde"){
       let error = Number(localStorage.getItem("error"));

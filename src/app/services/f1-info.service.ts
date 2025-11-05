@@ -8,13 +8,26 @@ import { environment } from '../../environments/environment';
 })
 export class F1InfoService {
 constructor(private http : HttpClient){ }
-getWinnersBySeason( year : string ) : Observable<any> {
+  getWinnersBySeason( year : string ) : Observable<any> {
     return this.http.get<any>(`${environment.F1API}/${year}/results/1.json`);
   }
+
+  getDriverOptions(year : number, race :number) : Observable<any> {
+    return this.http.get<any>(`${environment.F1API}/${year}/${race}/results/`);
+  }
+  
   getDrivers( year : number): Observable<any>{
     return this.http.get<any>(`${environment.F1API}/${year}/drivers.json`);
   }
+
   getConstructorByDriver( driverId : string, season: number): Observable<any> {   
     return this.http.get<any>(`${environment.F1API}/${season}/drivers/${driverId}/constructors.json`);
   }
+
+  getRacesPerYear(year: number) : Observable<any>{
+  return this.http.get<any>(`${environment.F1API}/${year}/races`)};
+  ///para ver que carrera en ese año, se pone /year/NUMEROdeCARRERA/races
 }
+
+
+

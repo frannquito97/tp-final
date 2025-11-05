@@ -32,10 +32,7 @@ export class LoginComponent {
       }
       this._userService.login(user).subscribe({
         next: (data) => {
-          console.log(data);
           this.dataToLS(data);
-          console.log(localStorage);
-          
         },
         error: (e: HttpErrorResponse) => {
           this._errorService.msjError(e);
@@ -44,11 +41,11 @@ export class LoginComponent {
     }
    else{
     Swal.fire({
-      title: 'Campos incompletos',
-      html: 'Complete todos los campos antes de enviar el registro',
+      title: 'Incomplete fields',
+      html: 'Complete all fields before submitting the login',
       icon: 'warning',
       animation: true,
-      confirmButtonText: 'Volver a Iniciar Sesion',
+      confirmButtonText: 'Back to Login',
       confirmButtonColor: 'red',
       allowOutsideClick: false
     })

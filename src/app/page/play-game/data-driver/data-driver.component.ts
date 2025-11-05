@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { F1InfoService } from '../../../services/f1-info.service';
 import { Driver } from '../../../interface/interfacesGames/driver';
 import { ManagementInfoService } from '../../../services/management-info.service';
 import { Router } from '@angular/router';
@@ -13,9 +12,7 @@ export class DataDriverComponent implements OnInit {
   drivers: Driver[] = [];
   constructor(private _infoService : ManagementInfoService){}
   ngOnInit(): void {
-    this.drivers = this._infoService.getDrivers(2025);  
+    this.drivers = this._infoService.getDrivers(2025);
   }
   route= inject(Router)
-
-  
 }

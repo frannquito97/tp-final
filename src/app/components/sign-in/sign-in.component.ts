@@ -33,17 +33,14 @@ export class SignInComponent {
 
 
   addUser() {
-    console.log(this.password);
-    console.log(this.confirmPassword);
-
     if (this.signInForm.valid) {
       if (this.confirmPassword != this.password) {
         Swal.fire({
-          title: 'Contraseñas incorrectas!',
+          title: 'Wrong Password!',
           icon: 'error',
-          html: 'Las contraseñas no son identicas, por favor vuelve a ingresarlas.',
+          html: 'The passwords are not identical, please re-enter them.',
           confirmButtonColor: 'red',
-          confirmButtonText: 'Volver a ingresar datos',
+          confirmButtonText: 'Re-enter data',
           allowOutsideClick: false,
           animation: true
         })
@@ -62,13 +59,13 @@ export class SignInComponent {
       this._userService.signIn(user).subscribe({
         next: async (v) => {
           await Swal.fire({
-            title: 'Usuario Registrado!',
+            title: 'User successfully registered!',
             icon: 'success',
-            confirmButtonText: 'Iniciar Sesion',
+            confirmButtonText: 'Log in',
             confirmButtonColor: 'green',
             allowOutsideClick: false,
             allowEscapeKey: false,
-            html: `${this.email} registrado exitosamente!`,
+            html: `${this.email} successfully registered!`,
             animation: true
           }).then( (result) => {
             if(result){
@@ -82,11 +79,11 @@ export class SignInComponent {
       })
     }else{
       Swal.fire({
-        title: 'Registro incompleto',
-        html: 'Complete todos los campos antes de enviar el registro',
+        title: 'Incomplete registration',
+        html: 'Complete all fields before submitting the registration.',
         icon: 'warning',
         animation: true,
-        confirmButtonText: 'Volver al registro',
+        confirmButtonText: 'Back to register',
         confirmButtonColor: 'red',
         allowOutsideClick: false
       })
